@@ -3,35 +3,24 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jdc.spring</groupId>
-	<artifactId>s02-spring-beans</artifactId>
+	<artifactId>s03-dependency-injection</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>6.1.11</version>
 		</dependency>
-
-		<!--
-		https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api -->
-		<dependency>
-			<groupId>jakarta.annotation</groupId>
-			<artifactId>jakarta.annotation-api</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>6.1.11</version>
 			<scope>test</scope>
 		</dependency>
-
-
+		
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
@@ -39,7 +28,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -53,9 +42,6 @@
 		</plugins>
 	</build>
 	<modules>
-		<module>ep01-xml-config-beans</module>
-		<module>ep02-annotation-config-beans</module>
-		<module>ep03-bean-scopes</module>
-		<module>ep04-bean-lifecycle</module>
+		<module>ep01-explicit-wiring</module>
 	</modules>
 </project>
