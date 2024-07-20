@@ -6,14 +6,23 @@
 	<artifactId>s02-spring-beans</artifactId>
 	<version>1.0.0</version>
 	<packaging>pom</packaging>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>6.1.11</version>
 		</dependency>
-		
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>6.1.11</version>
+			<scope>test</scope>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
@@ -21,7 +30,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -37,5 +46,6 @@
 	<modules>
 		<module>ep01-xml-config-beans</module>
 		<module>ep02-annotation-config-beans</module>
+		<module>ep03-bean-scopes</module>
 	</modules>
 </project>
