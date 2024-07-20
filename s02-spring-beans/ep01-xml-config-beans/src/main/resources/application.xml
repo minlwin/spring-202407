@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- bean definitions here -->
+	<bean id="first" name="firstBean,myFirstBean" class="com.jdc.spring.bean.MyFirstBean">
+		<constructor-arg value="Hello Spring Bean"></constructor-arg>
+	</bean>
+	
+	<bean name="second,secondBean,mySecondBean" class="com.jdc.spring.bean.MySecondBean">
+		<constructor-arg ref="first"></constructor-arg>
+	</bean>
+	
+	<bean class="com.jdc.spring.bean.MyFirstBeanFactory"
+	 	factory-method="createWithDefault"></bean>
+
+	<bean class="com.jdc.spring.bean.MyFirstBeanFactory"
+		factory-method="createWithName">
+		<constructor-arg value="Some Value"></constructor-arg> 		
+	</bean>
+
+	<bean class="com.jdc.spring.bean.MyFirstBeanFactory"
+		factory-method="createWithNameAndValue">
+		<constructor-arg index="0" value="My First Bean Name"></constructor-arg> 		
+		<constructor-arg index="1" value="My First Bean Value"></constructor-arg> 		
+	</bean>
+	
+	<bean name="factoryBean" class="com.jdc.spring.bean.MyFirstBeanFactoryBean"></bean>
+
+	<bean factory-bean="factoryBean" factory-method="createWithAllArgs">
+		<constructor-arg name="value" value="Bean Value"></constructor-arg>
+		<constructor-arg name="alias" value="Bean Alias"></constructor-arg>
+		<constructor-arg name="name" value="Bean Name"></constructor-arg>
+	</bean>
+</beans>
