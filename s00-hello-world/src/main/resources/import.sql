@@ -1,0 +1,15 @@
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
+insert into division (name, capital, region) values ('Ayeyarwady Region', 'Pathein', 'South');
