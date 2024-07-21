@@ -43,5 +43,8 @@
 	</build>
 	<modules>
 		<module>ep01-explicit-wiring</module>
+		<module>ep02-autowiring-xml</module>
+		<module>ep03-autowiring-annotation</module>
+		<module>ep04-circular-dependency</module>
 	</modules>
 </project>
