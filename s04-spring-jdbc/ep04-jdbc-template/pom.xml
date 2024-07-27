@@ -7,7 +7,7 @@
 		<artifactId>s04-spring-jdbc</artifactId>
 		<version>1.0.0</version>
 	</parent>
-	<artifactId>ep03-datasource-boots</artifactId>
+	<artifactId>ep04-jdbc-template</artifactId>
 	
 	<dependencies>
 		<dependency>
@@ -35,7 +35,7 @@
 						</exclude>
 					</excludes>
 				</configuration>
-			</plugin>
+			</plugin>		
 		</plugins>
 	</build>
 </project>
