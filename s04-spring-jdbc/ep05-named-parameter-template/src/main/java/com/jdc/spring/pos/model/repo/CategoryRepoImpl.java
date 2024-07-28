@@ -39,15 +39,12 @@ public class CategoryRepoImpl implements CategoryRepo {
 
 	@Override
 	public CategoryDto findById(int id) {
-		
 		try(var stream = template.queryForStream("select * from category where id = :id", 
 				new MapSqlParameterSource()
 					.addValue("id", id) , 
 				rowMapper)) {
-			
+			return stream.findAny().orElse(null);
 		}
-		
-		return null;
 	}
 
 	@Override

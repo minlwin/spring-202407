@@ -1,0 +1,14 @@
+1	Banana	100	G	500	1
+1	Mango	1	Piece	1500	2
+1	Grapes	100	G	19000	3
+1	Apple	1	Piece	5000	4
+2	Asparagas	100	G	2500	5
+2	Tomato	100	G	2000	6
+2	Needle Mushrom	100	G	3500	7
+3	Tiger Shrimp (Small)	1	KG	40000	8
+3	Tiger Shrimp (Mediam)	1	KG	70000	9
+3	Tiger Shrimp (Mediam)	1	KG	120000	10
+4	Bief Tong	250	G	12000	11
+4	Bief Shaft	250	G	16000	12
+4	Bief Tandarlion	250	G	15000	13
+4	Pork Steak	250	G	8000	14
