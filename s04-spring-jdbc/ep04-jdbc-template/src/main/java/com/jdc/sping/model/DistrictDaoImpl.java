@@ -84,14 +84,13 @@ public class DistrictDaoImpl implements DistrictDao {
 
 	@Override
 	public boolean update(int id, DistrictForm form) {
-		// TODO Auto-generated method stub
-		return false;
+		return template.update("update district set division_id = ?, name = ? where id = ?", 
+				form.divisionId(), form.name(), id) == 1;
 	}
 
 	@Override
 	public boolean delete(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		return template.update("delete district where id = ?", id) == 1;
 	}
 
 }

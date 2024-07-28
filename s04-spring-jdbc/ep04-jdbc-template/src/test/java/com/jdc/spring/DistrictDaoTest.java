@@ -84,11 +84,16 @@ public class DistrictDaoTest {
 	@CsvFileSource(resources = "/data/district/test_create.txt", delimiterString = "\t")
 	void test_update(int divisionId, String name, int id) {
 		var form = new DistrictForm(divisionId, name.toUpperCase());
-		var result = dao.update(id, form);
-		assertTrue(result);
+		assertTrue(dao.update(id, form));
+
+		var result = dao.findById(id);
+		assertNotNull(result);
+		
+		assertEquals(form.divisionId(), result.divisionId());
+		assertEquals(form.name(), result.name());
 	}
 	
-	@Order(5)
+	@Order(6)
 	@ParameterizedTest
 	@ValueSource(ints = {1, 2, 3, 4, 5})
 	void test_delete(int id) {
