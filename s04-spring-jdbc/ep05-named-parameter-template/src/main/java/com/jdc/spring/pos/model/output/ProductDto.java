@@ -5,6 +5,8 @@ public record ProductDto(
 		String name,
 		int categoryId,
 		String categoryName,
+		int amount,
+		String unit,
 		int price) {
 
 }
