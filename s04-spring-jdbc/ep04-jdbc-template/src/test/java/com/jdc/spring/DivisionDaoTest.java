@@ -31,7 +31,7 @@ public class DivisionDaoTest {
 	@ParameterizedTest
 	@CsvFileSource(
 			delimiterString = "\t",
-			resources = "/test_create.txt")
+			resources = "/data/division/test_create.txt")
 	void test_create(String name, String capital, String region, int expectedId) {
 		
 		// Prepare Input
@@ -54,7 +54,7 @@ public class DivisionDaoTest {
 	@ParameterizedTest
 	@CsvFileSource(
 			delimiterString = "\t",
-			resources = "/test_create.txt")
+			resources = "/data/division/test_create.txt")
 	void test_find_by_id(String name, String capital, String region, int id) {
 		
 		var result = dao.findById(id);
@@ -130,7 +130,7 @@ public class DivisionDaoTest {
 	@ParameterizedTest
 	@CsvFileSource(
 			delimiterString = "\t",
-			resources = "/test_create.txt")
+			resources = "/data/division/test_create.txt")
 	void test_update(String name, String capital, String region, int id) {
 		
 		var form = new DivisionForm(name.toUpperCase(), capital.toUpperCase(), region);

@@ -1,0 +1,14 @@
+1	Pathein	1
+1	Kyonpyaw	2
+1	Hinthada	3
+1	Labutta	4
+1	Maubin	5
+1	Myanaung	6
+1	Myaungmya	7
+1	Pyapon	8
+2	Bago	9
+2	Nyaunglebin	10
+2	Taungoo	11
+2	Pyay	12
+2	Tharrawaddy	13
+2	Nattalin	14

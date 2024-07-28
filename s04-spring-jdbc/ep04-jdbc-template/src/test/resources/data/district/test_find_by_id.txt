@@ -1,0 +1,14 @@
+Ayeyarwady Region	1	Pathein	1	South
+Ayeyarwady Region	1	Kyonpyaw	2	South
+Ayeyarwady Region	1	Hinthada	3	South
+Ayeyarwady Region	1	Labutta	4	South
+Ayeyarwady Region	1	Maubin	5	South
+Ayeyarwady Region	1	Myanaung	6	South
+Ayeyarwady Region	1	Myaungmya	7	South
+Ayeyarwady Region	1	Pyapon	8	South
+Bago Region	2	Bago	9	South, Central
+Bago Region	2	Nyaunglebin	10	South, Central
+Bago Region	2	Taungoo	11	South, Central
+Bago Region	2	Pyay	12	South, Central
+Bago Region	2	Tharrawaddy	13	South, Central
+Bago Region	2	Nattalin	14	South, Central
