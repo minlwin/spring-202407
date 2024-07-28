@@ -52,9 +52,10 @@ public class DivisionDaoImpl implements DivisionDao {
 	@Override
 	public Division findById(int id) {
 		var sql = "select * from division where id = ?";
-		return template.queryForStream(sql, rowMapper, id)
-				.findAny()
-				.orElse(null);
+		
+		try(var stream = template.queryForStream(sql, rowMapper, id)) {
+			return stream.findAny().orElse(null);
+		}
 	}
 
 	@Override
