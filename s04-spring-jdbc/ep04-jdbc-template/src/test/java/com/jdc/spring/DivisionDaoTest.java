@@ -2,6 +2,8 @@ package com.jdc.spring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -121,5 +124,33 @@ public class DivisionDaoTest {
 	void test_find_by_region(String region, int expectedSize) {
 		var list = dao.findByRegion(region);
 		assertEquals(expectedSize, list.size());
+	}
+	
+	@Order(7)
+	@ParameterizedTest
+	@CsvFileSource(
+			delimiterString = "\t",
+			resources = "/test_create.txt")
+	void test_update(String name, String capital, String region, int id) {
+		
+		var form = new DivisionForm(name.toUpperCase(), capital.toUpperCase(), region);
+		
+		assertTrue(dao.update(id, form));
+		
+		var result = dao.findById(id);
+		assertNotNull(result);
+		assertEquals(form.name(), result.name());
+		assertEquals(form.capital(), result.capital());
+		assertEquals(form.region(), result.region());
+		
+	}
+	
+	@Order(8)
+	@ParameterizedTest
+	@ValueSource(ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15})
+	void test_delete(int id) {
+		assertTrue(dao.delete(id));
+		var result = dao.findById(id);
+		assertNull(result);
 	}
 }

@@ -17,4 +17,8 @@ public interface DivisionDao {
 	List<Division> findByRegion(String region);
 	List<Division> findByCapital(String name);
 	
+	boolean update(int id, DivisionForm form);
+	
+	boolean delete(int id);
+	
 }
