@@ -56,7 +56,7 @@ public class CategoryRepoTest {
 	
 	@Order(3)
 	@ParameterizedTest
-	@ValueSource(ints = {5, 6, 6})
+	@ValueSource(ints = {5, 6, 7})
 	void test_find_by_id_not_found(int id) {
 		var result = repo.findById(id);
 		assertNull(result);
