@@ -48,5 +48,6 @@
 	</build>
 	<modules>
 		<module>ep01-pool-xml</module>
+		<module>ep02-pool-java</module>
 	</modules>
 </project>
