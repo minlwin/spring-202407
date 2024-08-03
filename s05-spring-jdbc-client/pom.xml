@@ -49,5 +49,6 @@
 	<modules>
 		<module>ep01-pool-xml</module>
 		<module>ep02-pool-java</module>
+		<module>ep03-pool-boots</module>
 	</modules>
 </project>
