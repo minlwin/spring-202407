@@ -30,6 +30,8 @@ public class CustomerRepoImpl implements CustomerRepo {
 	@Override
 	public int create(CustomerForm form) {
 		
+		validate(form);
+		
 		var keyHolder = new GeneratedKeyHolder();
 		
 		client.sql("insert into customer(name, phone, email) values (:name, :phone, :email)")
@@ -76,17 +78,36 @@ public class CustomerRepoImpl implements CustomerRepo {
 
 	@Override
 	public boolean update(int id, CustomerForm form) {
+		
+		validate(form);
+		
 		return client.sql("update customer set name = :name, phone = :phone, email = :email where id = :id")
 				.param("id", id)
-				.paramSource(new SimplePropertySqlParameterSource(form))
+				.param("name", form.name())
+				.param("phone", form.phone())
+				.param("email", form.email())
 				.update() == 1;
 	}
 
 	@Override
 	public boolean delete(int id) {
-		return client.sql("delete customer where id = :id")
+		return client.sql("delete from customer where id = :id")
 				.param("id", id)
 				.update() == 1;
 	}
-
+	
+	private void validate(CustomerForm form) {
+		
+		if(!StringUtils.hasLength(form.name())) {
+			throw new IllegalArgumentException("Please enter customer name.");
+		}
+		
+		if(!StringUtils.hasLength(form.phone())) {
+			throw new IllegalArgumentException("Please enter phone number.");
+		}
+		
+		if(!StringUtils.hasLength(form.email())) {
+			throw new IllegalArgumentException("Please enter email address.");
+		}
+	}
 }
