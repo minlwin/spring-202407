@@ -18,7 +18,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import com.jdc.spring.pos.model.input.ProductForm;
 import com.jdc.spring.pos.model.repo.ProductRepo;
 
-@SpringBootTest(classes = Application.class)
+@SpringBootTest
 @TestMethodOrder(value = OrderAnnotation.class)
 @Sql(scripts = "classpath:/sql/category.sql", 
 	executionPhase = ExecutionPhase.BEFORE_TEST_CLASS)

@@ -13,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.jdc.spring.aop.aspects.CheckResult;
 import com.jdc.spring.aop.model.RegistrationDto;
 import com.jdc.spring.aop.model.RegistrationForm;
 
@@ -40,6 +41,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
 	}
 
 	@Override
+	@CheckResult
 	public RegistrationDto findById(int id) {
 		return client.sql("select * from registration where id = :id")
 				.param("id", id)

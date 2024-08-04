@@ -21,7 +21,7 @@ import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
 import com.jdc.spring.pool.dto.CustomerForm;
 import com.jdc.spring.pool.repo.CustomerRepo;
 
-@SpringBootTest(classes = Application.class)
+@SpringBootTest
 @TestMethodOrder(value = OrderAnnotation.class)
 @Sql(scripts = "/schema.sql", executionPhase = ExecutionPhase.BEFORE_TEST_CLASS)
 public class CustomerRepoTest {

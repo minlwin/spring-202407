@@ -16,4 +16,18 @@
 	<jdbc:embedded-database type="H2">
 		<jdbc:script location="classpath:/schema.sql"/>
 	</jdbc:embedded-database>
+	
+	<bean id="loggingAspect" class="com.jdc.spring.aop.aspects.LoggingAspect"></bean>
+	
+	<aop:config >
+		<aop:aspect ref="loggingAspect">
+			<aop:pointcut expression="execution(int com.jdc.spring.aop.service.*.create(*)) and args(form)" id="beforeInsert"/>
+			<aop:around method="arroundAdvice" pointcut="execution(* *(int))"/>
+			
+			<aop:before method="beforeAdvice" pointcut-ref="beforeInsert" arg-names="form" />
+			<aop:after-returning method="afterReturningAdvice" 
+				pointcut="@annotation(com.jdc.spring.aop.aspects.CheckResult)"
+				returning="result" />
+		</aop:aspect>
+	</aop:config>
 </beans>

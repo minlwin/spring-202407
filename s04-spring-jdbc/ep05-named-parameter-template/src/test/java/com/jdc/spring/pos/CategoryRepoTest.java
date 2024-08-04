@@ -19,7 +19,7 @@ import com.jdc.spring.pos.model.input.CategoryForm;
 import com.jdc.spring.pos.model.repo.CategoryRepo;
 
 @TestMethodOrder(value = OrderAnnotation.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest
 public class CategoryRepoTest {
 	
 	@Autowired

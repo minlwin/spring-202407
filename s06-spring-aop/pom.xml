@@ -36,5 +36,6 @@
 	<modules>
 		<module>ep01-aop-xml</module>
 		<module>ep02-aop-boots</module>
+		<module>ep03-declare-parents</module>
 	</modules>
 </project>
