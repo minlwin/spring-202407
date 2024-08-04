@@ -1,0 +1,7 @@
+Java Basic	150000	Aung Aung	0911112222	aung@gmail.com	1
+Spring	400000	Thidar	0922223333	thidar@gmail.com	2
+Angular	300000	Nilar	0933334444	nilar@gmail.com	3
+One Stop	950000	Su Su	0944445555	susu@gmail.com	4
+Fultter	300000	Myo Myint	0955556666	myomyint@gmail.com	5
+React	300000	Nilar	0933334444	nilar@gmail.com	6
+Kubernetes	600000	Nilar	0933334444	nilar@gmail.com	7
