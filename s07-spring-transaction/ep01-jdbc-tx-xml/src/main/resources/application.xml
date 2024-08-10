@@ -3,14 +3,18 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd 
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- bean definitions here -->
+	<context:component-scan base-package="com.jdc.spring.trx"></context:component-scan>
+	
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
 		<constructor-arg>
 			<bean class="com.zaxxer.hikari.HikariConfig">
@@ -22,12 +26,38 @@
 		</constructor-arg>
 	</bean>
 	
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:/sql/schema.sql"/>
+		<jdbc:script location="classpath:/sql/limit-setting.sql"/>
+		<jdbc:script location="classpath:/sql/account.sql"/>
+	</jdbc:initialize-database>
+
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
 	
-	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="classpath:/sql/schema.sql"/>
-		<jdbc:script location="classpath:/sql/limit-setting.sql"/>
-	</jdbc:initialize-database>
+	<tx:advice id="repoTrxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="search*" read-only="true"/>
+			<tx:method name="*" timeout="1" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<tx:advice id="serviceTrxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="search*" read-only="true"/>
+			<tx:method name="*" timeout="1" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config proxy-target-class="true">
+	
+		<aop:pointcut expression="@within(org.springframework.stereotype.Repository)" id="repositories"/>
+		<aop:pointcut expression="@within(org.springframework.stereotype.Service)" id="services"/>
+		
+		<aop:advisor advice-ref="repoTrxAdvice" pointcut-ref="repositories" />
+		<aop:advisor advice-ref="serviceTrxAdvice" pointcut-ref="services" />
+
+	</aop:config>
+	
 </beans>
