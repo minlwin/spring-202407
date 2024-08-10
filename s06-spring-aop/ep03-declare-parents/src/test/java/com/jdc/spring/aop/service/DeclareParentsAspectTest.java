@@ -11,12 +11,19 @@ public class DeclareParentsAspectTest {
 	
 	@Autowired
 	private MyService myService;
+	@Autowired
+	private OtherService otherService;
 
 	@Test
 	void test() {
 		myService.doService();
 		
 		if(myService instanceof Trackable track) {
+			track.track();
+		}
+		
+		otherService.test();
+		if(otherService instanceof Trackable track) {
 			track.track();
 		}
 	}
