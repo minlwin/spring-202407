@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.jdc.spring.trx.dto.input.BalanceHistoryForm;
 import com.jdc.spring.trx.dto.input.CashInForm;
 import com.jdc.spring.trx.dto.input.LimitValidationForm;
+import com.jdc.spring.trx.dto.input.TransactionBaseForm;
 import com.jdc.spring.trx.dto.output.CashInDetails;
 import com.jdc.spring.trx.repo.AccountRepo;
 import com.jdc.spring.trx.repo.BalanceHistoryRepo;
@@ -51,7 +52,12 @@ public class CashInServiceImpl implements CashInService {
 		limitValidationService.validate(limitForm);
 		
 		// Initiate Transaction 
-		var trxId = baseRepo.create(form, account);
+		var trxId = baseRepo.create(new TransactionBaseForm(
+				TransactionType.CashIn, 
+				LedgerType.Credit, 
+				form.account(), 
+				account.amount(),
+				form.amount(), form.particular()));
 		
 		// Create Cash In Transaction
 		cashInRepo.create(trxId, form);
