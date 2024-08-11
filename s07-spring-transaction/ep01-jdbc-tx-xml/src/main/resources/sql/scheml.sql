@@ -24,6 +24,9 @@ create table TRX_BASE(
 	constraint trx_cash_in_to_account foreign key (account_id) references ACCOUNT (login_id)
 );
 
+drop index if exist user_and_trx_type;
+create index user_and_trx_type on TRX_BASE (account_id, trx_type);
+
 drop table if exist TRX_CASH_IN;
 
 create table TRX_CASH_IN (

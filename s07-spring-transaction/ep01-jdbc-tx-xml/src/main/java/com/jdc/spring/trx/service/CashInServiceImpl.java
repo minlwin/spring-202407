@@ -31,7 +31,8 @@ public class CashInServiceImpl implements CashInService {
 	
 	@Override
 	public CashInDetails findById(int id) {
-		return cashInRepo.findById(id);
+		return cashInRepo.findById(id)
+				.orElseThrow(() -> new BusinessException("Invalid transaction id."));
 	}
 
 	@Override
