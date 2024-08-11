@@ -3,6 +3,7 @@ package com.jdc.spring.trx.repo;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -11,6 +12,8 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.jdc.spring.trx.dto.input.TransactionBaseForm;
+import com.jdc.spring.trx.dto.input.TransactionSearch;
+import com.jdc.spring.trx.dto.output.TransactionInfo;
 import com.jdc.spring.trx.utils.constants.TransactionStatus;
 import com.jdc.spring.trx.utils.constants.TransactionType;
 
@@ -62,6 +65,12 @@ public class TransactionBaseRepoImpl implements TransactionBaseRepo {
 				.param(Timestamp.valueOf(now.plusDays(1).atStartOfDay()))
 				.query(Long.class)
 				.single();
+	}
+
+	@Override
+	public List<TransactionInfo> search(TransactionSearch search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
