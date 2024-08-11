@@ -53,7 +53,7 @@ create table BALANCE_HISTORY (
 	account_id varchar(20) not null,
 	before_amount int not null,
 	trx_amount int not null,
-	ledger boolean not null,
+	ledger varchar(10) not null,
 	particular varchar(255),
 	constraint balance_history_to_trx foreign key (trx_id) references TRX_BASE (id),
 	constraint balance_history_to_account foreign key (account_id) references ACCOUNT (login_id)
