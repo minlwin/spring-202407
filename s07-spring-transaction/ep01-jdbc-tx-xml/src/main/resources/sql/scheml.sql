@@ -14,6 +14,8 @@ drop table if exist TRX_BASE;
 create table TRX_BASE(
 	id integer primary key auto_increment,
 	trx_type varchar(10) not null,
+	issue_at timestamp not null,
+	status varchar(10) not null,
 	ledger boolean not null,
 	account_id varchar(20) not null,
 	before_usb int not null,
@@ -46,7 +48,6 @@ drop table if exist BALANCE_HISTORY;
 create table BALANCE_HISTORY (
 	trx_id int not null,
 	account_id varchar(20) not null,
-	seq_number int not null,
 	before_amount int not null,
 	trx_amount int not null,
 	ledger boolean not null,
@@ -58,12 +59,12 @@ create table BALANCE_HISTORY (
 drop table if exist LIMIT_SETTING;
 
 create table LIMIT_SETTING (
-	id integer primary key auto_increment,
 	user_level varchar(40) not null,
 	trx_type varchar(10) not null,
 	min_limit integer not null,
 	max_limit integer not null,
-	daily_limit integer not null
+	daily_limit integer not null,
+	primary key (user_level, trx_type)
 );
 
 set foreign_key_check = 1;
