@@ -8,6 +8,6 @@ public interface TransactionBaseRepo {
 
 	int create(CashInForm form, AccountDto account);
 
-	void update(int trxId, TransactionStatus success);
+	void updateStatus(int trxId, TransactionStatus success);
 
 }

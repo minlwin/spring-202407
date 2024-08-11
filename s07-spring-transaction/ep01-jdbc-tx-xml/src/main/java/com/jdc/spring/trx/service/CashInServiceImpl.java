@@ -68,10 +68,10 @@ public class CashInServiceImpl implements CashInService {
 
 		// Update Balance to account
 		var balance = account.amount() + form.amount();
-		accountRepo.update(account.loginId(), balance);
+		accountRepo.updateBalance(account.loginId(), balance);
 		
 		// Update Transaction Status
-		baseRepo.update(trxId, TransactionStatus.Success);
+		baseRepo.updateStatus(trxId, TransactionStatus.Success);
 		
 		return trxId;
 	}

@@ -8,6 +8,6 @@ public interface AccountRepo {
 
 	Optional<AccountDto> findById(String loginId);
 
-	void update(String loginId, int balance);
+	void updateBalance(String loginId, int balance);
 
 }
