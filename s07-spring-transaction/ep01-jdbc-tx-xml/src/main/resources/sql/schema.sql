@@ -1,6 +1,6 @@
-set foreign_key_check = 0;
+set foreign_key_checks = 0;
 
-drop table if exist ACCOUNT;
+drop table if exists ACCOUNT;
 
 create table ACCOUNT (
 	login_id varchar(20) primary key,
@@ -9,7 +9,7 @@ create table ACCOUNT (
 	amount integer default 0
 );
 
-drop table if exist TRX_BASE;
+drop table if exists TRX_BASE;
 
 create table TRX_BASE(
 	id integer primary key auto_increment,
@@ -21,32 +21,30 @@ create table TRX_BASE(
 	before_usb int not null,
 	amount int not null,
 	particular varchar(255),
-	constraint trx_cash_in_to_account foreign key (account_id) references ACCOUNT (login_id)
+	constraint trx_cash_in_to_account foreign key (account_id) references ACCOUNT (login_id),
+	index user_and_trx_type (account_id, trx_type)
 );
 
-drop index if exist user_and_trx_type;
-create index user_and_trx_type on TRX_BASE (account_id, trx_type);
-
-drop table if exist TRX_CASH_IN;
+drop table if exists TRX_CASH_IN;
 
 create table TRX_CASH_IN (
 	id integer primary key,
 	cash_in_from varchar(40) not null,
-	constraint trx_cash_in_to_base foreign key (id) references TRX_BASE,
+	constraint trx_cash_in_to_base foreign key (id) references TRX_BASE (id)
 );
 
 
-drop table if exist TRX_TRANSFER;
+drop table if exists TRX_TRANSFER;
 
 create table TRX_TRANSFER (
 	id integer primary key,
 	transfer_to varchar(20) not null,
 	before_tsfto int not null,
-	constraint trx_transfer_to_base foreign key (id) references TRX_BASE,
+	constraint trx_transfer_to_base foreign key (id) references TRX_BASE (id),
 	constraint trx_transfer_to_account foreign key (transfer_to) references ACCOUNT (login_id)
 );
 
-drop table if exist BALANCE_HISTORY;
+drop table if exists BALANCE_HISTORY;
 
 create table BALANCE_HISTORY (
 	trx_id int not null,
@@ -59,7 +57,7 @@ create table BALANCE_HISTORY (
 	constraint balance_history_to_account foreign key (account_id) references ACCOUNT (login_id)
 );
 
-drop table if exist LIMIT_SETTING;
+drop table if exists LIMIT_SETTING;
 
 create table LIMIT_SETTING (
 	user_level varchar(40) not null,
@@ -70,4 +68,4 @@ create table LIMIT_SETTING (
 	primary key (user_level, trx_type)
 );
 
-set foreign_key_check = 1;
+set foreign_key_checks = 1;
