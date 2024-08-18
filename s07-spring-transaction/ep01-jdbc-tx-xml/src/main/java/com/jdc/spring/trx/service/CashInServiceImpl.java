@@ -43,36 +43,35 @@ public class CashInServiceImpl implements CashInService {
 				.orElseThrow(() -> new BusinessException("Invalid cash in account id."));
 		
 		// Check Limit
-		var limitForm = new LimitValidationForm(
-				account.loginId(), 
-				account.level(), 
-				TransactionType.CashIn, 
-				account.amount(), 
-				form.amount());
-		
-		limitValidationService.validate(limitForm);
+		limitValidationService.validate(LimitValidationForm.builder()
+				.userId(account.loginId())
+				.level(account.level())
+				.type(TransactionType.CashIn)
+				.userBalance(account.amount())
+				.trxAmount(form.amount())
+				.build());
 		
 		// Initiate Transaction 
-		var trxId = baseRepo.create(new TransactionBaseForm(
-				TransactionType.CashIn, 
-				LedgerType.Credit, 
-				form.account(), 
-				account.amount(),
-				form.amount(), 
-				form.particular()));
-		
+		var trxId = baseRepo.create(TransactionBaseForm.builder()
+				.type(TransactionType.CashIn)
+				.ledger(LedgerType.Credit)
+				.account(account.loginId())
+				.beforeAmount(account.amount())
+				.amount(form.amount())
+				.particular(form.particular())
+				.build());
+
 		// Create Cash In Transaction
 		cashInRepo.create(trxId, form);
 		
 		// Create Balance History
-		var history = new BalanceHistoryForm(trxId, 
-				account.loginId(), 
-				account.amount(), 
-				form.amount(), 
-				LedgerType.Credit, 
-				form.particular());
-		
-		historyRepo.create(history);
+		historyRepo.create(BalanceHistoryForm.builder()
+				.accountId(account.loginId())
+				.beforeAmount(account.amount())
+				.trxAmount(form.amount())
+				.ledger(LedgerType.Credit)
+				.particular(form.particular())
+				.build());
 
 		// Update Balance to account
 		var balance = account.amount() + form.amount();
