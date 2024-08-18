@@ -6,4 +6,6 @@ public interface TransactionTransferRepo {
 
 	TransferDetails findById(int id);
 
+	void create(int trxId, String loginId, int amount);
+
 }
