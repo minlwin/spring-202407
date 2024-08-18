@@ -40,7 +40,7 @@ public class CashInServiceImpl implements CashInService {
 		
 		// Get Accounts
 		var account = accountRepo.findById(form.account())
-				.orElseThrow(() -> new BusinessException("Invalid transfer from account id."));
+				.orElseThrow(() -> new BusinessException("Invalid cash in account id."));
 		
 		// Check Limit
 		var limitForm = new LimitValidationForm(
@@ -58,7 +58,8 @@ public class CashInServiceImpl implements CashInService {
 				LedgerType.Credit, 
 				form.account(), 
 				account.amount(),
-				form.amount(), form.particular()));
+				form.amount(), 
+				form.particular()));
 		
 		// Create Cash In Transaction
 		cashInRepo.create(trxId, form);
