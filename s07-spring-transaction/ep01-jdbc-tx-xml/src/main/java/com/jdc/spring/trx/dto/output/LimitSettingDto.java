@@ -5,9 +5,12 @@ import com.jdc.spring.trx.utils.constants.UserLevel;
 
 public record LimitSettingDto(
 		UserLevel userLevel,
-		TransactionType trxType,
+		String trxType,
 		int minLimit,
 		int maxLimit,
 		int dailyLimit) {
 
+	public TransactionType getTransactionType() {
+		return TransactionType.fromDbName(trxType);
+	}
 }

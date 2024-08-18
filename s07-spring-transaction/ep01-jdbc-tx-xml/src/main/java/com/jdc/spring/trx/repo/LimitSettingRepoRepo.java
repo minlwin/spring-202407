@@ -27,8 +27,8 @@ public class LimitSettingRepoRepo implements LimitSettingRepo{
 	@Override
 	public Optional<LimitSettingDto> findById(UserLevel level, TransactionType type) {
 		return jdbcClient.sql("select * from LIMIT_SETTING where user_level = ? and trx_type = ?")
-				.param(level)
-				.param(type)
+				.param(level.name())
+				.param(type.getDbName())
 				.query(rowMapper)
 				.optional();
 	}

@@ -27,8 +27,8 @@ public class CashInServiceTest {
 	@CsvSource(value = {
 		"aung@gmail.com,MPU,999,Test Cash In,Transaction is under minimum limit 1000.",	
 		"thidar@gmail.com,MPU,999,Test Cash In,Transaction is under minimum limit 1000.",	
-		"nilar@gmail.com,MPU,2999,Test Cash In,Transaction is under minimum limit 1000.",	
-		"aung@gmail.com,MPU,2999,Test Cash In,Transaction is under minimum limit 1000."
+		"nilar@gmail.com,MPU,2999,Test Cash In,Transaction is under minimum limit 3000.",	
+		"kyaw@gmail.com,MPU,2999,Test Cash In,Transaction is under minimum limit 3000."
 	})
 	void test_create_lower_limit_error(
 			String account,
