@@ -112,8 +112,22 @@ public class CashInServiceTest {
 	}
 	
 	@Order(5)
-	void test_success() {
-		
+	@ParameterizedTest
+	@CsvSource(value = {
+		"aung@gmail.com,MPU,99999,Test Cash In,3",	
+		"nilar@gmail.com,MPU,99999,Test Cash In,4",	
+		"kyaw@gmail.com,MPU,300000,Test Cash In,5",	
+		"thidar@gmail.com,MPU,1000,Test Cash In,6",	
+	})
+	void test_success(
+			String account,
+			String cashInFrom,
+			Integer amount,
+			String particular,
+			int id) {
+		var form = new CashInForm(account, cashInFrom, amount, particular);
+		var result = service.cashIn(form);
+		assertEquals(id, result);
 	}
 	
 	

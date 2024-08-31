@@ -70,6 +70,7 @@ public class CashInServiceImpl implements CashInService {
 		
 		// Create Balance History
 		historyRepo.create(BalanceHistoryForm.builder()
+				.trxId(trxId)
 				.accountId(account.loginId())
 				.beforeAmount(account.amount())
 				.trxAmount(form.amount())

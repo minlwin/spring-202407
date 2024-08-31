@@ -10,6 +10,10 @@ public record BalanceHistoryForm(
 		LedgerType ledger,
 		String particular) {
 	
+	public String getLedgerValue() {
+		return ledger.name();
+	}
+	
 	public static Builder builder() {
 		return new Builder();
 	}

@@ -29,7 +29,7 @@ public class BalanceHistoryRepoImpl implements BalanceHistoryRepo {
 
 	@Override
 	public void create(BalanceHistoryForm history) {
-		jdbcClient.sql("insert into BALANCE_HISTORY values (?, ?, ?, ?, ?, ?)")
+		jdbcClient.sql("insert into BALANCE_HISTORY values (:trxId, :accountId, :beforeAmount, :trxAmount, :ledgerValue, :particular)")
 			.paramSource(new SimplePropertySqlParameterSource(history))
 			.update();
 	}
