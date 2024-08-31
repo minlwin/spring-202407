@@ -38,7 +38,7 @@
 	
 	<tx:advice id="repoTrxAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
-			<tx:method name="search*" read-only="true"/>
+			<tx:method name="search*" read-only="true" />
 			<tx:method name="find*" read-only="true"/>
 			<tx:method name="*" timeout="600" />
 		</tx:attributes>

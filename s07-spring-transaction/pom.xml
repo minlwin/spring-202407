@@ -76,5 +76,6 @@
 	</build>
 	<modules>
 		<module>ep01-jdbc-tx-xml</module>
+		<module>ep02-jdbc-tx-java</module>
 	</modules>
 </project>
