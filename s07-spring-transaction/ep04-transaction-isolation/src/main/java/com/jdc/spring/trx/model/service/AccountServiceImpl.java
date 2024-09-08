@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.jdc.spring.trx.model.AccountException;
+import com.jdc.spring.trx.model.HandleAccountException;
 import com.jdc.spring.trx.model.dto.Account;
 import com.jdc.spring.trx.model.repo.AccountRepo;
 
@@ -19,6 +20,7 @@ public class AccountServiceImpl implements AccountService{
 	private TrxHistoryService historyService;
 
 	@Override
+	@HandleAccountException
 	public void transfer(int from, int to, int amount) {
 		
 		var historyId = historyService.createHistory("Transfer from %d to %d.".formatted(from, to), amount, "Initiate");
