@@ -6,6 +6,6 @@ import com.jdc.transaction.service.model.ProductInfo;
 
 public interface SaleItemRepo {
 
-	void save(LinkedHashMap<ProductInfo, Integer> items);
+	void save(int saleId, LinkedHashMap<ProductInfo, Integer> items);
 
 }

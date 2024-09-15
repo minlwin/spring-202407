@@ -17,6 +17,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import com.jdc.transaction.exceptions.BusinessException;
 import com.jdc.transaction.repo.MemberRepo;
@@ -37,6 +38,7 @@ public class SaleServiceUnitTest {
 	@Mock private ProductRepo productRepo;
 	@Mock private SaleHistoryRepo saleHistoryRepo;
 	@Mock private SaleItemRepo saleItemRepo;
+	@Mock private PlatformTransactionManager transactionManager;
 	
 	@InjectMocks
 	private SaleServiceImpl service;
@@ -57,7 +59,7 @@ public class SaleServiceUnitTest {
 	@MethodSource
 	void test_invalid_member_id(SaleForm form) {
 		when(memberRepo.countById(form.memberId()))
-			.thenReturn(0);
+			.thenReturn(0L);
 		
 		var ex = assertThrows(BusinessException.class, () -> service.checkOut(form));
 		
@@ -75,7 +77,7 @@ public class SaleServiceUnitTest {
 	@MethodSource
 	void test_empty_items(SaleForm form) {
 		when(memberRepo.countById(form.memberId()))
-			.thenReturn(1);
+			.thenReturn(1L);
 		
 		var ex = assertThrows(BusinessException.class, () -> service.checkOut(form));
 		
@@ -92,7 +94,7 @@ public class SaleServiceUnitTest {
 	@MethodSource
 	void test_invalid_product_id(SaleForm form) {
 		when(memberRepo.countById(form.memberId()))
-			.thenReturn(1);
+			.thenReturn(1L);
 		
 		for(var item: form.items()) {
 			when(productRepo.findById(item.productId()))
@@ -122,7 +124,7 @@ public class SaleServiceUnitTest {
 	@MethodSource
 	void test_invalid_quantity(SaleForm form) {
 		when(memberRepo.countById(form.memberId()))
-			.thenReturn(1);
+			.thenReturn(1L);
 		
 		for(var item: form.items()) {
 			when(productRepo.findById(item.productId()))
@@ -156,7 +158,7 @@ public class SaleServiceUnitTest {
 	@MethodSource
 	void test_success(SaleForm form) {
 		when(memberRepo.countById(form.memberId()))
-			.thenReturn(1);
+			.thenReturn(1L);
 	
 	for(var item: form.items()) {
 		when(productRepo.findById(item.productId()))

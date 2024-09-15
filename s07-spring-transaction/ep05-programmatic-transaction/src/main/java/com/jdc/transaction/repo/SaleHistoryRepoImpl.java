@@ -1,19 +1,39 @@
 package com.jdc.transaction.repo;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.stereotype.Repository;
+
 import com.jdc.transaction.service.model.SaleResult.Status;
 
+@Repository
 public class SaleHistoryRepoImpl implements SaleHistoryRepo {
+	
+	@Autowired
+	private NamedParameterJdbcTemplate template;
 
 	@Override
 	public int create(int memberId) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		var keyHolder = new GeneratedKeyHolder();
+		
+		template.update("insert into SALE_HISTORY (members_id) values (:member)", 
+				new MapSqlParameterSource("member", memberId), 
+				keyHolder, new String[] {"id"});
+		return keyHolder.getKey().intValue();
 	}
 
 	@Override
-	public void update(int id, Status error, String string) {
-		// TODO Auto-generated method stub
-		
+	public void update(int id, Status status, String remark) {
+
+		template.update("update SALE_HISTORY set status = :status, remark = :remark, update_at = :updateAt where id = :id", 
+				Map.of("status", status.name(), "remark", remark, "updateAt", Timestamp.valueOf(LocalDateTime.now())));
 	}
 
 }
