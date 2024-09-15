@@ -76,5 +76,6 @@
 		<module>ep02-jdbc-tx-java</module>
 		<module>ep03-jdbc-trx-boots</module>
 		<module>ep04-transaction-isolation</module>
+		<module>ep05-programmatic-transaction</module>
 	</modules>
 </project>
