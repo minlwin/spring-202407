@@ -40,16 +40,6 @@ create table SALE_HISTORY (
 	foreign key (members_id) references MEMBERS(id)
 );
 
-drop table if exists SALE;
-
-create table SALE (
-	id int primary key,
-	members_id int not null,
-	sale_at timestamp null default CURRENT_TIMESTAMP,
-	foreign key (id) references SALE_HISTORY(id),
-	foreign key (members_id) references MEMBERS(id)
-);
-
 drop table if exists SALE_ITEM;
 
 create table SALE_ITEM (
