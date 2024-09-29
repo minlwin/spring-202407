@@ -77,5 +77,6 @@
 		<module>ep03-jdbc-trx-boots</module>
 		<module>ep04-transaction-isolation</module>
 		<module>ep05-programmatic-transaction</module>
+		<module>ep06-transaction-events</module>
 	</modules>
 </project>
