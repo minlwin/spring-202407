@@ -22,7 +22,7 @@ public class ProductRepoImpl implements ProductRepo {
 	public Optional<ProductInfo> findById(int productId) {
 		return template.query("""
 				select p.id, p.name, p.unit_price, p.category_id, c.name category from PRODUCT p 
-				join CATEGORY c on c.id = p.product_id where p.id = :id
+				join CATEGORY c on c.id = p.category_id where p.id = :id
 				""", 
 				Map.of("id", productId), rowMapper)
 				.stream().findAny();

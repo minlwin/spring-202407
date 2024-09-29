@@ -2,7 +2,6 @@ package com.jdc.transaction.repo;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -33,7 +32,12 @@ public class SaleHistoryRepoImpl implements SaleHistoryRepo {
 	public void update(int id, Status status, String remark) {
 
 		template.update("update SALE_HISTORY set status = :status, remark = :remark, update_at = :updateAt where id = :id", 
-				Map.of("status", status.name(), "remark", remark, "updateAt", Timestamp.valueOf(LocalDateTime.now())));
+				new MapSqlParameterSource()
+					.addValue("status", status.name())
+					.addValue("remark", remark)
+					.addValue("updateAt", Timestamp.valueOf(LocalDateTime.now()))
+					.addValue("id", id)
+				);
 	}
 
 }

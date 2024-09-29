@@ -48,7 +48,7 @@ create table SALE_ITEM (
 	unit_price int not null,
 	quantity int not null,
 	primary key (sale_id, product_id),
-	foreign key (sale_id) references SALE(id),
+	foreign key (sale_id) references SALE_HISTORY(id),
 	foreign key (product_id) references PRODUCT(id)
 );
 

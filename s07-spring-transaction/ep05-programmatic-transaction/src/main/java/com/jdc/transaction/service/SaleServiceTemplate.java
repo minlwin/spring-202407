@@ -4,8 +4,7 @@ import java.util.LinkedHashMap;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import com.jdc.transaction.repo.MemberRepo;
 import com.jdc.transaction.repo.ProductRepo;
@@ -18,27 +17,23 @@ import com.jdc.transaction.service.model.SaleResult;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Profile("manual")
 @RequiredArgsConstructor
-public class SaleServiceImpl extends AbstractSaleService {
+@Profile("template")
+public class SaleServiceTemplate extends AbstractSaleService {
 
 	private final MemberRepo memberRepo;
 	private final ProductRepo productRepo;
 	private final SaleHistoryRepo saleHistoryRepo;
 	private final SaleItemRepo saleItemRepo;
-
-	private final PlatformTransactionManager transactionManager;
+	
+	private final TransactionTemplate template;
 
 	@Override
 	public SaleResult checkOut(SaleForm form) {
-
+		
 		validate(form);
 
-		var initiate = transactionManager.getTransaction(new DefaultTransactionDefinition());
-
-		var id = saleHistoryRepo.create(form.memberId());
-
-		transactionManager.commit(initiate);
+		var id = template.execute(status -> saleHistoryRepo.create(form.memberId()));
 
 		var params = new LinkedHashMap<ProductInfo, Integer>();
 
@@ -46,12 +41,12 @@ public class SaleServiceImpl extends AbstractSaleService {
 			var product = productRepo.findById(item.productId());
 
 			if (product.isEmpty() || item.quantity() == 0) {
-				var updateError = transactionManager.getTransaction(new DefaultTransactionDefinition());
-				var result = new SaleResult(id, SaleResult.Status.Error,
-						product.isEmpty() ? "Invalid product id." : "Please enter quentity.");
-				saleHistoryRepo.update(id, result.status(), result.message());
-				transactionManager.commit(updateError);
-				return result;
+				return template.execute(status -> {
+					var result = new SaleResult(id, SaleResult.Status.Error,
+							product.isEmpty() ? "Invalid product id." : "Please enter quentity.");
+					saleHistoryRepo.update(id, result.status(), result.message());
+					return result;
+				});
 			}
 
 			// Add Item to Parameter
@@ -63,22 +58,15 @@ public class SaleServiceImpl extends AbstractSaleService {
 
 		}
 
-		var updateSuccess = transactionManager.getTransaction(new DefaultTransactionDefinition());
-
-		try {
+		return template.execute(status -> {
 			// Create Sale Items
 			saleItemRepo.save(id, params);
 
 			// Update Sale History
 			var result = new SaleResult(id, SaleResult.Status.Success, "Check out operation is done successfully.");
 			saleHistoryRepo.update(id, result.status(), result.message());
-			transactionManager.commit(updateSuccess);
 			return result;
-		} catch (Exception e) {
-			transactionManager.rollback(updateSuccess);
-			throw e;
-		}
-
+		});
 	}
 
 	@Override

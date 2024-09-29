@@ -5,6 +5,6 @@ public record ProductInfo(
 		String name, 
 		int unitPrice, 
 		int categoryId, 
-		String categroy) {
+		String category) {
 
 }
