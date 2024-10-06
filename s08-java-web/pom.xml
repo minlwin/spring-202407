@@ -53,5 +53,6 @@
 		<module>ep02-servlet-without-web-xml</module>
 		
 		<module>ep03-servlet-communication</module>
+		<module>ep04-servlet-scopes</module>
 	</modules>
 </project>
