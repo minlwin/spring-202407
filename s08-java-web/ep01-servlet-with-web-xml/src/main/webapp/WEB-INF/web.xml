@@ -11,10 +11,20 @@
 	<servlet>
 		<servlet-name>helloServlet</servlet-name>
 		<servlet-class>com.jdc.spring.web.HelloServlet</servlet-class>
+		<init-param>
+			<param-name>image-path</param-name>
+			<param-value>/storage/images</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
 	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>helloServlet</servlet-name>
 		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
+	
+	<context-param>
+		<param-name>common-wait</param-name>
+		<param-value>100</param-value>
+	</context-param>
 </web-app>

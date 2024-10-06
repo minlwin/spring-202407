@@ -50,5 +50,6 @@
 	</build>
 	<modules>
 		<module>ep01-servlet-with-web-xml</module>
+		<module>ep02-servlet-without-web-xml</module>
 	</modules>
 </project>
