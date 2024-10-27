@@ -10,6 +10,7 @@ import com.jdc.spring.web.controller.dto.User;
 @Controller
 @RequestMapping("home")
 public class HomeController {
+	
 
 	@GetMapping
 	String index(ModelMap model) {
