@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>    
 <!DOCTYPE html>
 <html>
@@ -11,32 +10,32 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-
+	
 	<div class="container mt-4">
-		<h3>Spring MVC</h3>
+		<h1>Region Details</h1>
 		
 		<table class="table table-bordered">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Name</th>
-					<th>Capital</th>
-					<th>Region</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<c:forEach var="region" items="${list}">
-					<tr>
-						<td>${region.id}</td>
-						<td>${region.name}</td>
-						<td>${region.capital}</td>
-						<td>${region.region}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
+			<tr>
+				<td>ID</td>
+				<td>${dto.id}</td>
+			</tr>
+			<tr>
+				<td>Name</td>
+				<td>${dto.name}</td>
+			</tr>
+			<tr>
+				<td>Capital</td>
+				<td>${dto.capital}</td>
+			</tr>
+			<tr>
+				<td>Region</td>
+				<td>${dto.region}</td>
+			</tr>
 		</table>
+		
+		<c:url var="home" value="/home"></c:url>
+		
+		<a href="${home}" class="btn btn-primary">Home</a>
 	</div>
-
 </body>
 </html>

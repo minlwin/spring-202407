@@ -105,5 +105,7 @@
 	</build>
 	<modules>
 		<module>ep01-springmvc-xml</module>
+		
+		<module>ep02-springmvc-java</module>
 	</modules>
 </project>

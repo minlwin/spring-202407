@@ -28,8 +28,16 @@
 			<tbody>
 				<c:forEach var="region" items="${list}">
 					<tr>
-						<td>${region.id}</td>
-						<td>${region.name}</td>
+						<td>
+							<c:url var="pathLink" value="/home/${region.id}"></c:url>
+							<a href="${pathLink}">${region.id}</a>
+						</td>
+						<td>
+							<c:url var="detailsUrl" value="/home/details">
+								<c:param name="id" value="${region.id}"></c:param>
+							</c:url>
+							<a href="${detailsUrl}">${region.name}</a>
+						</td>
 						<td>${region.capital}</td>
 						<td>${region.region}</td>
 					</tr>
