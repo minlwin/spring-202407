@@ -24,10 +24,10 @@ public class RootConfiguration {
 	@Bean
 	DataSource dataSource() {
 		var bean = new HikariDataSource();
-		bean.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		bean.setJdbcUrl("jdbc:mysql://localhost:3306/location_db");
-		bean.setUsername("spring");
-		bean.setPassword("spring");
+		bean.setDriverClassName("org.h2.Driver");
+		bean.setJdbcUrl("jdbc:h2:mem:testDB");
+		bean.setUsername("sa");
+		bean.setPassword("sa");
 		return bean;
 	}
 	
@@ -49,6 +49,7 @@ public class RootConfiguration {
 	private Properties getJpaProperties() {
 		var prop = new Properties();
 		prop.put("hibernate.hbm2ddl.auto", "create");
+		prop.put("hibernate.hbm2ddl.import_files", "/region.sql");
 		prop.put("hibernate.show_sql", true);
 		prop.put("hibernate.format_sql", true);
 		return prop;
