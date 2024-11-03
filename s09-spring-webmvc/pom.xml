@@ -33,10 +33,11 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<modules>
 		<module>ep01-springmvc-xml</module>
-		
 		<module>ep02-springmvc-java</module>
 		<module>ep03-springmvc-boot</module>
+		<module>ep04-spring-forms</module>
 	</modules>
 </project>
