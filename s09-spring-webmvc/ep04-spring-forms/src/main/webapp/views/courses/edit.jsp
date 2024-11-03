@@ -8,9 +8,7 @@
 	
 	<h4>Add New Course</h4>
 	
-	<form:form action="${pageContext.request.contextPath}/courses" method="post" modelAttribute="form">
-		
-		<form:errors path="*"></form:errors>
+	<form:form action="${pageContext.request.contextPath}/courses" method="post" modelAttribute="courseForm">
 		
 		<div class="mb-3 row">
 			<!-- Name -->
@@ -23,7 +21,7 @@
 		
 		<div class="row mb-3">
 			<!-- Level -->
-			<div class="col-2">
+			<div class="col-3">
 				<label for="level" class="form-label">Level</label>
 				<form:select path="level" cssClass="form-select">
 					<option value="">Search All</option>
@@ -34,14 +32,14 @@
 				<form:errors path="level"></form:errors>
 			</div>
 			<!-- Duration -->
-			<div class="col-2">
+			<div class="col-3">
 				<label class="form-label" for="hours">Hours</label>
 				<form:input path="hours" cssClass="form-control" type="number"/>
 				<form:errors path="hours" ></form:errors>
 			</div>
 			
 			<!-- Fees -->
-			<div class="col-2">
+			<div class="col-3">
 				<label class="form-label" for="fees">Fees</label>
 				<form:input path="fees" cssClass="form-control" type="number"/>
 				<form:errors path="fees" ></form:errors>

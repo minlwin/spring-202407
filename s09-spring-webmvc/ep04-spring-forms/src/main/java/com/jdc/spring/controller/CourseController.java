@@ -34,7 +34,7 @@ public class CourseController {
 	}
 	
 	@PostMapping
-	String save(@Validated @ModelAttribute CourseForm form, BindingResult result) {
+	String save(@Validated @ModelAttribute(name = "courseForm") CourseForm form, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "courses/edit";
@@ -43,7 +43,7 @@ public class CourseController {
 		return "redirect:/courses";
 	}
 	
-	@ModelAttribute(name = "form")
+	@ModelAttribute(name = "courseForm")
 	CourseForm form() {
 		return new CourseForm();
 	}
