@@ -40,6 +40,7 @@
 				<th>Name</th>
 				<th>Level</th>
 				<th>Hours</th>
+				<th>Fees</th>
 				<th>Created At</th>
 				<th>Sections</th>
 			</tr>
