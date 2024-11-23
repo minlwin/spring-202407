@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>    
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>    
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>    
 
 <app:layout title="Courses" active="courses">
 	<h4>Course Management</h4>
@@ -56,7 +57,7 @@
 				<td>${item.level()}</td>
 				<td>${item.hours()}</td>
 				<td>${item.fees()}</td>
-				<td><c:out value="${item.createdAt()}"></c:out></td>
+				<td>${localDateTimes.format(item.createdAt())}</td>
 				<td>${item.sections()}</td>
 			</tr>			
 			</c:forEach>

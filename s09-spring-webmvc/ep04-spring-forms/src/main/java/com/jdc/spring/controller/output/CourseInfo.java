@@ -2,6 +2,8 @@ package com.jdc.spring.controller.output;
 
 import java.time.LocalDateTime;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.jdc.spring.model.entity.Course;
 import com.jdc.spring.model.entity.Course.Level;
 import com.jdc.spring.model.entity.Course_;
@@ -18,6 +20,7 @@ public record CourseInfo(
 		Level level,
 		int hours,
 		int fees,
+		@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 		LocalDateTime createdAt,
 		long sections) {
 

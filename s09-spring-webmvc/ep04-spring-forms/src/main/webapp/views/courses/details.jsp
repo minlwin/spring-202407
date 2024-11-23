@@ -29,7 +29,7 @@
 		<!-- Created At -->
 		<div class="col">
 			<span class="text-secondary">Created At : </span>
-			<span>${details.createdAt()}</span>
+			<span>${localDateTimes.format(details.createdAt())}</span>
 		</div>
 	</div>
 	
