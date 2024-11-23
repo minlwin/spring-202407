@@ -45,6 +45,22 @@
 				<th>Sections</th>
 			</tr>
 		</thead>
+		
+		<tbody>
+			<c:forEach items="${list}" var="item">
+			<tr>
+				<td>${item.id()}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/courses/${item.id()}">${item.name()}</a>
+				</td>
+				<td>${item.level()}</td>
+				<td>${item.hours()}</td>
+				<td>${item.fees()}</td>
+				<td><c:out value="${item.createdAt()}"></c:out></td>
+				<td>${item.sections()}</td>
+			</tr>			
+			</c:forEach>
+		</tbody>
 	
 	</table>
 	

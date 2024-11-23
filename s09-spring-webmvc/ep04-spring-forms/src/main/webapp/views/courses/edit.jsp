@@ -6,9 +6,11 @@
 
 <app:layout title="Courses" active="courses">
 	
-	<h4>Add New Course</h4>
+	<h4>${courseForm.id ne null ? 'Edit' : 'Add New'} Course</h4>
 	
 	<form:form action="${pageContext.request.contextPath}/courses" method="post" modelAttribute="courseForm">
+		
+		<form:hidden path="id"/>
 		
 		<div class="mb-3 row">
 			<!-- Name -->
@@ -26,7 +28,7 @@
 				<form:select path="level" cssClass="form-select">
 					<option value="">Search All</option>
 					<c:forEach var="item" items="${levels}">
-						<option ${param.level eq item ? 'selected' : ''} value="${item}">${item}</option>
+						<option ${(param.level eq item or courseForm.level eq item) ? 'selected' : ''} value="${item}">${item}</option>
 					</c:forEach>
 				</form:select>
 				<form:errors path="level"></form:errors>
@@ -48,7 +50,7 @@
 		
 		<div class="mb-3">
 			<label for="description" class="form-label">Description</label>
-			<textarea class="form-control" name="description" id="description" cols="30" rows="3"></textarea>
+			<form:textarea path="description" cssClass="form-control"/>
 		</div>	
 		
 		<div class="mb-3">
