@@ -1,42 +1,39 @@
 package com.jdc.spring.model.entity;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
 @Entity
-public class Section {
+public class Student {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne(optional = false)
-	private Course course;
+	@Column(nullable = false)
+	private String name;
 	
 	@Column(nullable = false)
-	private int fees;
+	private String phone;
 
 	@Column(nullable = false)
-	private LocalDate startDate;
+	private String email;
+	
+	private Education lastEducation;
 	
 	@Column(nullable = false)
-	private int months;
-
-	@Column(nullable = false)
-	private int availableSeats;
+	private LocalDateTime entryAt;
 	
 	private String remark;
 	
-	@OneToMany(mappedBy = "section")
-	private List<Registration> registrations;
+	public enum Education {
+		BEHS, College, Master
+	}
 }
