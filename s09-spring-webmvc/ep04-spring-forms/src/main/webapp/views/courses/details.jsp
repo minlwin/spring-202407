@@ -8,7 +8,7 @@
 	<c:set var="sections" value="${details.sections()}"></c:set>
 	
 	
-	<h4>${details.name()}</h4>
+	<h4><i class="bi-book"></i> ${details.name()}</h4>
 	
 	<div class="row">
 		<!-- Level -->
@@ -80,13 +80,13 @@
 			<c:param name="id" value="${details.id()}"></c:param>
 		</c:url>
 		<a href="${editCourse}" class="btn btn-primary">
-			Edit Course
+			<i class="bi-pencil"></i> Edit Course
 		</a>
 		<c:url var="addNewSection" value="/sections/edit">
 			<c:param name="courseId" value="${details.id()}"></c:param>
 		</c:url>
-		<a href="${addNewSection}" class="btn btn-primary">
-			Add New Section
+		<a href="${addNewSection}" class="btn btn-outline-primary">
+			<i class="bi-plus"></i> Add New Section
 		</a>
 	</div>
 	

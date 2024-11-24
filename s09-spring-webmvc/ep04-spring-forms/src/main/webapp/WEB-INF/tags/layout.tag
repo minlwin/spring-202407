@@ -23,20 +23,20 @@
 	<nav class="navbar navbar-expand bg-primary navbar-dark">
 		
 		<div class="container">
-			<a href="/" class="navbar-brand">Using Forms</a>
+			<a href="/" class="navbar-brand"><i class="bi-house"></i> Using Forms</a>
 			
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a href="/registrations" class="nav-link ${active eq 'registrations' ? 'active' : ''}">Registrations</a>
+					<a href="/registrations" class="nav-link ${active eq 'registrations' ? 'active' : ''}"><i class="bi-flag"></i> Registrations</a>
 				</li>
 				<li class="nav-item">
-					<a href="/students" class="nav-link ${active eq 'students' ? 'active' : ''}">Students</a>
+					<a href="/students" class="nav-link ${active eq 'students' ? 'active' : ''}"><i class="bi-people"></i> Students</a>
 				</li>
 				<li class="nav-item">
-					<a href="/sections" class="nav-link ${active eq 'sections' ? 'active' : ''}">Sections</a>
+					<a href="/sections" class="nav-link ${active eq 'sections' ? 'active' : ''}"><i class="bi-calendar"></i> Sections</a>
 				</li>
 				<li class="nav-item">
-					<a href="/courses" class="nav-link ${active eq 'courses' ? 'active' : ''}">Courses</a>
+					<a href="/courses" class="nav-link ${active eq 'courses' ? 'active' : ''}"><i class="bi-book"></i> Courses</a>
 				</li>
 			</ul>
 		</div>

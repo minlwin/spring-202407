@@ -5,7 +5,7 @@
 
 <app:layout title="Sections" active="sections">
 	
-	<h4>Section Management</h4>
+	<h4><i class="bi-calendar"></i> Section Management</h4>
 	
 	<!-- Search Bar -->
 	<form class="row">
@@ -41,7 +41,7 @@
 		
 		<!-- Search Button -->
 		<div class="col btn-wrapper">
-			<button type="submit" class="btn btn-primary">Search</button>
+			<button type="submit" class="btn btn-primary"><i class="bi-search"></i> Search</button>
 		</div>
 		
 	</form>

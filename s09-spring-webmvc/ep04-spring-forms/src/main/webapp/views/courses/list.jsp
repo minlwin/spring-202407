@@ -5,7 +5,7 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>    
 
 <app:layout title="Courses" active="courses">
-	<h4>Course Management</h4>
+	<h4><i class="bi-book"></i> Course Management</h4>
 	
 	<!-- Search Form -->
 	<form class="row">
@@ -27,8 +27,8 @@
 		</div>
 		
 		<div class="col btn-wrapper">
-			<button type="submit" class="btn btn-primary">Search</button>
-			<a href="/courses/edit" class="btn btn-outline-primary">Add New</a>
+			<button type="submit" class="btn btn-primary"><i class="bi-search"></i> Search</button>
+			<a href="/courses/edit" class="btn btn-outline-primary"><i class="bi-plus"></i> Add New</a>
 		</div>
 	</form>
 	
@@ -44,6 +44,7 @@
 				<th>Fees</th>
 				<th>Created At</th>
 				<th>Sections</th>
+				<th></th>
 			</tr>
 		</thead>
 		
@@ -51,14 +52,17 @@
 			<c:forEach items="${list}" var="item">
 			<tr>
 				<td>${item.id()}</td>
-				<td>
-					<a href="${pageContext.request.contextPath}/courses/${item.id()}">${item.name()}</a>
-				</td>
+				<td>${item.name()}</td>
 				<td>${item.level()}</td>
 				<td>${item.hours()}</td>
 				<td>${item.fees()}</td>
 				<td>${localDateTimes.format(item.createdAt())}</td>
 				<td>${item.sections()}</td>
+				<td>
+					<a class="icon-link" href="${pageContext.request.contextPath}/courses/${item.id()}">
+						<i class="bi-send"></i>
+					</a>
+				</td>
 			</tr>			
 			</c:forEach>
 		</tbody>

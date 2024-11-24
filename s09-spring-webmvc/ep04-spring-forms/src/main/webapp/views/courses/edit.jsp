@@ -6,7 +6,16 @@
 
 <app:layout title="Courses" active="courses">
 	
-	<h4>${courseForm.id ne null ? 'Edit' : 'Add New'} Course</h4>
+	<h4>
+		<c:choose>
+			<c:when test="${courseForm.id ne null}">
+				<i class="bi-pencil"></i> Edit Course
+			</c:when>		
+			<c:otherwise>
+				<i class="bi-plus"></i> Add New Course
+			</c:otherwise>
+		</c:choose>
+	</h4>
 	
 	<form:form action="${pageContext.request.contextPath}/courses/edit" method="post" modelAttribute="courseForm">
 		

@@ -3,5 +3,6 @@
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>    
 
 <app:layout title="Sections" active="sections">
-	<h4>${details.courseName()} ${details.startAt()} Section</h4>
+	<h4><i class="bi-calendar"></i> ${details.courseName()} ${details.startAt()} Section</h4>
+	
 </app:layout>
