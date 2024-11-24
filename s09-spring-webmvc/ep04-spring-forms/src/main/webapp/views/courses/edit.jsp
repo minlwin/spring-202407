@@ -8,7 +8,7 @@
 	
 	<h4>${courseForm.id ne null ? 'Edit' : 'Add New'} Course</h4>
 	
-	<form:form action="${pageContext.request.contextPath}/courses" method="post" modelAttribute="courseForm">
+	<form:form action="${pageContext.request.contextPath}/courses/edit" method="post" modelAttribute="courseForm">
 		
 		<form:hidden path="id"/>
 		
