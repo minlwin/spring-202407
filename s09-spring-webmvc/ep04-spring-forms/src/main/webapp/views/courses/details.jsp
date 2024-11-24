@@ -40,7 +40,33 @@
 	<!-- Sections -->
 	<c:choose>
 		<c:when test="${sections.size() > 0}">
-		
+			
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Start At</th>
+						<th>Months</th>
+						<th>Fees</th>
+						<th>Available Seats</th>
+						<th>Registrations</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+				<c:forEach items="${sections}" var="item">
+					<tr>
+						<td>${item.id()}</td>
+						<td>${item.startAt()}</td>
+						<td>${item.months()}</td>
+						<td>${item.fees()}</td>
+						<td>${item.seats()}</td>
+						<td>${item.registrations()}</td>
+					</tr>
+				</c:forEach>	
+				</tbody>
+			</table>
+			
 		</c:when>
 		<c:otherwise>
 			<div class="alert alert-info">
@@ -56,7 +82,10 @@
 		<a href="${editCourse}" class="btn btn-primary">
 			Edit Course
 		</a>
-		<a href="" class="btn btn-primary">
+		<c:url var="addNewSection" value="/sections/edit">
+			<c:param name="courseId" value="${details.id()}"></c:param>
+		</c:url>
+		<a href="${addNewSection}" class="btn btn-primary">
 			Add New Section
 		</a>
 	</div>

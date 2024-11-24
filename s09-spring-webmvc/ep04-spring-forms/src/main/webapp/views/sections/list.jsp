@@ -58,8 +58,29 @@
 				<th>Fees</th>
 				<th>Available Seats</th>
 				<th>Registrations</th>
+				<th></th>
 			</tr>
 		</thead>
+		
+		<tbody>
+		<c:forEach items="${list}" var="item">
+			<tr>
+				<td>${item.id()}</td>
+				<td>${item.level()}</td>
+				<td>${item.courseName()}</td>
+				<td>${item.startAt()}</td>
+				<td>${item.months()}</td>
+				<td>${item.fees()}</td>
+				<td>${item.seats()}</td>
+				<td>${item.registrations()}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/sections/${item.id()}" class="icon-link">
+						<i class="bi-send"></i>
+					</a>
+				</td>
+			</tr>
+		</c:forEach>
+		</tbody>
 	</table>
 	
 </app:layout>

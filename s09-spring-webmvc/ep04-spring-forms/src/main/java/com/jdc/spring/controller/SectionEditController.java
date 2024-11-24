@@ -21,7 +21,7 @@ public class SectionEditController {
 
 	private final SectionService service;
 	
-	@GetMapping("edit")
+	@GetMapping
 	String edit() {
 		return "sections/edit";
 	}

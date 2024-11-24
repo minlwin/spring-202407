@@ -35,6 +35,7 @@ public class SectionForm {
 		form.setCourseId(section.getCourse().getId());
 		form.setCourseName(section.getCourse().getName());
 		form.setCourseLevel(section.getCourse().getLevel());
+		form.setFees(section.getFees());
 		form.setStartDate(section.getStartDate());
 		form.setMonths(section.getMonths());
 		form.setAvailableSeats(section.getAvailableSeats());
@@ -48,6 +49,7 @@ public class SectionForm {
 		form.setCourseId(course.getId());
 		form.setCourseName(course.getName());
 		form.setCourseLevel(course.getLevel());
+		form.setFees(course.getFees());
 		
 		return form;
 	}
