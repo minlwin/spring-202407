@@ -1,15 +1,27 @@
 package com.jdc.spring.controller.input;
 
-import com.jdc.spring.model.entity.Registration;
+import java.time.LocalDate;
+
 import com.jdc.spring.model.entity.Section;
 
-public record RegistrationForm() {
-
-	public static RegistrationForm from(Registration entity) {
-		return null;
-	}
+public record RegistrationForm(
+		String id,
+		int sectionId,
+		String course,
+		LocalDate startAt,
+		int fees,
+		Integer studentId,
+		String name,
+		String phone,
+		String email) {
 
 	public static RegistrationForm from(Section entity) {
-		return null;
+		return new RegistrationForm(
+				null,
+				entity.getId(), 
+				entity.getCourse().getName(), 
+				entity.getStartDate(), 
+				0, 
+				null, null, null, null);
 	}
 }

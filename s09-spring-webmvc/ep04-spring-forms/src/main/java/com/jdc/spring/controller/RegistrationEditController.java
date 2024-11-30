@@ -39,8 +39,7 @@ public class RegistrationEditController {
 	
 	@ModelAttribute("registForm")
 	RegistrationForm registForm(
-			@RequestParam(required = false) String id,
 			@RequestParam(required = false) Integer sectionId) {
-		return service.findForEdit(id, sectionId);
+		return service.findForEdit(sectionId);
 	}
 }

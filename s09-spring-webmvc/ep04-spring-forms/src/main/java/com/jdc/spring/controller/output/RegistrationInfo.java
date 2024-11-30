@@ -4,8 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.jdc.spring.model.entity.Course.Level;
+import com.jdc.spring.model.entity.Course_;
 import com.jdc.spring.model.entity.Registration;
 import com.jdc.spring.model.entity.RegistrationPk;
+import com.jdc.spring.model.entity.Registration_;
+import com.jdc.spring.model.entity.Section_;
+import com.jdc.spring.model.entity.Student_;
+
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 public record RegistrationInfo(
 		RegistrationPk id,
@@ -21,6 +28,29 @@ public record RegistrationInfo(
 		String studentEmail,
 		LocalDateTime entryAt,
 		LocalDateTime registedAt) {
+	
+	public static void select(CriteriaQuery<RegistrationInfo> cq, Root<Registration> root) {
+		
+		var section = root.join(Registration_.section);
+		var course = section.join(Section_.course);
+		var student = root.join(Registration_.student);
+		
+		cq.multiselect(
+			root.get(Registration_.id),
+			course.get(Course_.id),
+			course.get(Course_.level),
+			course.get(Course_.name),
+			section.get(Section_.startDate),
+			section.get(Section_.months),
+			section.get(Section_.fees),
+			section.get(Section_.availableSeats),
+			student.get(Student_.name),
+			student.get(Student_.phone),
+			student.get(Student_.email),
+			student.get(Student_.entryAt),
+			root.get(Registration_.registedAt)
+		);
+	}
 	
 	public static RegistrationInfo from(Registration entity) {
 		return builder()
