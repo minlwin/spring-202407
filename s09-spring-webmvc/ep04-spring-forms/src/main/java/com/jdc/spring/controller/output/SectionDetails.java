@@ -15,6 +15,7 @@ public record SectionDetails(
 		int months,
 		int fees,
 		int seats,
+		String remark,
 		List<RegistrationInfo> registrations) {
 
 	public static SectionDetails from(Section entity) {
@@ -27,6 +28,7 @@ public record SectionDetails(
 				entity.getMonths(), 
 				entity.getFees(), 
 				entity.getAvailableSeats(), 
+				entity.getRemark(),
 				entity.getRegistrations().stream().map(RegistrationInfo::from).toList());
 	}
 
