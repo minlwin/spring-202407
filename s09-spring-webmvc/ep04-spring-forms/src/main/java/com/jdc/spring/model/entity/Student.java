@@ -1,12 +1,14 @@
 package com.jdc.spring.model.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 @Data
@@ -32,6 +34,9 @@ public class Student {
 	private LocalDateTime entryAt;
 	
 	private String remark;
+	
+	@OneToMany(mappedBy = "student")
+	private List<Registration> registrations;
 	
 	public enum Education {
 		BEHS, College, Master
