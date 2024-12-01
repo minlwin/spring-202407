@@ -1,5 +1,6 @@
 package com.jdc.spring.controller.input;
 
+import com.jdc.spring.model.entity.Student;
 import com.jdc.spring.model.entity.Student.Education;
 
 import jakarta.validation.constraints.NotBlank;
@@ -21,9 +22,22 @@ public class StudentForm {
 	@NotBlank(message = "Please enter student name.")
 	private String email;
 	
-	@NotBlank(message = "Please select last education.")
+	@NotNull(message = "Please select last education.")
 	private Education education;
 	
 	private String remark;
+	
+	public static StudentForm from(Student entity) {
+		var form = new StudentForm();
+		
+		form.setId(entity.getId());
+		form.setName(entity.getName());
+		form.setPhone(entity.getPhone());
+		form.setEmail(entity.getEmail());
+		form.setEducation(entity.getLastEducation());
+		form.setRemark(entity.getRemark());
+		
+		return form;
+	}
 	
 }

@@ -24,19 +24,19 @@
 		<!-- Start From -->
 		<div class="col-auto">
 			<label class="form-label">Start From</label>
-			<input type="date" class="form-control" name="startFrom" />
+			<input name="startFrom" value="${param.startFrom}" type="date" class="form-control" />
 		</div>
 				
 		<!-- Start To -->
 		<div class="col-auto">
 			<label class="form-label">Start To</label>
-			<input type="date" class="form-control" name="startTo" />
+			<input name="startTo" value="${param.startTo}" type="date" class="form-control" />
 		</div>
 		
 		<!-- Keyword -->
 		<div class="col-auto">
 			<label class="form-label">Keyword</label>
-			<input type="text" class="form-control" name="keyword" placeholder="Search Keyword" />
+			<input name="keyword" value="${param.keyword}" type="text" class="form-control" placeholder="Search Keyword" />
 		</div>
 		
 		<!-- Search Button -->

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jdc.spring.controller.input.StudentForm;
+import com.jdc.spring.model.entity.Student.Education;
 import com.jdc.spring.service.StudentService;
 
 @Controller
@@ -28,6 +29,9 @@ public class StudentEditController {
 	@PostMapping
 	String save(@Validated @ModelAttribute(name = "studentForm") StudentForm form, 
 			BindingResult result) {
+		
+		validateBusiness(form, result);
+		
 		if(result.hasErrors()) {
 			return "students/edit";
 		}
@@ -41,4 +45,17 @@ public class StudentEditController {
 	StudentForm studentForm(@RequestParam int id) {
 		return service.findForEdit(id);
 	}
+	
+	@ModelAttribute(name = "educations")
+	Education[] educations() {
+		return Education.values();
+	}
+
+	private void validateBusiness(StudentForm form, BindingResult result) {
+		if(!service.findEmailById(form.getId()).equals(form.getEmail()) 
+				&& service.findByEmail(form.getEmail())) {
+			result.rejectValue("email", null, "Your email has been already used.");
+		}
+	}
+
 }
