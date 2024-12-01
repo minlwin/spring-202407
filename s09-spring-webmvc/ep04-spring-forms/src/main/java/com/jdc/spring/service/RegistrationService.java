@@ -1,5 +1,6 @@
 package com.jdc.spring.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.function.Function;
 
@@ -28,6 +29,8 @@ public class RegistrationService {
 	private RegistrationRepo registrationRepo;
 	@Autowired
 	private SectionRepo sectionRepo;
+	@Autowired
+	private StudentService studentService;
 
 	public RegistrationForm findForEdit(Integer sectionId) {
 		return sectionRepo.findById(sectionId)
@@ -60,8 +63,19 @@ public class RegistrationService {
 
 	@Transactional
 	public void save(RegistrationForm form) {
-		// TODO Auto-generated method stub
 		
+		var student = studentService.save(form.getName(), form.getPhone(), form.getEmail());
+		var section = sectionRepo.findById(form.getSectionId())
+				.orElseThrow();
+		
+		var registration = new Registration();
+		registration.setId(new RegistrationPk(section.getId(), student.getId()));
+		registration.setSection(section);
+		registration.setStudent(student);
+		registration.setRegistedAt(LocalDateTime.now());
+		registration.setRemark(form.getRemark());
+		
+		registrationRepo.save(registration);
 	}
 
 }

@@ -4,24 +4,35 @@ import java.time.LocalDate;
 
 import com.jdc.spring.model.entity.Section;
 
-public record RegistrationForm(
-		String id,
-		int sectionId,
-		String course,
-		LocalDate startAt,
-		int fees,
-		Integer studentId,
-		String name,
-		String phone,
-		String email) {
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
+
+@Data
+public class RegistrationForm {
+	
+	private int sectionId;
+	private String course;
+	private LocalDate startAt;
+	private int fees;
+	
+	@NotBlank(message = "Please enter student name.")
+	private String name;
+	@NotBlank(message = "Please enter phone number.")
+	private String phone;
+	@NotBlank(message = "Please enter email address.")
+	private String email;
+	
+	private String remark;
+
 
 	public static RegistrationForm from(Section entity) {
-		return new RegistrationForm(
-				null,
-				entity.getId(), 
-				entity.getCourse().getName(), 
-				entity.getStartDate(), 
-				0, 
-				null, null, null, null);
+		var dto = new RegistrationForm();
+		
+		dto.setSectionId(entity.getId());
+		dto.setCourse(entity.getCourse().getName());
+		dto.setStartAt(entity.getStartDate());
+		dto.setFees(entity.getFees());
+		
+		return dto;
 	}
 }

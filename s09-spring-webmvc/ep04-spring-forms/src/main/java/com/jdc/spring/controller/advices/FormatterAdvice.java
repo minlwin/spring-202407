@@ -14,4 +14,9 @@ public class FormatterAdvice {
 	LocalDateTimeFormatter localDateTimeFormatter() {
 		return new LocalDateTimeFormatter(dateTimeFormat);
 	}
+	
+	@ModelAttribute(name = "numbers")
+	NumberFormatter numberFormatter() {
+		return new NumberFormatter();
+	}
 }

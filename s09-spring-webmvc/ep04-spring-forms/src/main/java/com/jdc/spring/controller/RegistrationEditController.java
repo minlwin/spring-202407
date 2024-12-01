@@ -26,7 +26,7 @@ public class RegistrationEditController {
 	}
 	
 	@PostMapping
-	String save(@Validated @ModelAttribute("registForm") RegistrationForm form, BindingResult result) {
+	String save(@Validated @ModelAttribute(name = "registForm") RegistrationForm form, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return "registrations/edit";
@@ -37,7 +37,8 @@ public class RegistrationEditController {
 		return "redirect:/registrations";
 	}
 	
-	@ModelAttribute("registForm")
+
+	@ModelAttribute(name = "registForm")
 	RegistrationForm registForm(
 			@RequestParam(required = false) Integer sectionId) {
 		return service.findForEdit(sectionId);

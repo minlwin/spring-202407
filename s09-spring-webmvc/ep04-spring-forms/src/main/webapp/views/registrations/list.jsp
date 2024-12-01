@@ -59,6 +59,7 @@
 				<th>Phone</th>
 				<th>Email</th>
 				<th>Fees</th>
+				<th></th>
 			</tr>
 		</thead>
 		
@@ -69,11 +70,16 @@
 				<td>${item.level()}</td>
 				<td>${item.courseName()}</td>
 				<td>${item.startAt()}</td>
-				<td>${item.registedAt()}</td>
+				<td>${localDateTimes.format(item.registedAt())}</td>
 				<td>${item.studentName()}</td>
 				<td>${item.studentPhone()}</td>
 				<td>${item.studentEmail()}</td>
 				<td>${item.fees()}</td>
+				<td>
+					<a href="${pageContext.request.contextPath}/registrations/${item.id().code}" class="icon-link">
+						<i class="bi-send"></i>
+					</a>
+				</td>
 			</tr>
 		</c:forEach>	
 		</tbody>
