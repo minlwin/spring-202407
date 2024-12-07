@@ -26,16 +26,20 @@
 			</a>
 			
 			<ul class="navbar-nav">
-				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/admin" class="nav-link ${title eq 'Admin' ? 'active' : ''}">
-						<i class="bi-shield"></i> Admin
-					</a>
-				</li>
-				<li class="nav-item">
-					<a href="${pageContext.request.contextPath}/member" class="nav-link ${title eq 'Member' ? 'active' : ''}">
-						<i class="bi-person"></i> Member
-					</a>
-				</li>
+				<security:authorize access="hasAuthority('Admin')">
+					<li class="nav-item">
+						<a href="${pageContext.request.contextPath}/admin" class="nav-link ${title eq 'Admin' ? 'active' : ''}">
+							<i class="bi-shield"></i> Admin
+						</a>
+					</li>
+				</security:authorize>
+				<security:authorize access="hasAnyAuthority('Admin', 'Member')">
+					<li class="nav-item">
+						<a href="${pageContext.request.contextPath}/member" class="nav-link ${title eq 'Member' ? 'active' : ''}">
+							<i class="bi-person"></i> Member
+						</a>
+					</li>
+				</security:authorize>
 				<security:authorize access="isAuthenticated()">
 					<li class="nav-item">
 						<a id="logoutMenu" class="nav-link">
