@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:security="http://www.springframework.org/schema/security" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd 
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" >
+
+	<context:component-scan base-package="com.jdc.spring.security" />
+	
+	<!-- Web MVC Configuration -->
+	<mvc:annotation-driven />
+	
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/views/" suffix=".jsp"/>
+	</mvc:view-resolvers>
+	
+	<mvc:view-controller path="/" view-name="home"/>	
+	<mvc:view-controller path="/admin" view-name="admin"/>	
+	<mvc:view-controller path="/member" view-name="member"/>
+	<mvc:view-controller path="/forbidden" view-name="forbidden"/>
+	<mvc:view-controller path="/login" view-name="login"/>
+		
+	
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	
+	<!-- Security Config -->
+	<security:user-service>
+		<security:user name="admin" password="{noop}admin" authorities="Admin"/>
+		<security:user name="member" password="{noop}member" authorities="Member"/>
+	</security:user-service>
+	
+	<security:http>
+	
+		<security:intercept-url pattern="/admin" access="hasAuthority('Admin')"/>
+		<security:intercept-url pattern="/member" access="hasAnyAuthority('Admin', 'Member')"/>
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/login" access="permitAll" />
+		<security:intercept-url pattern="/resources/**" access="permitAll" />
+		
+		<security:form-login login-page="/login" login-processing-url="/login" />
+		<security:logout logout-success-url="/" />
+		
+		<security:access-denied-handler error-page="/forbidden"/>
+
+	</security:http>
+	
+	<bean id="webSecurityExpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler"></bean>
+	
+</beans>
