@@ -30,8 +30,7 @@
 	<mvc:view-controller path="/member" view-name="member"/>
 	<mvc:view-controller path="/forbidden" view-name="forbidden"/>
 	<mvc:view-controller path="/login" view-name="login"/>
-		
-	
+			
 	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 	
 	<!-- Security Config -->

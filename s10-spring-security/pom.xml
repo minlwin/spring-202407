@@ -36,5 +36,6 @@
 	<modules>
 		<module>ep01-spring-security-xml</module>
 		<module>ep02-spring-security-java</module>
+		<module>ep03-spring-security-boot</module>
 	</modules>
 </project>
