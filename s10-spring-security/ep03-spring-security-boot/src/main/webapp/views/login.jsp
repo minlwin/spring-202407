@@ -15,9 +15,15 @@
 			<input type="password" name="password" required="required" placeholder="Enter Password" class="form-control" />
 		</app:form-group>
 		
-		<button type="submit" class="btn btn-primary">
-			<i class="bi-check"></i> Login
-		</button>
+		<div>
+			<button type="submit" class="btn btn-primary">
+				<i class="bi-check"></i> Login
+			</button>
+			
+			<a href="${pageContext.request.contextPath}/signup" class="btn btn-outline-primary">
+				<i class="bi-person-plus"></i> Sign Up
+			</a>
+		</div>
 	</form:form>
 	
 </app:layout>

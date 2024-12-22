@@ -21,12 +21,15 @@ public class WebSecurityConfiguration {
 		http.authorizeHttpRequests(req -> {
 			req.dispatcherTypeMatchers(DispatcherType.INCLUDE, DispatcherType.FORWARD, DispatcherType.ERROR)
 				.permitAll();
-			req.requestMatchers("/", "/login", "/resources/**").permitAll();
+			req.requestMatchers("/", "/login", "/signup", "/resources/**").permitAll();
+			req.requestMatchers("/admin/**").hasAuthority("Admin");
+			req.anyRequest().authenticated();
 		});
 		
 		http.formLogin(form -> {
 			form.loginPage("/login");
 			form.loginProcessingUrl("/login");
+			form.defaultSuccessUrl("/", true);
 		});
 		
 		http.logout(logout -> {

@@ -8,10 +8,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Index;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
+@Table(indexes = {
+	@Index(name = "account-nameIndex", columnList = "name"),
+	@Index(name = "account-requestAtIndex", columnList = "requested_at"),
+	@Index(name = "account-statusIndex", columnList = "activated")
+})
 public class Account {
 	
 	@Id
@@ -32,6 +39,7 @@ public class Account {
 	
 	private boolean activated;
 
+	@Column(name = "requested_at")
 	private LocalDateTime requestedAt;
 	private LocalDateTime activatedAt;
 	

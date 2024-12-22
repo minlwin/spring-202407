@@ -1,11 +1,15 @@
 package com.jdc.spring.security;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.jdc.spring.security.model.BaseRepositoryImpl;
+
 @Configuration
+@EnableJpaRepositories(repositoryBaseClass = BaseRepositoryImpl.class)
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Override
