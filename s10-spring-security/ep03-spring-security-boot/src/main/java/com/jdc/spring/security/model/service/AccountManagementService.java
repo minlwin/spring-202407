@@ -1,6 +1,8 @@
 package com.jdc.spring.security.model.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +40,15 @@ public class AccountManagementService {
 			cq.orderBy(cb.desc(root.get(Account_.requestedAt)));
 			return cq;
 		};
+	}
+
+	@Transactional
+	public void updateStatus(String id) {
+		
+		var account = repo.findById(UUID.fromString(id))
+				.orElseThrow();
+		
+		account.setActivated(!account.isActivated());
+		account.setActivatedAt(LocalDateTime.now());
 	}
 }

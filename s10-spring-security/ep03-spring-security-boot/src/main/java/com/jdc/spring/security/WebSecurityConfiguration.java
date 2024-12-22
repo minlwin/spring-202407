@@ -3,6 +3,7 @@ package com.jdc.spring.security;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,7 @@ import com.jdc.spring.security.model.service.AdminUserInitializer;
 import jakarta.servlet.DispatcherType;
 
 @Configuration
+@EnableMethodSecurity
 public class WebSecurityConfiguration {
 
 	@Bean

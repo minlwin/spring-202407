@@ -16,6 +16,10 @@ public record AccountInfo(
 		boolean activated,
 		LocalDateTime requestedAt,
 		LocalDateTime activatedAt) {
+	
+	public String status() {
+		return activated ? "Active" : "Pending";
+	}
 
 	public static void select(CriteriaQuery<AccountInfo> cq, Root<Account> root) {
 		cq.multiselect(

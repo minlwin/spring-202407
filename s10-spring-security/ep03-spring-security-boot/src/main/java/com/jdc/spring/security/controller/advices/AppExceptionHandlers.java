@@ -15,4 +15,5 @@ public class AppExceptionHandlers {
 		mv.getModel().put("message", e.getMessage());
 		return mv;
 	}
+
 }

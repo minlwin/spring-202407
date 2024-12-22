@@ -15,9 +15,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(indexes = {
-	@Index(name = "account-nameIndex", columnList = "name"),
-	@Index(name = "account-requestAtIndex", columnList = "requested_at"),
-	@Index(name = "account-statusIndex", columnList = "activated")
+	@Index(name = "account_nameIndex", columnList = "name"),
+	@Index(name = "account_requestAtIndex", columnList = "requested_at"),
+	@Index(name = "account_statusIndex", columnList = "activated")
 })
 public class Account {
 	
