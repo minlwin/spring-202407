@@ -1,0 +1,15 @@
+volumes:
+  shopdb:
+
+services:
+  database:
+    image: postgres:alpine
+    container_name: shopdb
+    environment:
+      - POSTGRES_DB=shopdb
+      - POSTGRES_USER=shopdb
+      - POSTGRES_PASSWORD=shopdb
+    ports:
+      - 5432:5432
+    volumes:
+      - shopdb:/var/lib/postgresql/data
