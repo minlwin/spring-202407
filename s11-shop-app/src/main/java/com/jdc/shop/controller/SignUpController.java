@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jdc.shop.controller.input.SignUpForm;
-import com.jdc.shop.model.account.service.CustomerService;
+import com.jdc.shop.model.account.service.SignUpService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 public class SignUpController {
 
 	private final AuthenticationManager authenticationManager;
-	private final CustomerService customerService;
+	private final SignUpService customerService;
 	private final SecurityContextRepository securityContextRepository;
 	
 	@GetMapping

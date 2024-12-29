@@ -34,6 +34,51 @@
 						<i class="bi-house"></i> Admin Home
 					</a>
 				</li>
+				
+				<li class="nav-item">
+					<a href="" class="nav-link">
+						<i class="bi-calendar"></i> Invoices
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a href="" class="nav-link">
+						<i class="bi-cart"></i> Purchases
+					</a>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+						<i class="bi-database"></i> Master
+					</a>
+					
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#" class="dropdown-item">
+								<i class="bi-people"></i> Customers
+							</a>
+						</li>
+						<li>
+							<a href="#" class="dropdown-item">
+								<i class="bi-people-fill"></i> Suppliers
+							</a>
+						</li>
+						<li>
+							<hr class="dropdown-divider" />
+						</li>
+						<li>
+							<a href="#" class="dropdown-item">
+								<i class="bi-tags"></i> Categories
+							</a>
+						</li>
+						<li>
+							<a href="#" class="dropdown-item">
+								<i class="bi-gift"></i> Products
+							</a>
+						</li>
+					</ul>
+				</li>
+				
 			</sec:authorize>
 			<!-- Customer Menu -->
 			<sec:authorize access="hasAuthority('Customer')">
@@ -51,7 +96,7 @@
 			<sec:authorize access="isAuthenticated()">
 				<li class="nav-item">
 					<a href="#" id="signOutMenu" onclick="return false;" class="nav-link">
-						<i class="bi-door-colose"></i> Sign Out
+						<i class="bi-door-closed"></i> Sign Out
 					</a>
 				</li>
 			</sec:authorize>
