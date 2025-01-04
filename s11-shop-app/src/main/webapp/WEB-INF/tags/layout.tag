@@ -71,7 +71,7 @@
 					
 					<ul class="dropdown-menu">
 						<li>
-							<a href="#" class="dropdown-item">
+							<a href="${root}/admin/category" class="dropdown-item ${menu eq 'category' ? 'active' : ''}">
 								<i class="bi-tags"></i> Categories
 							</a>
 						</li>

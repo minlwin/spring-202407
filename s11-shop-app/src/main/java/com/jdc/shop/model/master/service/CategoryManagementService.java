@@ -1,14 +1,20 @@
 package com.jdc.shop.model.master.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.function.Function;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.jdc.shop.controller.input.CategoryForm;
 import com.jdc.shop.controller.input.CategorySearch;
 import com.jdc.shop.controller.output.CategoryInfo;
 import com.jdc.shop.model.master.entity.Category;
+import com.jdc.shop.model.master.entity.Category_;
 import com.jdc.shop.model.master.repo.CategoryRepo;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -34,8 +40,48 @@ public class CategoryManagementService {
 			CategoryInfo.select(cb, cq, root);
 			cq.where(search.where(cb, root));
 			
+			cq.orderBy(cb.asc(root.get(Category_.id)));
+			
 			return cq;
 		};
+	}
+
+	@Transactional
+	public void upload(MultipartFile file) {
+		if(null != file) {
+			
+			try(var br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
+				
+				String line = null;
+				
+				while(null != (line = br.readLine())) {
+					
+					if(repo.countByNameIgnoreCase(line) == 0L) {
+						var entity = new Category();
+						entity.setName(line);
+						repo.save(entity);
+					}
+				}
+				
+			} catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Transactional
+	public void save(CategoryForm form) {
+		
+		if(repo.countByNameIgnoreCase(form.getName()) == 0L) {
+			
+			if(null != form.getId()) {
+				repo.findById(form.getId()).ifPresent(entity -> entity.setName(form.getName()));
+			} else {
+				var entity = new Category();
+				entity.setName(form.getName());
+				repo.save(entity);
+			}
+		}
 	}
 
 }
