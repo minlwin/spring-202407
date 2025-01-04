@@ -3,6 +3,9 @@ package com.jdc.shop.controller.input;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import org.springframework.util.StringUtils;
+
+import com.jdc.shop.model.account.entity.Account_;
 import com.jdc.shop.model.account.entity.Customer;
 import com.jdc.shop.model.account.entity.Customer_;
 
@@ -22,6 +25,18 @@ public record CustomerSearch(
 			params.add(cb.greaterThanOrEqualTo(root.get(Customer_.registeredAt), from.atStartOfDay()));
 		}
 		
+		if(null != to) {
+			params.add(cb.lessThan(root.get(Customer_.registeredAt), to.plusDays(1).atStartOfDay()));
+		}
+		
+		if(StringUtils.hasLength(keyword)) {
+			params.add(cb.or(
+				cb.like(cb.lower(root.get(Customer_.name)), keyword.toLowerCase().concat("%")),
+				cb.like(cb.lower(root.get(Customer_.phone)), keyword.toLowerCase().concat("%")),
+				cb.like(cb.lower(root.get(Customer_.account).get(Account_.email)), keyword.toLowerCase().concat("%"))
+			));
+		}
+
 		return params.toArray(size -> new Predicate[size]);
 	}
 }

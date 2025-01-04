@@ -17,6 +17,7 @@ import com.jdc.shop.model.PageInfo;
 import com.jdc.shop.model.account.entity.Account;
 import com.jdc.shop.model.account.entity.Account.Role;
 import com.jdc.shop.model.account.entity.Customer;
+import com.jdc.shop.model.account.entity.Customer_;
 import com.jdc.shop.model.account.repo.AccountRepo;
 import com.jdc.shop.model.account.repo.CustomerRepo;
 
@@ -64,7 +65,9 @@ public class CustomerService implements SignUpService, CustomerReferenceService{
 			var root = cq.from(Customer.class);
 			
 			CustomerInfo.select(cq, root);
+			cq.where(search.where(cb, root));
 			
+			cq.orderBy(cb.desc(root.get(Customer_.registeredAt)));
 			
 			return cq;
 		};
@@ -73,6 +76,9 @@ public class CustomerService implements SignUpService, CustomerReferenceService{
 	private Function<CriteriaBuilder, CriteriaQuery<Long>> countFunc(CustomerSearch search) {
 		return cb -> {
 			var cq = cb.createQuery(Long.class);
+			var root = cq.from(Customer.class);
+			cq.select(cb.count(root.get(Customer_.id)));
+			cq.where(search.where(cb, root));
 			return cq;
 		};
 	}
