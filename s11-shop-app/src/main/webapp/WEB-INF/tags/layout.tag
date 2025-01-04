@@ -1,15 +1,25 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <%@ attribute name="title" type="java.lang.String" %>
+<%@ attribute name="menu" type="java.lang.String" %>
+<%@ attribute name="group" type="java.lang.String" %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>The Shop | ${title eq null ? "Home" : title}</title>
 
-<c:set value="${pageContext.request.contextPath}" var="root" scope="request" />
+<sec:authorize access="hasAuthority('Admin')">
+	<title>Shop Admin | ${title eq null ? "Home" : title}</title>
+</sec:authorize>
+
+<sec:authorize access="!hasAuthority('Admin')">
+	<title>The Shop | ${title eq null ? "Home" : title}</title>
+</sec:authorize>
+
+<c:set var="root" value="${pageContext.request.contextPath}" scope="request" />
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -22,9 +32,16 @@
 	<!-- Navbar -->
 	<nav class="navbar navbar-expand bg-primary navbar-dark">
 		<div class="container">
-			<a href="${root}/" class="navbar-brand">
-				<i class="bi-shop-window"></i> The Shop
-			</a>
+			<sec:authorize access="!hasAuthority('Admin')">
+				<a href="${root}/" class="navbar-brand">
+					<i class="bi-shop-window"></i> The Shop
+				</a>
+			</sec:authorize>
+			<sec:authorize access="hasAuthority('Admin')">
+				<a href="${root}/" class="navbar-brand">
+					<i class="bi-shop-window"></i> Shop Admin
+				</a>
+			</sec:authorize>
 			
 			<ul class="navbar-nav">
 			<!-- Admin Menu -->
@@ -48,24 +65,11 @@
 				</li>
 
 				<li class="nav-item dropdown">
-					<a href="" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+					<a href="" class="nav-link dropdown-toggle ${group eq 'master' ? 'active' : ''}" data-bs-toggle="dropdown">
 						<i class="bi-database"></i> Master
 					</a>
 					
 					<ul class="dropdown-menu">
-						<li>
-							<a href="#" class="dropdown-item">
-								<i class="bi-people"></i> Customers
-							</a>
-						</li>
-						<li>
-							<a href="#" class="dropdown-item">
-								<i class="bi-people-fill"></i> Suppliers
-							</a>
-						</li>
-						<li>
-							<hr class="dropdown-divider" />
-						</li>
 						<li>
 							<a href="#" class="dropdown-item">
 								<i class="bi-tags"></i> Categories
@@ -74,6 +78,19 @@
 						<li>
 							<a href="#" class="dropdown-item">
 								<i class="bi-gift"></i> Products
+							</a>
+						</li>
+						<li>
+							<hr class="dropdown-divider" />
+						</li>
+						<li>
+							<a href="${root}/admin/customer" class="dropdown-item ${menu eq 'customer' ? 'active' : ''}">
+								<i class="bi-people"></i> Customers
+							</a>
+						</li>
+						<li>
+							<a href="#" class="dropdown-item">
+								<i class="bi-people-fill"></i> Suppliers
 							</a>
 						</li>
 					</ul>
@@ -87,7 +104,7 @@
 			<!-- Public Menu -->
 			<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
-					<a href="${root}/public/signin" class="nav-link ${title eq 'Sign In' ? 'active' : ''}">
+					<a href="${root}/public/signin" class="nav-link ${menu eq 'signIn' ? 'active' : ''}">
 						<i class="bi-door-open"></i> Sign In
 					</a>
 				</li>

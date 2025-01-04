@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
-<app:layout title="Sign Up">
+<app:layout title="Sign Up" menu="signIn">
 	
 	<div class="row">
 		<div class="col d-flex align-items-center">
@@ -14,7 +14,7 @@
 				<i class="bi-cart cover-icon"></i>
 			</div>
 			<div>
-				<h1><i class="bi-person-plus"></i> Sign Up</h1>
+				<app:page-title title="Sign In" icon="bi-person-plus" />
 				
 				<p>
 					Hi! There. You can search and buy our products from this site.
