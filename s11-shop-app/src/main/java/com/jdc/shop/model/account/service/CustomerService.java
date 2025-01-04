@@ -1,6 +1,7 @@
 package com.jdc.shop.model.account.service;
 
 import java.time.LocalDateTime;
+import java.util.function.Function;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,6 +20,8 @@ import com.jdc.shop.model.account.entity.Customer;
 import com.jdc.shop.model.account.repo.AccountRepo;
 import com.jdc.shop.model.account.repo.CustomerRepo;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -52,8 +55,27 @@ public class CustomerService implements SignUpService, CustomerReferenceService{
 	@Override
 	@PreAuthorize(value = "hasAuthority('Admin')")
 	public PageInfo<CustomerInfo> search(CustomerSearch search, int page, int size) {
-		// TODO Auto-generated method stub
-		return null;
+		return customerRepo.search(queryFunc(search), countFunc(search), page, size);
 	}
+
+	private Function<CriteriaBuilder, CriteriaQuery<CustomerInfo>> queryFunc(CustomerSearch search) {
+		return cb -> {
+			var cq = cb.createQuery(CustomerInfo.class);
+			var root = cq.from(Customer.class);
+			
+			CustomerInfo.select(cq, root);
+			
+			
+			return cq;
+		};
+	}
+
+	private Function<CriteriaBuilder, CriteriaQuery<Long>> countFunc(CustomerSearch search) {
+		return cb -> {
+			var cq = cb.createQuery(Long.class);
+			return cq;
+		};
+	}
+
 
 }

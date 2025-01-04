@@ -13,8 +13,11 @@ import jakarta.persistence.criteria.CriteriaQuery;
 public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
 
 	<R> List<R> search(Function<CriteriaBuilder, CriteriaQuery<R>> queryFunc);
-	<R> PageInfo<R> search(Function<CriteriaBuilder, CriteriaQuery<R>> queryFunc, 
-			Function<CriteriaBuilder, CriteriaQuery<Long>> countFunc, int page, int size);
+
+	<R> PageInfo<R> search(
+			Function<CriteriaBuilder, CriteriaQuery<R>> queryFunc, 
+			Function<CriteriaBuilder, CriteriaQuery<Long>> countFunc, 
+			int page, int size);
 	
 	Long count(Function<CriteriaBuilder, CriteriaQuery<Long>> queryFunc);
 }
