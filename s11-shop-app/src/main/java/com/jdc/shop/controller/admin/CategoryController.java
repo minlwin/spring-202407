@@ -6,7 +6,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,7 +40,7 @@ public class CategoryController {
 	
 	@PostMapping
 	@ResponseBody
-	AjaxSaveResult save(@RequestBody @Validated CategoryForm form, BindingResult result) {
+	AjaxSaveResult save(@Validated CategoryForm form, BindingResult result) {
 		
 		if(result.hasErrors()) {
 			return new AjaxSaveResult(result.getFieldErrors().stream().map(a -> a.getDefaultMessage()).toList());

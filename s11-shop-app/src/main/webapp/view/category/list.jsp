@@ -8,7 +8,7 @@
 	
 	<app:page-title title="Category Management" icon="bi-tags" />
 	
-	<form class="row">
+	<form id="searchForm" class="row">
 		<app:form-group label="Create From" cssClass="col-auto">
 			<input name="from" value="${param.from}" type="date" class="form-control" />
 		</app:form-group>
@@ -27,7 +27,7 @@
 				<i class="bi-upload"></i> Upload
 			</a>
 			
-			<a href="#" onclick="return false;" class="btn btn-outline-primary">
+			<a href="#" id="addNewBtn" onclick="return false;" class="btn btn-outline-primary">
 				<i class="bi-plus"></i> Add New
 			</a>
 			
@@ -67,7 +67,8 @@
 							<td>${item.updatedBy()}</td>
 							<td class="text-end">${products}</td>
 							<td class="text-center">
-								<a href="#" class="icon-link">
+								<a href="#" onclick="return false;" class="icon-link editBtn" 
+									data-id="${item.id()}" data-name="${item.name()}" >
 									<i class="bi-pencil"></i>
 								</a>
 							</td>
@@ -84,6 +85,41 @@
 		
 		<input id="uploadInput" type="file" name="file" />
 	</form>
+	
+	<div id="editDialog" class="modal fade">
+		<div class="modal-dialog">
+			<form action="${root}/admin/category" id="editForm" class="modal-content" method="post">
+				
+				<sec:csrfInput/>
+				<input id="idInput" type="hidden" name="id">
+				
+				<div class="modal-header">
+					<h5 id="dialogTitle" class="modal-title">Edit Category</h5>
+				</div>
+				
+				<div class="modal-body">
+					
+					<div id="dialogMessage" class="alert alert-info d-none"></div>
+				
+					<app:form-group label="Category Name">
+						<input id="nameInput" name="name" type="text" class="form-control" placeholder="Enter Category Name" required="required"/>
+					</app:form-group>
+				</div>
+				
+				<div class="modal-footer">
+					
+					<button id="closeBtn" type="button" class="btn btn-outline-primary">
+						<i class="bi-x"></i> Close
+					</button>
+				
+					<button type="submit" class="btn btn-outline-primary">
+						<i class="bi-save"></i> Save
+					</button>
+				</div>
+			
+			</form>
+		</div>
+	</div>
 	
 	<script src="${root}/resources/js/category.js"></script>
 </app:layout>
