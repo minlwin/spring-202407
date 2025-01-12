@@ -9,6 +9,10 @@
 	<app:page-title title="Category Management" icon="bi-tags" />
 	
 	<form id="searchForm" class="row">
+	
+		<input id="pageInput" type="hidden" name="page" value="${pageResult.page()}">
+		<input id="sizeInput" type="hidden" name="size" value="${pageResult.size()}">
+		
 		<app:form-group label="Create From" cssClass="col-auto">
 			<input name="from" value="${param.from}" type="date" class="form-control" />
 		</app:form-group>
@@ -19,7 +23,7 @@
 			<input name="keyword" value="${param.keyword}" class="form-control" placeholder="Search Keyword" />
 		</app:form-group>
 		<div class="col btn-wrapper">
-			<button class="btn btn-outline-primary">
+			<button id="searchBtn" type="button" class="btn btn-outline-primary">
 				<i class="bi-search"></i> Search
 			</button>
 			

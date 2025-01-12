@@ -59,7 +59,7 @@
 				</li>
 
 				<li class="nav-item">
-					<a href="" class="nav-link">
+					<a href="${root}/admin/purchase" class="nav-link ${menu eq 'purchase' ? 'active' : ''}" >
 						<i class="bi-cart"></i> Purchases
 					</a>
 				</li>

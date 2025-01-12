@@ -29,8 +29,8 @@ public class CategoryController {
 	String search(
 			ModelMap model, 
 			CategorySearch search, 
-			@RequestParam(required = false, defaultValue = "4") int page,
-			@RequestParam(required = false, defaultValue = "1") int size) {
+			@RequestParam(required = false, defaultValue = "0") int page,
+			@RequestParam(required = false, defaultValue = "5") int size) {
 		var pageResult = service.search(search, page, size);
 		model.put("pageResult", pageResult);
 		return "category/list";
