@@ -35,6 +35,8 @@
 	</form>
 	
 	<!-- Result Table -->
+	<c:set var="list" value="${pageResult.contents()}" />
+		
 	<div class="mt-3">
 		<c:choose>
 			<c:when test="${empty list}">
@@ -79,6 +81,8 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
+	
+	<app:pagination pageResult="${pageResult}" />
 
 	<form id="uploadForm" enctype="multipart/form-data" class="d-none" action="${root}/admin/category/upload" method="post">
 		<sec:csrfInput/>

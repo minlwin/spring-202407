@@ -76,7 +76,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#" class="dropdown-item">
+							<a href="#" class="dropdown-item" ${menu eq 'product' ? 'active' : ''}">
 								<i class="bi-gift"></i> Products
 							</a>
 						</li>
