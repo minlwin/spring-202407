@@ -2,87 +2,85 @@ package com.jdc.shop.controller.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.jdc.shop.controller.input.PurchaseForm;
-import com.jdc.shop.controller.input.SupplierCodeForm;
-import com.jdc.shop.controller.input.SupplierForm;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes({
-	"purchase", "supplier", "supplierCode"
-})
+@SessionAttributes("purchase")
 @RequestMapping("admin/purchase/edit")
 public class PurchaseEditController {
-
+	
 	@GetMapping
-	String edit() {
-		return "purchase/edit/supplier/search";
+	String startFlow(HttpSession session, ModelMap model) {
+		session.removeAttribute("purchase");
+		model.remove("purchase");
+		return "redirect:/admin/purchase/edit/supplier";
+	}
+
+	@GetMapping("supplier")
+	String supplier(ModelMap model) {
+		if(model.get("purchase") == null) {
+			model.put("purchase", new PurchaseForm());
+		}
+		return "purchase/edit/supplier";
 	}
 	
-	@PostMapping("supplier/select")
-	String selectSupplier(
-			@Validated @ModelAttribute("supplierCode") SupplierCodeForm form, BindingResult result, ModelMap model) {
+	/**
+	 * Form Value will be Supplier Informations
+	 * @param form
+	 * @return
+	 */
+	@PostMapping("purchase")
+	String purchase(@ModelAttribute("purchase") PurchaseForm form) {
 		
-		if(result.hasErrors()) {
-			return "purchase/edit/supplier/search";
+		form.validateSupplier();
+		
+		if(!form.getErrors().isEmpty()) {
+			return "purchase/edit/supplier";
 		}
-		model.put("supplierUrl", "admin/purchase/edit");
+		
+		if(form.getItems().isEmpty()) {
+			form.addItem();
+		}
 		
 		return "purchase/edit/purchase";
 	}
 	
-
-	@GetMapping("supplier/edit")
-	String addNewSupplier() {
-		return "purchase/edit/supplier/edit";
+	@PostMapping("purchase/add")
+	String addPurchaseItem(@ModelAttribute("purchase") PurchaseForm form) {
+		form.addItem();
+		return "purchase/edit/purchase";
 	}
-
-	@PostMapping("supplier/edit")
-	String selectSupplier(
-			@Validated @ModelAttribute("supplier") SupplierForm form, BindingResult result, ModelMap model) {
-		
-		if(result.hasErrors()) {
-			return "purchase/edit/supplier/edit";
-		}
-		
-		model.put("supplierUrl", "admin/purchase/edit/supplier/edit");
-		
+	
+	@PostMapping("purchase/remove")
+	String removePurchaseItem(@RequestParam int index, @ModelAttribute("purchase") PurchaseForm form) {
+		form.removeItem(index);
 		return "purchase/edit/purchase";
 	}
 
+	/**
+	 * Form Value will be Purchase Items
+	 * 
+	 * @param form
+	 * @return
+	 */
 	@PostMapping("confirm")
-	String confirm(
-			@Validated @ModelAttribute("purchase") PurchaseForm form, BindingResult result) {
-		
+	String confirm(@ModelAttribute("purchase") PurchaseForm form) {
 		
 		
 		return "purchase/edit/confirm";
 	}
 	
 	@PostMapping
-	String save() {
+	String save(@ModelAttribute("purchase") PurchaseForm form) {
 		return "redirect:/admin/purchase/%s";
-	}
-	
-	@ModelAttribute("purchase")
-	PurchaseForm purchaseForm() {
-		return new PurchaseForm();
-	}
-	
-	@ModelAttribute("supplierCode")
-	SupplierCodeForm supplierCodeForm() {
-		return new SupplierCodeForm();
-	}
-	
-	@ModelAttribute("supplier")
-	SupplierForm supplierForm() {
-		return new SupplierForm();
 	}
 }
