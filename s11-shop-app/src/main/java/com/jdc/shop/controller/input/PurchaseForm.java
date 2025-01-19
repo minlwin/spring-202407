@@ -14,14 +14,25 @@ public class PurchaseForm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String supplierCode;
+	
 	private String supplierName;
 	private String phone;
 	private String email;
 	private String shopName;
 	private String address;
+	private SupplierFormMode mode = SupplierFormMode.Search;
+	
+	public enum SupplierFormMode {
+		Search, Create
+	}
 	
 	private List<PurchaseFormItem> items = new ArrayList<>();
+	
 	private List<String> errors = new ArrayList<>();
+	
+	public int getTotal() {
+		return items.stream().mapToInt(a -> a.getTotal()).sum();
+	}
 	
 	public void addItem() {
 		items.add(new PurchaseFormItem());
@@ -38,20 +49,22 @@ public class PurchaseForm implements Serializable {
 	public void validateSupplier() {
 		errors.clear();
 		
-		if(!StringUtils.hasLength(supplierCode)) {
-			errors.add("Please enter supplier code.");
-		}
-		
-		if(!StringUtils.hasLength(supplierName)) {
-			errors.add("Please enter supplier name.");
-		}
-		
-		if(!StringUtils.hasLength(shopName)) {
-			errors.add("Please enter shop name.");
-		}
+		if(mode == SupplierFormMode.Search) {
+			if(!StringUtils.hasLength(supplierCode)) {
+				errors.add("Please enter supplier code.");
+			}
+		} else {
+			if(!StringUtils.hasLength(supplierName)) {
+				errors.add("Please enter supplier name.");
+			}
+			
+			if(!StringUtils.hasLength(shopName)) {
+				errors.add("Please enter shop name.");
+			}
 
-		if(!StringUtils.hasLength(phone)) {
-			errors.add("Please enter phone number.");
+			if(!StringUtils.hasLength(phone)) {
+				errors.add("Please enter phone number.");
+			}
 		}
 	}
 }

@@ -15,26 +15,7 @@
 		<div class="row mt-4">
 			<div class="col">
 				<!-- Supplier Info -->
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title"><i class="bi-shop"></i> Supplier</h5>
-						
-						<div class="mb-3">
-							<div class="text-sm text-secondary">Supplier Code</div>
-							<div>${purchase.supplierCode}</div>
-						</div>
-
-						<div class="mb-3">
-							<div class="text-sm text-secondary">Supplier Name</div>
-							<div>${purchase.supplierName}</div>
-						</div>
-
-						<div class="mb-3">
-							<div class="text-sm text-secondary">Supplier Shop</div>
-							<div>${purchase.shopName}</div>
-						</div>
-					</div>
-				</div>
+				<app:supplier-info />
 			</div>
 			
 			<div class="col-9">
@@ -56,21 +37,26 @@
 						<!-- Purchase Items -->
 						<c:forEach items="${purchase.items}" var="item" varStatus="status">
 							<div class="row mb-2 gx-2">
-								<div class="col-4">
-									<form:input path="items[${status.index}].productName" placeholder="Product Name" cssClass="form-control"/>
+								<div class="col">
+									<form:input required='required' path="items[${status.index}].productName" placeholder="Product Name" cssClass="form-control"/>
 								</div>
 								<div class="col">
-									<form:input path="items[${status.index}].category" placeholder="Category Name" cssClass="form-control"/>
+									<form:input required='required' path="items[${status.index}].category" placeholder="Category Name" cssClass="form-control"/>
 								</div>
 								<div class="col-2">
-									<form:input id="p-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].unitPrice" type="number" cssClass="form-control"/>
+									<form:input required='required' id="p-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].buyPrice" type="number" cssClass="form-control"/>
 								</div>
 								<div class="col-1">
-									<form:input id="q-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].quantity" type="number" cssClass="form-control"/>
+									<form:input required='required' id="q-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].quantity" type="number" cssClass="form-control"/>
+								</div>
+								<div class="col-1">
+									<span id="t-${status.index}" class="form-control">${item.total}</span>
 								</div>
 								<div class="col-2">
 									<div class="input-group">
-										<span id="t-${status.index}" class="form-control">${item.total}</span>
+										<div class="col-2">
+											<form:input required='required' path="items[${status.index}].sellPrice" type="number" cssClass="form-control"/>
+										</div>
 										<c:url var="remove" value="/admin/purchase/edit/purchase/remove">
 											<c:param name="index" value="${status.index}" />
 										</c:url>

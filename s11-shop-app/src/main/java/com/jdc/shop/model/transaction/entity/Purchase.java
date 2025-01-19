@@ -26,5 +26,10 @@ public class Purchase extends AbstractEntity {
 	@OneToMany(mappedBy = "purchase")
 	private List<PurchaseProduct> products;
 	
-	private int delivery;
+	private Status status;
+	private String remark;
+	
+	public enum Status {
+		Initiate, Success, Error
+	}
 }

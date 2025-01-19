@@ -12,9 +12,10 @@ public class PurchaseFormItem implements Serializable {
 	private String category;
 	private String productName;
 	private int quantity;
-	private int unitPrice;
+	private int buyPrice;
+	private int sellPrice;
 	
 	public int getTotal() {
-		return quantity * unitPrice;
+		return quantity * buyPrice;
 	}
 }

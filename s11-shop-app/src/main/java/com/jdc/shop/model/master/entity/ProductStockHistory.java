@@ -16,17 +16,15 @@ public abstract class ProductStockHistory {
 	@EmbeddedId
 	private ProductStockHistoryPk id;
 	
-	private int price;
-	private int quantity;
-	
-	private String remark;
 	private int beforeStock;
+	private int quantity;
+	private String remark;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Product product;
 	
 	public enum Action {
-		Purchase, Sell
+		Buy, Sell
 	}
 }

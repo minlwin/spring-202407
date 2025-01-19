@@ -14,4 +14,7 @@ public class PurchaseProduct extends ProductStockHistory {
 
 	@ManyToOne
 	private Purchase purchase;
+	
+	private int buyPrice;
+	private int sellPrice;
 }

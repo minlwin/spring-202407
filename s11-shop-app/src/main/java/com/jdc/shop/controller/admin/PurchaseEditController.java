@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.jdc.shop.controller.input.PurchaseForm;
+import com.jdc.shop.model.transaction.service.PurchaseAdminService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 @SessionAttributes("purchase")
 @RequestMapping("admin/purchase/edit")
 public class PurchaseEditController {
+	
+	private final PurchaseAdminService service;
 	
 	@GetMapping
 	String startFlow(HttpSession session, ModelMap model) {
@@ -54,6 +59,11 @@ public class PurchaseEditController {
 		return "purchase/edit/purchase";
 	}
 	
+	@GetMapping("purchase")
+	String backToPurchase() {
+		return "purchase/edit/purchase";
+	}
+
 	@PostMapping("purchase/add")
 	String addPurchaseItem(@ModelAttribute("purchase") PurchaseForm form) {
 		form.addItem();
@@ -74,13 +84,17 @@ public class PurchaseEditController {
 	 */
 	@PostMapping("confirm")
 	String confirm(@ModelAttribute("purchase") PurchaseForm form) {
-		
-		
 		return "purchase/edit/confirm";
 	}
 	
 	@PostMapping
-	String save(@ModelAttribute("purchase") PurchaseForm form) {
-		return "redirect:/admin/purchase/%s";
+	String save(@ModelAttribute("purchase") PurchaseForm form, HttpSession session, ModelMap model) {
+		
+		var id = service.save(form);
+		
+		session.removeAttribute("purchase");
+		model.remove("purchase");
+		
+		return "redirect:/admin/purchase/%s".formatted(id.getCode());
 	}
 }
