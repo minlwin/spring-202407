@@ -16,6 +16,7 @@ public class PurchaseProduct extends ProductStockHistory {
 	public PurchaseProduct() {
 		var pk = new ProductStockHistoryPk();
 		pk.setAction(Action.Buy);
+		setId(pk);
 	}
 
 	@ManyToOne

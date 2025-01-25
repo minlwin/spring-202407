@@ -12,9 +12,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class Category extends AbstractEntity{
 
@@ -26,4 +28,10 @@ public class Category extends AbstractEntity{
 	
 	@OneToMany(mappedBy = "category")
 	private List<Product> products;
+
+	public Category(String name) {
+		super();
+		this.name = name;
+	}
+	
 }

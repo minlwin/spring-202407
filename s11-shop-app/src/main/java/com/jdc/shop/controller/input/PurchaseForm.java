@@ -83,7 +83,7 @@ public class PurchaseForm implements Serializable {
 			}
 		}
 		
-		return !errors.isEmpty();
+		return errors.isEmpty();
 	}
 
 

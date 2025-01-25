@@ -10,82 +10,87 @@
 	
 	<h5>Purchase Edit > Supplier > Purchase Item</h5>
 	
+	<c:if test="${not empty purchase.errors}">
+		<div id="errors" class="alert alert-info my-3">
+			<ul>
+			<c:forEach var="item" items="${purchase.errors}">
+				<li>${item}</li>
+			</c:forEach>
+			</ul>
+		</div>
+	</c:if>
+
+
 	<form:form  id="itemsForm" action="${root}/admin/purchase/edit/confirm" method="post" modelAttribute="purchase">
 		
-		<div class="row mt-4">
-			<div class="col">
-				<!-- Supplier Info -->
-				<app:supplier-info />
-			</div>
-			
-			<div class="col-9">
-				<div class="card">
-					<div class="card-body">
-						<h5 class="card-title">
-							<i class="bi-cart"></i> Purchase Items
-						</h5>
-						
-						<!-- Header -->
+		<div class="mt-4">
+
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">
+						<i class="bi-cart"></i> Purchase Items
+					</h5>
+					
+					<!-- Header -->
+					<div class="row mb-2 gx-2">
+						<div class="col">Product</div>
+						<div class="col">Category</div>
+						<div class="col">Price</div>
+						<div class="col-1">Qty</div>
+						<div class="col">Total</div>
+						<div class="col">Sell Price</div>
+					</div>
+	
+					<!-- Purchase Items -->
+					<c:forEach items="${purchase.items}" var="item" varStatus="status">
 						<div class="row mb-2 gx-2">
-							<div class="col-4">Product</div>
-							<div class="col">Category</div>
-							<div class="col-2">Price</div>
-							<div class="col-1">Qty</div>
-							<div class="col-2">Total</div>
-						</div>
-		
-						<!-- Purchase Items -->
-						<c:forEach items="${purchase.items}" var="item" varStatus="status">
-							<div class="row mb-2 gx-2">
-								<div class="col">
-									<form:input required='required' path="items[${status.index}].productName" placeholder="Product Name" cssClass="form-control"/>
-								</div>
-								<div class="col">
-									<form:input required='required' path="items[${status.index}].category" placeholder="Category Name" cssClass="form-control"/>
-								</div>
-								<div class="col-2">
-									<form:input required='required' id="p-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].buyPrice" type="number" cssClass="form-control"/>
-								</div>
-								<div class="col-1">
-									<form:input required='required' id="q-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].quantity" type="number" cssClass="form-control"/>
-								</div>
-								<div class="col-1">
-									<span id="t-${status.index}" class="form-control">${item.total}</span>
-								</div>
-								<div class="col-2">
-									<div class="input-group">
-										<div class="col-2">
-											<form:input required='required' path="items[${status.index}].sellPrice" type="number" cssClass="form-control"/>
-										</div>
-										<c:url var="remove" value="/admin/purchase/edit/purchase/remove">
-											<c:param name="index" value="${status.index}" />
-										</c:url>
-										<a href="${remove}" class="input-group-text removeItem">
-											<i class="bi-trash"></i>
-										</a>
-									</div>
+							<div class="col">
+								<form:input required='required' path="items[${status.index}].productName" placeholder="Product Name" cssClass="form-control"/>
+							</div>
+							<div class="col">
+								<form:input required='required' path="items[${status.index}].category" placeholder="Category Name" cssClass="form-control"/>
+							</div>
+							<div class="col">
+								<form:input required='required' id="p-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].buyPrice" type="number" cssClass="form-control"/>
+							</div>
+							<div class="col-1">
+								<form:input required='required' id="q-${status.index}" onchange="calculate(${status.index})" path="items[${status.index}].quantity" type="number" cssClass="form-control"/>
+							</div>
+							<div class="col">
+								<span id="t-${status.index}" class="form-control">${item.total}</span>
+							</div>
+							<div class="col">
+								<div class="input-group">
+									<c:url var="remove" value="/admin/purchase/edit/purchase/remove">
+										<c:param name="index" value="${status.index}" />
+									</c:url>
+
+									<form:input required='required' path="items[${status.index}].sellPrice" type="number" cssClass="form-control"/>
+									<a href="${remove}" class="input-group-text removeItem">
+										<i class="bi-trash"></i>
+									</a>
 								</div>
 							</div>
-						</c:forEach>
-						
-						<div class="pt-2">
-							<a href="${root}/admin/purchase/edit/supplier" class="btn btn-primary">
-								<i class="bi-arrow-left"></i> Back
-							</a>
-							
-							<a id="addItem" href="${root}/admin/purchase/edit/purchase/add" class="btn btn-primary">
-								<i class="bi-plus"></i> Add Item
-							</a>
-							
-							<button type="submit" class="btn btn-primary">
-								<i class="bi-check"></i> Confirm
-							</button>
-										
 						</div>
+					</c:forEach>
+					
+					<div class="pt-2">
+						<a href="${root}/admin/purchase/edit/supplier" class="btn btn-primary">
+							<i class="bi-arrow-left"></i> Back
+						</a>
+						
+						<a id="addItem" href="${root}/admin/purchase/edit/purchase/add" class="btn btn-primary">
+							<i class="bi-plus"></i> Add Item
+						</a>
+						
+						<button type="submit" class="btn btn-primary">
+							<i class="bi-check"></i> Confirm
+						</button>
+									
 					</div>
 				</div>
 			</div>
-		
+		</div>		
 		</div>
 		
 	</form:form>

@@ -40,7 +40,7 @@ public class PurchaseAdminService {
 			// Update to Success
 			purchase.setStatus(Status.Success);
 		
-		} catch (RuntimeException e) {
+		} catch (Exception e) {
 			// Update for Error
 			purchase.setStatus(Status.Error);
 			purchase.setRemark(e.getMessage());

@@ -1,8 +1,11 @@
 package com.jdc.shop.model.master.entity;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.jdc.shop.model.AbstractEntity;
+import com.jdc.shop.model.transaction.entity.PurchaseProduct;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -14,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapKeyColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -46,5 +50,9 @@ public class Product extends AbstractEntity{
 	@ElementCollection
 	@MapKeyColumn(name = "property")
 	@CollectionTable(name = "product_properties")
-	private Map<String, String> properties;
+	private Map<String, String> properties = new HashMap<>();
+
+	@OneToMany(mappedBy = "product")
+	private List<PurchaseProduct> purchases;
+	
 }
