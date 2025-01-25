@@ -6,6 +6,9 @@ import java.time.format.DateTimeFormatter;
 
 import org.springframework.util.StringUtils;
 
+import com.jdc.shop.model.master.entity.ProductStockAction;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,12 +18,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class PurchasePk implements Serializable{
+public class PurchasePk implements Serializable, ProductStockAction{
 
 	private static final long serialVersionUID = 1L;
 	private static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyyMMdd");
 	
+	@Column(name = "issue_at")
 	private LocalDate issueAt;
+	
+	@Column(name = "seq_number")
 	private int seqNumber;
 	
 	public String getCode() {

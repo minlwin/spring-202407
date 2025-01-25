@@ -18,11 +18,20 @@ import lombok.NoArgsConstructor;
 public class ProductStockHistoryPk implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Column(name = "issue_at")
 	private LocalDate issueAt;
-	@Column(name = "seq_number")
-	private int seqNumber;
+
 	@Column(name = "product_id")
 	private int productId;
+	
+	@Column(name = "seq_number")
+	private int seqNumber;
+	
 	private Action action;
+	
+	public void setStockAction(ProductStockAction stockAction) {
+		this.issueAt = stockAction.getIssueAt();
+		this.seqNumber = stockAction.getSeqNumber();
+	}
 }

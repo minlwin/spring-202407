@@ -24,6 +24,11 @@ public abstract class ProductStockHistory {
 	@JoinColumn(name = "product_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Product product;
 	
+	public void setProduct(Product product) {
+		this.product = product;
+		this.id.setProductId(product.getId());
+	}
+	
 	public enum Action {
 		Buy, Sell
 	}

@@ -2,6 +2,8 @@ package com.jdc.shop.controller.input;
 
 import java.io.Serializable;
 
+import org.springframework.util.StringUtils;
+
 import lombok.Data;
 
 @Data
@@ -17,5 +19,13 @@ public class PurchaseFormItem implements Serializable {
 	
 	public int getTotal() {
 		return quantity * buyPrice;
+	}
+	
+	public boolean validate() {
+		return StringUtils.hasLength(category) 
+				&& StringUtils.hasLength(productName)
+				&& quantity > 0
+				&& buyPrice > 0
+				&& sellPrice > 0;
 	}
 }

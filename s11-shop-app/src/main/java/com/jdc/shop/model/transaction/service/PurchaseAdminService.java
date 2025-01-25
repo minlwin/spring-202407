@@ -24,7 +24,7 @@ public class PurchaseAdminService {
 	private final PurchaseIdGenerator idGenerator;
 	private final PurchaseRepo purchaseRepo;
 	
-	@Transactional(noRollbackFor = RuntimeException.class)
+	@Transactional
 	public PurchasePk save(PurchaseForm form) {
 		
 		// Create or get Supplier

@@ -67,4 +67,24 @@ public class PurchaseForm implements Serializable {
 			}
 		}
 	}
+
+	public boolean validateItems() {
+		
+		errors.clear();
+		
+		if(items.isEmpty()) {
+			errors.add("Please enter items.");
+		}
+		
+		for(var item : items) {
+			if(!item.validate()) {
+				errors.add("Please enter valid item field.");
+				break;
+			}
+		}
+		
+		return !errors.isEmpty();
+	}
+
+
 }

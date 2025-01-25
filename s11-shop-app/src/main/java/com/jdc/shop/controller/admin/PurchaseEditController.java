@@ -84,6 +84,11 @@ public class PurchaseEditController {
 	 */
 	@PostMapping("confirm")
 	String confirm(@ModelAttribute("purchase") PurchaseForm form) {
+		
+		if(!form.validateItems()) {
+			return "purchase/edit/purchase";
+		}
+		
 		return "purchase/edit/confirm";
 	}
 	
