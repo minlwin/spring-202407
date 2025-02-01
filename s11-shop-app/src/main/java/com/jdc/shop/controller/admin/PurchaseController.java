@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jdc.shop.controller.input.PurchaseSearch;
+import com.jdc.shop.model.transaction.entity.Purchase.Status;
 import com.jdc.shop.model.transaction.service.PurchaseAdminService;
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,10 @@ public class PurchaseController {
 			PurchaseSearch form, 
 			@RequestParam(required = false, defaultValue = "0") int page, 
 			@RequestParam(required = false, defaultValue = "5") int size) {
-		model.put("list", service.search(form, page, size));
+		
+		model.put("statusList", Status.values());
+		model.put("result", service.search(form, page, size));
+		
 		return "purchase/list";
 	}
 	

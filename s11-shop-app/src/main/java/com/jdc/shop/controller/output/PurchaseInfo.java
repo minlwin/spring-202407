@@ -3,6 +3,7 @@ package com.jdc.shop.controller.output;
 import com.jdc.shop.model.account.entity.Supplier;
 import com.jdc.shop.model.account.entity.Supplier_;
 import com.jdc.shop.model.transaction.entity.Purchase;
+import com.jdc.shop.model.transaction.entity.Purchase.Status;
 import com.jdc.shop.model.transaction.entity.PurchasePk;
 import com.jdc.shop.model.transaction.entity.PurchasePk_;
 import com.jdc.shop.model.transaction.entity.PurchaseProduct;
@@ -16,12 +17,14 @@ import jakarta.persistence.criteria.Root;
 
 public record PurchaseInfo(
 		PurchasePk id,
+		Status status,
+		String remark,
 		String supplierName,
 		String shopName,
 		String phone,
 		String email,
 		Long totalItem,
-		Long totalAmount) {
+		Integer totalAmount) {
 
 	public String code() {
 		return id.getCode();
@@ -36,6 +39,8 @@ public record PurchaseInfo(
 		
 		cq.multiselect(
 			root.get(Purchase_.id),
+			root.get(Purchase_.status),
+			root.get(Purchase_.remark),
 			supplier.get(Supplier_.name),
 			supplier.get(Supplier_.shopName),
 			supplier.get(Supplier_.phone),
@@ -46,6 +51,8 @@ public record PurchaseInfo(
 		
 		cq.groupBy(
 			root.get(Purchase_.id),
+			root.get(Purchase_.status),
+			root.get(Purchase_.remark),
 			supplier.get(Supplier_.name),
 			supplier.get(Supplier_.shopName),
 			supplier.get(Supplier_.phone),
