@@ -35,8 +35,11 @@
 			<input name="keyword" placeholder="Search Keyword" class="form-control" />
 		</app:form-group>
 		
+		<input id="sizeInput" name="size" type="hidden" />
+		<input id="pageInput" name="page" type="hidden" />
+		
 		<div class="btn-wrapper">
-			<button type="button" class="btn btn-outline-primary">
+			<button id="searchBtn" type="button" class="btn btn-outline-primary">
 				<i class="bi-search"></i> Search
 			</button>
 			

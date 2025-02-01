@@ -21,10 +21,17 @@ import lombok.Data;
 @Data
 public class PurchaseSearch {
 	
+	private Integer supplierId;
 	private Status status;
 	private LocalDate dateFrom;
 	private LocalDate dateTo;
 	private String keyword;
+	
+	public static PurchaseSearch withSupplier(int id) {
+		var search = new PurchaseSearch();
+		search.setSupplierId(id);
+		return search;
+	}
 	
 	public Predicate[] where(
 			CriteriaBuilder cb, 
@@ -32,6 +39,10 @@ public class PurchaseSearch {
 			Join<Purchase, Supplier> supplier) {
 		
 		var params = new ArrayList<Predicate>();
+		
+		if(null != supplier) {
+			params.add(cb.equal(supplier.get(Supplier_.id), supplierId));
+		}
 		
 		if(null != status) {
 			params.add(cb.equal(root.get(Purchase_.status), status));

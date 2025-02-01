@@ -12,6 +12,10 @@ public record PurchaseDetails(
 		String remark,
 		SupplierInfo supplier,
 		List<PurchaseProductInfo> products) {
+	
+	public int getAllTotal() {
+		return products.stream().mapToInt(a -> a.quantity() * a.buyPrice()).sum();
+	}
 
 	public static PurchaseDetails from(Purchase entity) {
 		return new PurchaseDetails(

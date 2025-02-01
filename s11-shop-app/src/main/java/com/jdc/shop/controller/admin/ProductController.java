@@ -32,6 +32,6 @@ public class ProductController {
 	@GetMapping("{id}/details")
 	String showDetails(@PathVariable int id, ModelMap model) {
 		model.put("dto", service.findById(id));
-		return "product/list";
+		return "product/details";
 	}
 }

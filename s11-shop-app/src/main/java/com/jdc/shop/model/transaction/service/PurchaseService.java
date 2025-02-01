@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class PurchaseAdminService {
+public class PurchaseService {
 	
 	private final SupplierService supplierService;
 	private final PurchaseItemService itemService;
@@ -77,6 +77,9 @@ public class PurchaseAdminService {
 				"Purchase", "code", id);
 	}
 
+	public PageInfo<PurchaseInfo> findBySupplier(int supplierId, int page, int size) {
+		return search(PurchaseSearch.withSupplier(supplierId), page, size);
+	}
 
 	public PageInfo<PurchaseInfo> search(PurchaseSearch form, int page, int size) {
 		return purchaseRepo.search(queryFunc(form), countFunc(form), page, size);

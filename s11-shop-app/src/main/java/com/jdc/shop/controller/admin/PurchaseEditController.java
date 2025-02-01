@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.jdc.shop.controller.input.PurchaseForm;
-import com.jdc.shop.model.transaction.service.PurchaseAdminService;
+import com.jdc.shop.model.transaction.service.PurchaseService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("admin/purchase/edit")
 public class PurchaseEditController {
 	
-	private final PurchaseAdminService service;
+	private final PurchaseService service;
 	
 	@GetMapping
 	String startFlow(HttpSession session, ModelMap model) {

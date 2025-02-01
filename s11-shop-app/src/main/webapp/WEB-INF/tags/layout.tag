@@ -47,13 +47,13 @@
 			<!-- Admin Menu -->
 			<sec:authorize access="hasAuthority('Admin')">
 				<li class="nav-item">
-					<a href="" class="nav-link">
+					<a href="${root}/admin/home" class="nav-link ${menu eq 'home' ? 'active' : ''}">
 						<i class="bi-house"></i> Admin Home
 					</a>
 				</li>
 				
 				<li class="nav-item">
-					<a href="" class="nav-link">
+					<a href="${root}/admin/invoice" class="nav-link ${menu eq 'invoice' ? 'active' : ''}" >
 						<i class="bi-calendar"></i> Invoices
 					</a>
 				</li>
@@ -65,7 +65,7 @@
 				</li>
 
 				<li class="nav-item dropdown">
-					<a href="" class="nav-link dropdown-toggle ${group eq 'master' ? 'active' : ''}" data-bs-toggle="dropdown">
+					<a class="nav-link dropdown-toggle ${group eq 'master' ? 'active' : ''}" data-bs-toggle="dropdown">
 						<i class="bi-database"></i> Master
 					</a>
 					
@@ -76,7 +76,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#" class="dropdown-item" ${menu eq 'product' ? 'active' : ''}">
+							<a href="${root}/admin/product" class="dropdown-item ${menu eq 'product' ? 'active' : ''}">
 								<i class="bi-gift"></i> Products
 							</a>
 						</li>
@@ -89,7 +89,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="#" class="dropdown-item">
+							<a href="${root}/admin/supplier" class="dropdown-item ${menu eq 'supplier' ? 'active' : ''}">
 								<i class="bi-people-fill"></i> Suppliers
 							</a>
 						</li>

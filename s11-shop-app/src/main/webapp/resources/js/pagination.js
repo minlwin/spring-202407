@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
 	
 	const searchForm = document.getElementById('searchForm')
+	const searchBtn = document.getElementById('searchBtn')
 	const sizeInput = document.getElementById('sizeInput')
 	const pageInput = document.getElementById('pageInput')
+
 	const sizeSelect = document.getElementById('sizeSelect')
-	const searchBtn = document.getElementById('searchBtn')
 	
 	if(searchForm && sizeInput && pageInput && sizeSelect && searchBtn) {
 		

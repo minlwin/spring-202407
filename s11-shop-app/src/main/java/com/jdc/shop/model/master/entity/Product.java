@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.jdc.shop.model.AbstractEntity;
-import com.jdc.shop.model.transaction.entity.PurchaseProduct;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -53,6 +52,6 @@ public class Product extends AbstractEntity{
 	private Map<String, String> properties = new HashMap<>();
 
 	@OneToMany(mappedBy = "product")
-	private List<PurchaseProduct> purchases;
+	private List<ProductStockHistory> stockHistory;
 	
 }

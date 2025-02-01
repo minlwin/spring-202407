@@ -27,6 +27,7 @@ public record ProductInfo(
 		cq.multiselect(
 			root.get(Product_.id),
 			root.get(Product_.category).get(Category_.name),
+			root.get(Product_.name),
 			root.get(Product_.salePrice),
 			root.get(Product_.stock).get(ProductStock_.stock),
 			supplier.get(Supplier_.name),

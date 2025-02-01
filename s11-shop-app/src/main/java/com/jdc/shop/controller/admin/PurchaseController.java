@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jdc.shop.controller.input.PurchaseSearch;
 import com.jdc.shop.model.transaction.entity.Purchase.Status;
-import com.jdc.shop.model.transaction.service.PurchaseAdminService;
+import com.jdc.shop.model.transaction.service.PurchaseService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("admin/purchase")
 public class PurchaseController {
 	
-	private final PurchaseAdminService service;
+	private final PurchaseService service;
 	
 	@GetMapping
 	String search(ModelMap model, 
