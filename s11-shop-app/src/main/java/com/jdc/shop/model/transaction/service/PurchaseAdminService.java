@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.shop.controller.input.PurchaseForm;
+import com.jdc.shop.controller.input.PurchaseSearch;
+import com.jdc.shop.controller.output.PurchaseInfo;
+import com.jdc.shop.model.PageInfo;
 import com.jdc.shop.model.account.entity.Supplier;
 import com.jdc.shop.model.transaction.PurchaseIdGenerator;
 import com.jdc.shop.model.transaction.entity.Purchase;
@@ -57,6 +60,18 @@ public class PurchaseAdminService {
 		entity.setStatus(Status.Initiate);
 		
 		return purchaseRepo.saveAndFlush(entity);
+	}
+
+
+	public PageInfo<PurchaseInfo> search(PurchaseSearch form, int page, int size) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public Object findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

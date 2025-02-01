@@ -11,8 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 
-import jakarta.servlet.DispatcherType;
-
 @Configuration
 public class ShopAppSecurityConfig {
 
@@ -21,8 +19,6 @@ public class ShopAppSecurityConfig {
 		
 		// Authorization
 		http.authorizeHttpRequests(req -> {
-			req.dispatcherTypeMatchers(DispatcherType.INCLUDE, DispatcherType.FORWARD, DispatcherType.ERROR)
-				.permitAll();
 			req.requestMatchers("/resources/**", "/public/**", "/").permitAll();
 			req.requestMatchers("/admin/**").hasAuthority("Admin");
 			req.anyRequest().authenticated();
