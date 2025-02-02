@@ -10,6 +10,7 @@ public record ProductDetails(
 		String category,
 		String name,
 		int salePrice,
+		int stock,
 		String image,
 		String description,
 		Map<String, String> properties,
@@ -22,6 +23,7 @@ public record ProductDetails(
                 .category(entity.getCategory().getName())
                 .name(entity.getName())
                 .salePrice(entity.getSalePrice())
+                .stock(entity.getStock().getStock())
                 .image(entity.getImage())
                 .description(entity.getDescription())
                 .properties(entity.getProperties())
@@ -35,6 +37,7 @@ public record ProductDetails(
         private String category;
         private String name;
         private int salePrice;
+        private int stock;
         private String image;
         private String description;
         private Map<String, String> properties;
@@ -58,6 +61,11 @@ public record ProductDetails(
 
         public Builder salePrice(int salePrice) {
             this.salePrice = salePrice;
+            return this;
+        }
+
+        public Builder stock(int stock) {
+            this.stock = stock;
             return this;
         }
 
@@ -87,7 +95,7 @@ public record ProductDetails(
         }
 
         public ProductDetails build() {
-            return new ProductDetails(id, category, name, salePrice, image, description, properties, createdAt, updatedAt);
+            return new ProductDetails(id, category, name, salePrice, stock, image, description, properties, createdAt, updatedAt);
         }
     }
  }

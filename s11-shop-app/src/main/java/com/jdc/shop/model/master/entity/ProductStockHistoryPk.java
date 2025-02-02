@@ -2,6 +2,7 @@ package com.jdc.shop.model.master.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.jdc.shop.model.master.entity.ProductStockHistory.Action;
 
@@ -18,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class ProductStockHistoryPk implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	private static final DateTimeFormatter DF = DateTimeFormatter.ofPattern("yyyyMMdd");
 	
 	@Column(name = "issue_at")
 	private LocalDate issueAt;
@@ -34,4 +36,10 @@ public class ProductStockHistoryPk implements Serializable {
 		this.issueAt = stockAction.getIssueAt();
 		this.seqNumber = stockAction.getSeqNumber();
 	}
+	
+	public String getCode() {
+		// yyyyMMdd-001
+		return "%s-%03d".formatted(issueAt.format(DF), seqNumber);
+	}
+
 }

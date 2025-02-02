@@ -32,4 +32,5 @@ public abstract class ProductStockHistory {
 	public enum Action {
 		Buy, Sell
 	}
+	
 }

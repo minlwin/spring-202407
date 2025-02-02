@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 	
-	const helper = new ProductHelper
-	const productSizeSelect = document.getElementById('productSizeSelect')
-	productSizeSelect.addEventListener('change', (e) => {
+	const helper = new StockHelper
+	const stockSizeSelect = document.getElementById('stockSizeSelect')
+	stockSizeSelect.addEventListener('change', (e) => {
 		helper.sizeChange(e.target.value)
 	})
 	
@@ -10,17 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
 	helper.search()
 })
 
-class ProductHelper {
+class StockHelper {
 
 	pageChange(page) {
-		const pageInput = document.getElementById('productPage')
+		const pageInput = document.getElementById('stockPage')
 		pageInput.value = page
 		this.search()
 	}
 
 	sizeChange(size) {
-		const pageInput = document.getElementById('productPage')
-		const sizeInput = document.getElementById('productSize')
+		const pageInput = document.getElementById('stockPage')
+		const sizeInput = document.getElementById('stockSize')
 		
 		pageInput.value = 0
 		sizeInput.value = size
@@ -30,14 +30,16 @@ class ProductHelper {
 
 
 	async search() {
-		const searchForm = document.getElementById('productSearchForm')
-		const pageInput = document.getElementById('productPage')
-		const sizeInput = document.getElementById('productSize')
+		const searchForm = document.getElementById('stockSearchForm')
+		const pageInput = document.getElementById('stockPage')
+		const sizeInput = document.getElementById('stockSize')
 		
 		const url = searchForm.action 
 		const params = new URLSearchParams
 		params.append('page', pageInput.value)
 		params.append('size', sizeInput.value)
+		
+		console.log(`URL : ${url}?${params.toString()}`)
 		
 		try {
 			const response = await fetch(`${url}?${params.toString()}`, {
@@ -49,7 +51,7 @@ class ProductHelper {
 			)
 			
 			if(!response.ok) {
-				throw new Error('Featch Error : product for Supplier')
+				throw new Error('Featch Error : stock for Supplier')
 			}
 			
 			const {contents, ... pageInfo} = await response.json()
@@ -65,24 +67,25 @@ class ProductHelper {
 
 	loadData(contents) {
 		console.log(contents)
-		const productList = document.getElementById('productList')
-		const baseUrl = productList.dataset.details
+		const stockList = document.getElementById('stockList')
+		const baseUrl = stockList.dataset.details
 		
-		Array.from(productList.children).forEach(child => productList.removeChild(child))
+		Array.from(stockList.children).forEach(child => stockList.removeChild(child))
 		
 		contents.forEach(item => {
-			productList.appendChild(this.getRow(item, baseUrl))
+			stockList.appendChild(this.getRow(item, baseUrl))
 		})
 	}
 
 	getRow(item, baseUrl) {
 		const tr = document.createElement('tr')
-		tr.appendChild(this.getCell(item.id))
-		tr.appendChild(this.getCell(item.productName))
-		tr.appendChild(this.getCell(item.category))
+		tr.appendChild(this.getCell(item.id.issueAt))
+		tr.appendChild(this.getCell(item.id.action))
+		tr.appendChild(this.getCell(item.target))
+		tr.appendChild(this.getCell(item.beforeStock))
+		tr.appendChild(this.getCell(item.quantity))
 		tr.appendChild(this.getCell(item.stock))
-		tr.appendChild(this.getCell(item.sellPrice))
-		tr.appendChild(this.getLinkCell(item.id, baseUrl))
+		tr.appendChild(this.getLinkCell(item.id.code, item.id.action === 'Buy' ? `${baseUrl}/purchase` : `${baseUrl}/invoice`))
 		return tr
 	}
 
@@ -91,7 +94,7 @@ class ProductHelper {
 		icon.classList.add('bi-arrow-right')
 		
 		const link = document.createElement('a')
-		link.href = `${baseUrl}/${data}/details`
+		link.href = `${baseUrl}/${data}`
 		link.appendChild(icon)
 		
 		const td = document.createElement('td')
@@ -117,13 +120,13 @@ class ProductHelper {
 	loadPagination(pageInfo) {
 		console.log(pageInfo)
 		
-		const productTotalPages = document.getElementById('productTotalPages')
-		const productCount = document.getElementById('productCount')
+		const stockTotalPages = document.getElementById('stockTotalPages')
+		const stockCount = document.getElementById('stockCount')
 		
-		productTotalPages.innerText = pageInfo.totalPages
-		productCount.innerText = pageInfo.count
+		stockTotalPages.innerText = pageInfo.totalPages
+		stockCount.innerText = pageInfo.count
 		
-		const pageLinks = document.getElementById('productPageLinks')
+		const pageLinks = document.getElementById('stockPageLinks')
 		Array.from(pageLinks.children).forEach(child => pageLinks.removeChild(child))
 		
 		if(pageInfo.totalPage > 1) {

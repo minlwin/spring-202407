@@ -12,15 +12,17 @@ import com.jdc.shop.controller.input.ProductSearch;
 import com.jdc.shop.controller.output.StockChangeInfo;
 import com.jdc.shop.model.PageInfo;
 import com.jdc.shop.model.master.service.ProductService;
+import com.jdc.shop.model.master.service.StockHistoryService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("admin/product")
-public class ProductController {
+public class ProductAdminController {
 	
-	private final ProductService service;
+	private final ProductService productService;
+	private final StockHistoryService historyService;
 
 	@GetMapping
 	String search(
@@ -28,23 +30,23 @@ public class ProductController {
 			ModelMap model,
 			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
-		model.put("result", service.search(form, page, size));
+		model.put("result", productService.search(form, page, size));
 		return "product/list";
 	}
 	
 	@GetMapping("{id}/details")
 	String showDetails(@PathVariable int id, ModelMap model) {
-		model.put("dto", service.findById(id));
+		model.put("details", productService.findById(id));
 		return "product/details";
 	}
 
 	@ResponseBody
-	@GetMapping("{id}/sales")
+	@GetMapping("{id}/stock")
 	PageInfo<StockChangeInfo> searchStockChangeHistory(
-			@PathVariable int productId, 
+			@PathVariable int id, 
 			@RequestParam(required = false, defaultValue = "0") int page, 
 			@RequestParam(required = false, defaultValue = "10") int size) {
-		return null;
+		return historyService.search(id, page, size);
 	}
 
 }

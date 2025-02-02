@@ -28,6 +28,10 @@ public record ProductSearch(
 		Integer stockFrom,
 		Integer stockTo) {
 	
+	public static ProductSearch withKeyword(String keyword) {
+		return new ProductSearch(null, keyword, null, null);
+	}
+
 	public static ProductSearch withSupplier(int supplier) {
 		return new ProductSearch(supplier, null, null, null);
 	}
