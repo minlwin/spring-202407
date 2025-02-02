@@ -1,4 +1,4 @@
-package com.jdc.shop.model.transaction.service;
+package com.jdc.shop.model.master.service;
 
 
 import org.springframework.stereotype.Service;

@@ -9,10 +9,9 @@
 	<app:page-title title="Purchase Management" icon="bi-cart-check" />
 	
 	<form id="searchForm" class="d-flex">
-		<c:if test="${pageResult ne null}">
-			<input id="pageInput" type="hidden" name="page" value="${pageResult.page()}" />
-			<input id="sizeInput" type="hidden" name="size" value="${pageResult.size()}" />
-		</c:if>
+
+		<input id="pageInput" type="hidden" name="page" value="${pageResult.page()}" />
+		<input id="sizeInput" type="hidden" name="size" value="${pageResult.size()}" />
 		
 		<app:form-group label="Status" cssClass="me-2">
 			<select name="status" class="form-select">
@@ -34,9 +33,6 @@
 		<app:form-group label="Keywoord" cssClass="me-2">
 			<input name="keyword" placeholder="Search Keyword" class="form-control" />
 		</app:form-group>
-		
-		<input id="sizeInput" name="size" type="hidden" />
-		<input id="pageInput" name="page" type="hidden" />
 		
 		<div class="btn-wrapper">
 			<button id="searchBtn" type="button" class="btn btn-outline-primary">

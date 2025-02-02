@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jdc.shop.controller.input.ProductSearch;
-import com.jdc.shop.model.transaction.service.ProductService;
+import com.jdc.shop.controller.output.StockChangeInfo;
+import com.jdc.shop.model.PageInfo;
+import com.jdc.shop.model.master.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +28,7 @@ public class ProductController {
 			ModelMap model,
 			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "10") int size) {
-		model.put("list", service.search(form, page, size));
+		model.put("result", service.search(form, page, size));
 		return "product/list";
 	}
 	
@@ -34,4 +37,14 @@ public class ProductController {
 		model.put("dto", service.findById(id));
 		return "product/details";
 	}
+
+	@ResponseBody
+	@GetMapping("{id}/sales")
+	PageInfo<StockChangeInfo> searchStockChangeHistory(
+			@PathVariable int productId, 
+			@RequestParam(required = false, defaultValue = "0") int page, 
+			@RequestParam(required = false, defaultValue = "10") int size) {
+		return null;
+	}
+
 }

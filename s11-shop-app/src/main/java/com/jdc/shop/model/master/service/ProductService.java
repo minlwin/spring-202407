@@ -1,4 +1,4 @@
-package com.jdc.shop.model.transaction.service;
+package com.jdc.shop.model.master.service;
 
 import static com.jdc.shop.utils.EntityOperationUtils.safeCall;
 
@@ -102,7 +102,7 @@ public class ProductService {
 			var purchase = productPurchase.join(PurchaseProduct_.purchase);
 			var supplier = purchase.join(Purchase_.supplier);
 			
-			cq.select(cb.count(root));
+			cq.select(cb.countDistinct(root.get(Product_.id)));
 			cq.where(form.where(cb, root, supplier, stockHistory));
 			
 			return cq;

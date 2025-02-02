@@ -10,7 +10,7 @@ public record PageInfo<T>(
 		int size
 		) {
 
-	public List<Integer> links() {
+	public List<Integer> getLinks() {
 		
 		var list = new ArrayList<Integer>();
 		
@@ -20,7 +20,7 @@ public record PageInfo<T>(
 			list.addFirst(list.getFirst() - 1);
 		}
 		
-		while(list.getLast() < totalPages() - 1 && list.size() < 5) {
+		while(list.getLast() < getTotalPages() - 1 && list.size() < 5) {
 			list.add(list.getLast() + 1);
 		}
 		
@@ -31,18 +31,20 @@ public record PageInfo<T>(
 		return list;
 	}
 	
-	public int totalPages() {
+	public int getTotalPages() {
 		var totalPage = count.intValue() / size;
 		return count.intValue() % size > 0 ? totalPage + 1 : totalPage;
 	}
 	
-	public boolean showFirst() {
-		var links = links();
+	public boolean isShowFirst() {
+		var links = getLinks();
 		return !links.isEmpty() && links.getFirst() > 0;
 	}
+	
+	
 
-	public boolean showLast() {
-		var links = links();
-		return !links.isEmpty() && links.getLast() < totalPages() - 1;
+	public boolean isShowLast() {
+		var links = getLinks();
+		return !links.isEmpty() && links.getLast() < getTotalPages() - 1;
 	}
 }

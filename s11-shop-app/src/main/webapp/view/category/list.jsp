@@ -71,7 +71,7 @@
 							<td>${item.createdBy()}</td>
 							<td>${formatter.dateTime(item.updatedAt())}</td>
 							<td>${item.updatedBy()}</td>
-							<td class="text-end">${products}</td>
+							<td class="text-end">${item.products()}</td>
 							<td class="text-center">
 								<a href="#" onclick="return false;" class="icon-link editBtn" 
 									data-id="${item.id()}" data-name="${item.name()}" >

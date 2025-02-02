@@ -9,7 +9,7 @@
 	<!-- Total Info -->
 	<div class="d-flex">
 		<app:input-group label="Total Pages" cssClass="me-2">
-			<span class="form-control">${pageResult.totalPages()}</span>
+			<span class="form-control">${pageResult.totalPages}</span>
 		</app:input-group>
 		
 		<app:input-group label="Total Count">
@@ -29,14 +29,14 @@
 		</app:input-group>
 		
 		<!-- First Page -->
-		<c:if test="${pageResult.showFirst()}">
+		<c:if test="${pageResult.showFirst}">
 			<a href="#" data-page="0" onclick="return false" class="btn btn-outline-primary ms-2 pageLink">
 				<i class="bi-arrow-bar-left"></i>
 			</a>
 		</c:if>
 		
 		<!-- Links -->
-		<c:if test="${pageResult.totalPages() > 1}">
+		<c:if test="${pageResult.totalPages > 1}">
 			<c:forEach var="item" items="${pageResult.links()}">
 			
 				<c:choose>
@@ -56,8 +56,8 @@
 		</c:if>
 
 		<!-- Last Page -->
-		<c:if test="${pageResult.showLast()}">
-			<a href="#" data-page="${pageResult.totalPages() - 1}" onclick="return false" class="btn btn-outline-primary ms-1 pageLink">
+		<c:if test="${pageResult.showLast}">
+			<a href="#" data-page="${pageResult.totalPages - 1}" onclick="return false" class="btn btn-outline-primary ms-1 pageLink">
 				<i class="bi-arrow-bar-right"></i>
 			</a>
 		</c:if>

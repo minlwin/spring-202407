@@ -1,4 +1,4 @@
-package com.jdc.shop.model.transaction.service;
+package com.jdc.shop.model.account.service;
 
 import static com.jdc.shop.utils.EntityOperationUtils.safeCall;
 

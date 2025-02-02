@@ -80,5 +80,5 @@
 		
 	</form:form>
 	
-	<script src="${root}/resources/js/supplier.js" type="text/javascript"></script>
+	<script src="${root}/resources/js/purchase-edit-supplier.js" type="text/javascript"></script>
 </app:layout>

@@ -33,6 +33,6 @@ public record ProductInfo(
 			supplier.get(Supplier_.name),
 			supplier.get(Supplier_.shopName),
 			supplier.get(Supplier_.phone)
-		);
+		).distinct(true);
 	}
 }

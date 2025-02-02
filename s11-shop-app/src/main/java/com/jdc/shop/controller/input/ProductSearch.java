@@ -32,7 +32,11 @@ public record ProductSearch(
 		return new ProductSearch(supplier, null, null, null);
 	}
 
-	public Predicate[] where(CriteriaBuilder cb, Root<Product> root, Join<Purchase, Supplier> supplier, ListJoin<Product, ProductStockHistory> stockHistory) {
+	public Predicate[] where(
+			CriteriaBuilder cb, Root<Product> root, 
+			Join<Purchase, Supplier> supplier, 
+			ListJoin<Product, ProductStockHistory> stockHistory) {
+		
 		var params = new ArrayList<Predicate>();
 		
 		params.add(cb.equal(stockHistory.get(ProductStockHistory_.id).get(ProductStockHistoryPk_.action), Action.Buy));

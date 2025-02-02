@@ -12,9 +12,9 @@ import com.jdc.shop.controller.input.SupplierSearch;
 import com.jdc.shop.controller.output.ProductInfo;
 import com.jdc.shop.controller.output.PurchaseInfo;
 import com.jdc.shop.model.PageInfo;
-import com.jdc.shop.model.transaction.service.ProductService;
+import com.jdc.shop.model.account.service.SupplierService;
+import com.jdc.shop.model.master.service.ProductService;
 import com.jdc.shop.model.transaction.service.PurchaseService;
-import com.jdc.shop.model.transaction.service.SupplierService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -42,7 +42,7 @@ public class SupplierController {
 	@GetMapping("{id}")
 	String findById(@PathVariable int id, ModelMap model) {
 		model.put("details", supplierService.findById(id));
-		return "supplier/detaisl";
+		return "supplier/details";
 	}
 	
 	@ResponseBody

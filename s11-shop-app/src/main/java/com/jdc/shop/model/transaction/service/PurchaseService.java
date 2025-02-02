@@ -14,6 +14,7 @@ import com.jdc.shop.controller.output.PurchaseDetails;
 import com.jdc.shop.controller.output.PurchaseInfo;
 import com.jdc.shop.model.PageInfo;
 import com.jdc.shop.model.account.entity.Supplier;
+import com.jdc.shop.model.account.service.SupplierService;
 import com.jdc.shop.model.transaction.PurchaseIdGenerator;
 import com.jdc.shop.model.transaction.entity.Purchase;
 import com.jdc.shop.model.transaction.entity.Purchase.Status;

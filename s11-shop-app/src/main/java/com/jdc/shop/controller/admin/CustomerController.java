@@ -23,7 +23,7 @@ public class CustomerController {
 			@RequestParam(required = false, defaultValue = "0") int page, 
 			@RequestParam(required = false, defaultValue = "10") int size) {
 		var pageInfo = service.search(search, page, size);
-		model.put("page", pageInfo);
+		model.put("result", pageInfo);
 		return "customer/list";
 	}
 }

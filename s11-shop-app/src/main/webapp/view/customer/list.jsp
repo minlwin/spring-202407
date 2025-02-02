@@ -8,7 +8,10 @@
 	<app:page-title title="Customer Management" icon="bi-people" />
 	
 	<!-- Search Form -->
-	<form class="row">
+	<form class="row" id="searchForm">
+		<input id="pageInput" type="hidden" name="page" value="${result.page()}">
+		<input id="sizeInput" type="hidden" name="size" value="${result.size()}">
+	
 		<!-- From -->
 		<app:form-group label="Registered From" cssClass="col-auto">
 			<input name="from" value="${param.from}" type="date" class="form-control" />
@@ -26,7 +29,7 @@
 		
 		<!-- Search Button -->
 		<div class="col btn-wrapper">
-			<button class="btn btn-outline-primary">
+			<button type="button" id="searchBtn" class="btn btn-outline-primary">
 				<i class="bi-search"></i> Search
 			</button>
 		</div>
@@ -60,5 +63,6 @@
 	</table>
 	
 	<!-- Pagination -->
+	<app:pagination pageResult="${result}" />
 
 </app:layout>

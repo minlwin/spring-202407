@@ -1,10 +1,10 @@
 package com.jdc.shop.controller.admin;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Service
+@Controller
 @RequestMapping("admin/home")
 public record AdminHomeController() {
 

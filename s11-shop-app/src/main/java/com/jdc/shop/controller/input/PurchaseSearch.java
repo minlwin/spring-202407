@@ -40,7 +40,7 @@ public class PurchaseSearch {
 		
 		var params = new ArrayList<Predicate>();
 		
-		if(null != supplier) {
+		if(null != supplierId) {
 			params.add(cb.equal(supplier.get(Supplier_.id), supplierId));
 		}
 		
