@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
 <app:layout title="Products" menu="product" group="master">
@@ -11,10 +12,10 @@
 		<app:page-title title="${details.name()}" icon="bi-gift" />
 		
 		<div>
-			<button class="btn btn-primary">
+			<button id="imageUploadBtn" class="btn btn-primary">
 				<i class="bi-camera"></i> Upload Photos
 			</button>		
-			<a href="#" class="btn btn-primary">
+			<a href="${root}/admin/product/${details.id()}/edit" class="btn btn-primary">
 				<i class="bi-pencil"></i> Edit Product
 			</a>
 		</div>
@@ -32,6 +33,11 @@
 	<div class="tab-content pt-3">
 		<div id="info" class="tab-pane fade show active">
 			<div class="row">
+			
+				<div class="col">
+					<app:product-images coverPhoto="${details.coverPhoto}" photos="${details.photos}" />					
+				</div>
+			
 				<div class="col-3">
 					<!-- Product Information -->
 					<div class="list-group">
@@ -58,10 +64,6 @@
 					</div>
 				</div>
 				
-				<div class="col">
-					<!-- Photos -->
-				
-				</div>
 			</div>
 		</div>
 		<div id="history" class="tab-pane fade">
@@ -69,5 +71,15 @@
 		</div>
 	</div>
 	
+	<!-- Product Image Form -->
+	<form id="imageUploadForm" 
+		action="${root}/admin/product/${details.id()}/photos" 
+		enctype="multipart/form-data"
+		method="post" class="d-none">
+		<sec:csrfInput/>
+		<input type="file" multiple="multiple" name="photos" id="imageInput" />
+	</form>
+	
+	<script src="${root}/resources/js/product-details-image-upload.js"></script>
 
 </app:layout>

@@ -43,6 +43,8 @@ public class Product extends AbstractEntity{
 	@Column(nullable = false)
 	private String name;
 	private int salePrice;
+	
+	@Column(columnDefinition = "TEXT")
 	private String image;
 	private String description;
 	

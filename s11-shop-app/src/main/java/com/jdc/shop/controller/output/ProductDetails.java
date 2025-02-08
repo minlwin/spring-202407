@@ -1,7 +1,10 @@
 package com.jdc.shop.controller.output;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
+
+import org.springframework.util.StringUtils;
 
 import com.jdc.shop.model.master.entity.Product;
 
@@ -16,6 +19,23 @@ public record ProductDetails(
 		Map<String, String> properties,
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt) {
+	
+	public List<String> getPhotos() {
+		if(StringUtils.hasLength(image)) {
+			return List.of(image.split(","));
+		}
+		
+		return List.of();
+	}
+	
+	public String getCoverPhoto() {
+		var photos = getPhotos();
+		if(photos.size() > 0) {
+			return photos.get(0);
+		}
+		
+		return null;
+	}
 	
 	public static ProductDetails from(Product entity) {
         return new Builder()
