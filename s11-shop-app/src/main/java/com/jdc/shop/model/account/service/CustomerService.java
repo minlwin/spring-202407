@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.shop.controller.input.CustomerSearch;
 import com.jdc.shop.controller.input.SignUpForm;
+import com.jdc.shop.controller.output.CustomerDetails;
 import com.jdc.shop.controller.output.CustomerInfo;
 import com.jdc.shop.model.PageInfo;
 import com.jdc.shop.model.account.entity.Account;
@@ -81,6 +82,12 @@ public class CustomerService implements SignUpService, CustomerReferenceService{
 			cq.where(search.where(cb, root));
 			return cq;
 		};
+	}
+
+	@Override
+	public CustomerDetails findById(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
