@@ -5,7 +5,9 @@ import java.util.List;
 
 import com.jdc.shop.model.master.entity.Product;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
@@ -14,10 +16,10 @@ public class ProductForm {
 	private int id;
 	@NotBlank(message = "Please enter product name.")
 	private String name;
-	@NotBlank(message = "Please enter sale price.")
+	@NotNull(message = "Please enter sale price.")
 	private Integer salePrice;
 	private String description;
-	private List<ProductFeature> features = new ArrayList<>();
+	private List<@Valid ProductFeature> features = new ArrayList<>();
 	
 	public static ProductForm from(Product product) {
 		var form =  new ProductForm();
@@ -27,7 +29,7 @@ public class ProductForm {
 		form.setSalePrice(product.getSalePrice());
 		form.setDescription(product.getDescription());
 		var features = product.getProperties().entrySet().stream()
-				.map(item -> new ProductFeature(item.getKey(), item.getValue())).toList();
+				.map(item -> new ProductFeature(item.getKey(), item.getValue(), false)).toList();
 		form.getFeatures().addAll(features);
 		
 		if(form.getFeatures().size() == 0) {

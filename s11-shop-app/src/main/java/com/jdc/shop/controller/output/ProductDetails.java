@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.util.StringUtils;
 
+import com.jdc.shop.controller.input.ProductFeature;
 import com.jdc.shop.model.master.entity.Product;
 
 public record ProductDetails(
@@ -19,6 +20,10 @@ public record ProductDetails(
 		Map<String, String> properties,
 		LocalDateTime createdAt,
 		LocalDateTime updatedAt) {
+	
+	public List<ProductFeature> getFeatures() {
+		return properties.entrySet().stream().map(a -> new ProductFeature(a.getKey(), a.getValue(), false)).toList();
+	}
 	
 	public List<String> getPhotos() {
 		if(StringUtils.hasLength(image)) {

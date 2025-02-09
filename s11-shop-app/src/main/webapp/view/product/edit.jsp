@@ -35,25 +35,42 @@
 					<sf:textarea path="description" cssClass="form-control"/>
     			</app:form-group>
 				
-				<c:forEach var="item" varStatus="status" items="${form.features}">
-					<div class="row mb-3">
-						<div class="col-4">
-							<c:if test="${status.index eq 0}">
-								<label class="form-label">Name</label>
-								<sf:input path="features[${status.index}].name" cssClass="form-control" placeholder="Enter Name"/>
-							</c:if>
-						</div>
-						<div class="col">
-							<c:if test="${status.index eq 0}">
-								<label class="form-label">Feature</label>
-								<sf:input path="features[${status.index}].feature" cssClass="form-control" placeholder="Enter Feature"/>
-							</c:if>
-						</div>
+				<div class="row">
+					<div class="col-4">
+						<label class="form-label">Name</label>
 					</div>
-				</c:forEach>
+					<div class="col">
+						<label class="form-label">Feature</label>
+					</div>
+				</div>
+
+				<section id="featuresHolder" class="mb-3">
+					
+					<c:forEach var="item" varStatus="status" items="${form.features}">
+						<div class="row ${status.index gt 0 ? 'mt-2' : ''}">
+							
+							<sf:hidden path="features[${status.index}].deleted" data-server="true" />
+							
+							<div class="col-4">
+								<sf:input path="features[${status.index}].name" cssClass="form-control" placeholder="Enter Name"/>
+								<sf:errors path="features[${status.index}].name" cssClass="text-secondary" />
+							</div>
+							
+							<div class="col">
+								<div class="input-group">
+									<sf:input path="features[${status.index}].feature" cssClass="form-control" placeholder="Enter Feature"/>
+									<button type="button" class="btn btn-outline-primary input-group-text deleteBtn">
+										<i class="bi-trash"></i>
+									</button>
+								</div>
+								<sf:errors path="features[${status.index}].feature" cssClass="text-secondary" />
+							</div>
+						</div>
+					</c:forEach>
+				</section>
 				
 				<div>
-					<button type="button" class="btn btn-outline-primary">
+					<button id="addFeatureBtn" type="button" class="btn btn-outline-primary">
 						<i class="bi-plus"></i> Add New Feature
 					</button>
 					
@@ -65,5 +82,7 @@
     	</div>
 
     </div>
+    
+    <script type="text/javascript" src="${root}/resources/js/product-edit.js"></script>
     
 </app:layout>    

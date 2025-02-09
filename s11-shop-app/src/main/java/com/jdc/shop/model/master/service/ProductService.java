@@ -154,7 +154,9 @@ public class ProductService {
 			var map = new LinkedHashMap<String, String>();
 			
 			for(var feature : form.getFeatures()) {
-				map.put(feature.getName(), feature.getFeature());
+				if(!feature.isDeleted()) {
+					map.put(feature.getName(), feature.getFeature());
+				}
 			}
 			
 			product.setProperties(map);

@@ -55,12 +55,15 @@
 								<fmt:formatNumber value="${details.salePrice()}" />
 							</div>
 						</div>
-						<div class="list-group-item">
-							<span class="text-secondary">Stock</span>
-							<div class="fs-5">
-								<fmt:formatNumber value="${details.stock()}" />
+						
+						<c:forEach var="item" items="${details.features}">
+							<div class="list-group-item">
+								<span class="text-secondary">${item.name}</span>
+								<div class="fs-5">
+									${item.feature}
+								</div>
 							</div>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
 				
