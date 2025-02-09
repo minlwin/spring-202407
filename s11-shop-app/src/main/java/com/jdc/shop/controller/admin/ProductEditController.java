@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jdc.shop.controller.input.ProductForm;
+import com.jdc.shop.controller.output.ProductDetails;
 import com.jdc.shop.model.master.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -42,5 +43,10 @@ public class ProductEditController {
 	@ModelAttribute(name = "form")
 	ProductForm form(@PathVariable int id) {
 		return service.findForEdit(id);
+	}
+	
+	@ModelAttribute(name = "details")
+	ProductDetails details(@PathVariable int id) {
+		return service.findById(id);
 	}
 }

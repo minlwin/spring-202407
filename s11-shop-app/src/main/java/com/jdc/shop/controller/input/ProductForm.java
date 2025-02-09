@@ -26,8 +26,9 @@ public class ProductForm {
 		form.setName(product.getName());
 		form.setSalePrice(product.getSalePrice());
 		form.setDescription(product.getDescription());
-		form.setFeatures(product.getProperties().entrySet().stream()
-				.map(item -> new ProductFeature(item.getKey(), item.getValue())).toList());
+		var features = product.getProperties().entrySet().stream()
+				.map(item -> new ProductFeature(item.getKey(), item.getValue())).toList();
+		form.getFeatures().addAll(features);
 		
 		if(form.getFeatures().size() == 0) {
 			form.getFeatures().add(new ProductFeature());
