@@ -28,14 +28,14 @@ public class ShoppingCartController {
 	
 	@GetMapping("checkout")
 	String navigateToCheckOut() {
-		return "invoice/checkout";
+		return "checkout/shipping-address";
 	}
 	
 	@PostMapping("checkout/confirm")
 	String confirm(
 			@Validated
 			@ModelAttribute("cart") ShoppingCart shoppingCart, BindingResult result) {
-		return "invoice/checkout-confirm";
+		return "invoice/confirm";
 	}
 	
 	@PostMapping("checkout")
