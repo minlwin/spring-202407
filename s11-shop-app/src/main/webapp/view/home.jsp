@@ -36,8 +36,11 @@
 								</div>
 							</div>
 							
-							<sec:authorize access="isAnonymous or hasAuthority('Member')">
-								<a href="#" class="btn-link add-to-cart">
+							<sec:authorize access="isAnonymous or hasAuthority('Customer')">
+								<c:url var="addToCart" value="${root}/cart/add">
+									<c:param name="productId" value="${item.id()}" />
+								</c:url>
+								<a href="${addToCart}" onclick="return false;" class="btn-link add-to-cart">
 									<i class="bi-cart-plus"></i>
 								</a>
 							</sec:authorize>
@@ -50,4 +53,5 @@
 	
 	<app:pagination pageResult="${result}" />
 	
+	<script src="${root}/resources/js/home.js"></script>
 </app:layout>

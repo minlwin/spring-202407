@@ -30,13 +30,13 @@ public class CustomerController {
 			@RequestParam(required = false, defaultValue = "10") int size) {
 		var pageInfo = customerService.search(search, page, size);
 		model.put("result", pageInfo);
-		return "customer/list";
+		return "admin/customers";
 	}
 	
 	@GetMapping("{id}")
 	String findById(@PathVariable String id, ModelMap model) {
 		model.put("details", customerService.findById(id));
-		return "customer/details";
+		return "admin/customer-details";
 	}
 
 	@ResponseBody

@@ -19,8 +19,9 @@ public class ShopAppSecurityConfig {
 		
 		// Authorization
 		http.authorizeHttpRequests(req -> {
-			req.requestMatchers("/resources/**", "/public/**", "/").permitAll();
+			req.requestMatchers("/resources/**", "/public/**", "/", "/cart/add").permitAll();
 			req.requestMatchers("/admin/**").hasAuthority("Admin");
+			req.requestMatchers("/customer/**").hasAuthority("Customer");
 			req.anyRequest().authenticated();
 		});
 		

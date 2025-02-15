@@ -49,7 +49,7 @@
 		</thead>
 		
 		<tbody>
-		<c:forEach var="item" items="${page.contents()}">
+		<c:forEach var="item" items="${result.contents()}">
 			<tr>
 				<td>${item.name()}</td>
 				<td>${formatter.dateTime(item.registeredAt())}</td>

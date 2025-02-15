@@ -26,13 +26,13 @@ public class SaleController {
 			@RequestParam(required = false, defaultValue = "10")  int size,
 			ModelMap model) {
 		model.put("result", service.search(search, page, size));
-		return "customer/sale/list";
+		return "invoice/list";
 	}
 
 	@GetMapping("{id}")
 	String findDetails(@PathVariable String id, ModelMap model) {
 		model.put("details", service.findById(id));
-		return "customer/sale/details";
+		return "invoice/details";
 	}
 
 }

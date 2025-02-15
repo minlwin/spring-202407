@@ -4,6 +4,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
-<app:layout title="Invoice" menu="invoice" >
+<app:layout title="Check Out" menu="checkout" >
 	
 </app:layout>

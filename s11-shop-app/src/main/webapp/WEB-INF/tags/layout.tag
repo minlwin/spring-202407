@@ -97,10 +97,30 @@
 				</li>
 				
 			</sec:authorize>
+			
 			<!-- Customer Menu -->
 			<sec:authorize access="hasAuthority('Customer')">
+				<li class="nav-item">
+					<a href="" class="nav-link">
+						<i class="bi-house"></i> Home
+					</a>
+				</li>
 			
+				<li class="nav-item">
+					<a href="${root}/customer/sale" class="nav-link">
+						<i class="bi-calendar"></i> Invoices
+					</a>
+				</li>
 			</sec:authorize>
+			
+			<sec:authorize access="hasAuthority('Customer') or isAnonymous()">
+				<li id="checkOutMenu" class="nav-item ${(cart eq null or cart.totalCount eq 0) ? 'd-none' : ''}" >
+					<a href="${root}/cart/checkout" class="nav-link ${menu eq 'Check Out' ? 'active' : ''}">
+						<i class="bi-cart"></i> <span id="cartCount">${cart.totalCount}</span>
+					</a>
+				</li>
+			</sec:authorize>
+
 			<!-- Public Menu -->
 			<sec:authorize access="isAnonymous()">
 				<li class="nav-item">
