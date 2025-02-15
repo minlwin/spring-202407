@@ -1,12 +1,15 @@
 package com.jdc.shop.controller.input;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShoppingCart {
+public class ShoppingCart implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private final Map<Integer, ShoppingCartItem> cart;
 	
 	public ShoppingCart() {
