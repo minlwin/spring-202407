@@ -53,7 +53,7 @@
 				</li>
 				
 				<li class="nav-item">
-					<a href="${root}/admin/invoice" class="nav-link ${menu eq 'invoice' ? 'active' : ''}" >
+					<a href="${root}/admin/invoice" class="nav-link ${menu eq 'Invoice' ? 'active' : ''}" >
 						<i class="bi-calendar"></i> Invoices
 					</a>
 				</li>
@@ -107,7 +107,7 @@
 				</li>
 			
 				<li class="nav-item">
-					<a href="${root}/customer/sale" class="nav-link">
+					<a href="${root}/customer/sale" class="nav-link ${menu eq 'Invoice' ? 'active' : ''}">
 						<i class="bi-calendar"></i> Invoices
 					</a>
 				</li>

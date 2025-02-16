@@ -24,7 +24,8 @@ public record SaleInfo(
 		String customerEmail,
 		LocalDateTime saleAt,
 		Status status,
-		int items,
+		String remark,
+		long items,
 		int totals) {
 
 	public static void select(CriteriaBuilder cb, CriteriaQuery<SaleInfo> cq, Root<Sale> root) {
@@ -39,6 +40,7 @@ public record SaleInfo(
 			root.get(Sale_.customer).get(Customer_.account).get(Account_.email),
 			root.get(Sale_.saleAt),
 			root.get(Sale_.status),
+			root.get(Sale_.remark),
 			cb.count(items),
 			cb.sum(cb.prod(items.get(SaleProduct_.quantity), items.get(SaleProduct_.salePrice)))
 		);

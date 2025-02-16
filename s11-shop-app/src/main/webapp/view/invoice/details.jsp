@@ -4,6 +4,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="app" tagdir="/WEB-INF/tags" %>
 
-<app:layout title="Invoice" menu="invoice" >
+<app:layout title="Invoice" menu="Invoice" >
+	
+	<app:page-title title="Invoice : ${details.id().code}" icon="bi-calendar"></app:page-title>
 	
 </app:layout>

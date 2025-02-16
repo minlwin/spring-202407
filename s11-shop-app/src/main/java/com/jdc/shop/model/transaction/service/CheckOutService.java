@@ -5,11 +5,13 @@ import static com.jdc.shop.utils.EntityOperationUtils.safeCall;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.shop.controller.input.ShippingAddressForm;
 import com.jdc.shop.controller.input.ShoppingCart;
@@ -109,7 +111,11 @@ public class CheckOutService {
 
 	private Address saveAddress(Customer customer, ShippingAddressForm form) {
 		
-		var address = addressRepo.findById(UUID.fromString(form.getId()))
+		
+		var address = Optional.ofNullable(form.getId())
+				.filter(id -> StringUtils.hasLength(id))
+				.map(id -> UUID.fromString(id))
+				.flatMap(addressRepo::findById)
 				.orElseGet(() -> {
 					var entity = new Address();
 					entity.setCustomer(customer);

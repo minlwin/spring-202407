@@ -1,6 +1,7 @@
 package com.jdc.shop.model;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
@@ -39,6 +40,11 @@ public class BaseRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implem
 	@Override
 	public Long count(Function<CriteriaBuilder, CriteriaQuery<Long>> queryFunc) {
 		return search(queryFunc).stream().findAny().orElse(0L);
+	}
+
+	@Override
+	public <R> Optional<R> searchOne(Function<CriteriaBuilder, CriteriaQuery<R>> queryFunc) {
+		return em.createQuery(queryFunc.apply(em.getCriteriaBuilder())).getResultList().stream().findAny();
 	}
 
 }

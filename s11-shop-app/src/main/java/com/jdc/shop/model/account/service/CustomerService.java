@@ -1,6 +1,10 @@
 package com.jdc.shop.model.account.service;
 
+import static com.jdc.shop.utils.EntityOperationUtils.safeCall;
+
 import java.time.LocalDateTime;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Function;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import com.jdc.shop.controller.input.CustomerSearch;
 import com.jdc.shop.controller.input.SignUpForm;
@@ -17,6 +22,7 @@ import com.jdc.shop.controller.output.CustomerInfo;
 import com.jdc.shop.model.PageInfo;
 import com.jdc.shop.model.account.entity.Account;
 import com.jdc.shop.model.account.entity.Account.Role;
+import com.jdc.shop.model.account.entity.Account_;
 import com.jdc.shop.model.account.entity.Customer;
 import com.jdc.shop.model.account.entity.Customer_;
 import com.jdc.shop.model.account.repo.AccountRepo;
@@ -86,8 +92,25 @@ public class CustomerService implements SignUpService, CustomerReferenceService{
 
 	@Override
 	public CustomerDetails findById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		return safeCall(Optional.ofNullable(id)
+				.filter(StringUtils::hasLength)
+				.map(UUID::fromString)
+				.flatMap(uuid -> customerRepo.findById(uuid))
+				.map(CustomerDetails::from), "Customer", "id", id);
+	}
+
+	@Override
+	public UUID findIdByUsername(String username) {
+		
+		Function<CriteriaBuilder, CriteriaQuery<UUID>> queryFunc = cb -> {
+			var cq = cb.createQuery(UUID.class);
+			var root = cq.from(Customer.class);
+			cq.select(root.get(Customer_.id));
+			cq.where(cb.equal(root.get(Customer_.account).get(Account_.email), username));
+			return cq;
+		};
+		
+		return safeCall(customerRepo.searchOne(queryFunc), "Customer", "login id", username);
 	}
 
 

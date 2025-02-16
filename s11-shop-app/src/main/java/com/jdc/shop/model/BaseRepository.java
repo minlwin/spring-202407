@@ -1,6 +1,7 @@
 package com.jdc.shop.model;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,4 +21,6 @@ public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
 			int page, int size);
 	
 	Long count(Function<CriteriaBuilder, CriteriaQuery<Long>> queryFunc);
+	
+	<R> Optional<R> searchOne(Function<CriteriaBuilder, CriteriaQuery<R>> queryFunc);
 }
