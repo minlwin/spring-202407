@@ -15,6 +15,7 @@ import com.jdc.shop.controller.input.ShoppingCart;
 import com.jdc.shop.controller.input.ShoppingCartItem;
 import com.jdc.shop.controller.output.ShoppingCartResponse;
 import com.jdc.shop.model.master.service.ProductService;
+import com.jdc.shop.model.transaction.service.CheckOutService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class ShoppingCartController {
 	
 	private final ProductService productService;
+	private final CheckOutService checkOutService;
 	
 	@GetMapping("checkout")
 	String navigateToCheckOut() {
@@ -35,12 +37,21 @@ public class ShoppingCartController {
 	String confirm(
 			@Validated
 			@ModelAttribute("cart") ShoppingCart shoppingCart, BindingResult result) {
-		return "invoice/confirm";
+		
+		if(result.hasErrors()) {
+			return "checkout/shipping-address";
+		}
+		
+		return "checkout/confirm";
 	}
 	
 	@PostMapping("checkout")
 	String checkOut(@ModelAttribute("cart") ShoppingCart shoppingCart) {
-		return "redirect:/customer/sale/%s";
+		
+		var saleId = checkOutService.checkOut(shoppingCart);
+		shoppingCart.clear();
+		
+		return "redirect:/customer/sale/%s".formatted(saleId.getCode());
 	}
 	
 	@ResponseBody

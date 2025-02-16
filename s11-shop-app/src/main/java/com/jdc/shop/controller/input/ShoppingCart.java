@@ -62,6 +62,7 @@ public class ShoppingCart implements Serializable{
 	}
 	
 	public void clear() {
+		addressForm = new ShippingAddressForm();
 		cart.clear();
 	}
 	

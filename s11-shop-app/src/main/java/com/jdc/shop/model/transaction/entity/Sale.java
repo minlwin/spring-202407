@@ -32,9 +32,11 @@ public class Sale extends AbstractEntity {
 	private Status status;
 	private LocalDateTime satusChangeAt;
 	private int delivery;
+	private String remark;
 	
 	@OneToMany(mappedBy = "sale")
 	private List<SaleProduct> products;
+	
 	
 	public enum Status {
 		Invoiced, Delivered, Cancel

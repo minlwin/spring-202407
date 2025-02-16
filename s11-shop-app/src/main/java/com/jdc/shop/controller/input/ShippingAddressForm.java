@@ -6,6 +6,8 @@ import lombok.Data;
 @Data
 public class ShippingAddressForm {
 
+	private String id;
+	
 	@NotBlank(message = "Please enter name.")
 	private String name;
 	@NotBlank(message = "Please enter building.")

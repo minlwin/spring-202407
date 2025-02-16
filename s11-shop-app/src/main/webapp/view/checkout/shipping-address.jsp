@@ -16,30 +16,38 @@
 				<div class="card-body">
 					<h5>Shipping Address</h5>
 					
+					<sf:hidden path="addressForm.id"/>
+						
 					<div class="row row-cols-2 gx-4 gy-3">
 						<!-- Shipping Address  -->
 						<app:form-group label="Name" cssClass="col">
 							<sf:input path="addressForm.name" placeholder="Enter Address Name" cssClass="form-control"/>
+							<sf:errors path="addressForm.name" cssClass="text-secondary" />
 						</app:form-group>
 						
 						<app:form-group label="Building" cssClass="col">
 							<sf:input path="addressForm.building" placeholder="Enter Building" cssClass="form-control"/>
+							<sf:errors path="addressForm.building" cssClass="text-secondary" />
 						</app:form-group>
 	
 						<app:form-group label="Street" cssClass="col">
 							<sf:input path="addressForm.street" placeholder="Enter Street" cssClass="form-control"/>
+							<sf:errors path="addressForm.street" cssClass="text-secondary" />
 						</app:form-group>
 	
 						<app:form-group label="Quarter" cssClass="col">
 							<sf:input path="addressForm.quarter" placeholder="Enter Quarter" cssClass="form-control"/>
+							<sf:errors path="addressForm.quarter" cssClass="text-secondary" />
 						</app:form-group>
 						
 						<app:form-group label="Township" cssClass="col">
 							<sf:input path="addressForm.township" placeholder="Enter Township" cssClass="form-control"/>
+							<sf:errors path="addressForm.township" cssClass="text-secondary" />
 						</app:form-group>
 	
 						<app:form-group label="Region" cssClass="col">
 							<sf:input path="addressForm.region" placeholder="Enter Region" cssClass="form-control"/>
+							<sf:errors path="addressForm.region" cssClass="text-secondary" />
 						</app:form-group>
 					</div>
 					
