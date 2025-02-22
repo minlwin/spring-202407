@@ -15,4 +15,6 @@ public interface InvoiceService {
 
 	SaleDetails findById(String id);
 
+	void cancel(String id, String reason);
+
 }

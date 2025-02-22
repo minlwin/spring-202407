@@ -4,7 +4,6 @@ import static com.jdc.shop.utils.EntityOperationUtils.safeCall;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,14 +14,11 @@ import org.springframework.util.StringUtils;
 
 import com.jdc.shop.controller.input.ShippingAddressForm;
 import com.jdc.shop.controller.input.ShoppingCart;
-import com.jdc.shop.controller.input.ShoppingCartItem;
 import com.jdc.shop.model.BusinessException;
 import com.jdc.shop.model.account.entity.Address;
 import com.jdc.shop.model.account.entity.Customer;
 import com.jdc.shop.model.account.repo.AddressRepo;
 import com.jdc.shop.model.account.repo.CustomerRepo;
-import com.jdc.shop.model.master.entity.ProductStockHistory.Action;
-import com.jdc.shop.model.master.entity.ProductStockHistoryPk;
 import com.jdc.shop.model.master.repo.ProductRepo;
 import com.jdc.shop.model.transaction.SaleIdGenerator;
 import com.jdc.shop.model.transaction.entity.Sale;
@@ -58,26 +54,13 @@ public class CheckOutService {
 		var sale = saveSale(customer, address);
 		
 		// Save All Sale Product
-		saveSaleProducts(sale, shoppingCart.getItems());
-		
-		return sale.getId();
-	}
-
-	private void saveSaleProducts(Sale sale, List<ShoppingCartItem> items) {
-		
-		for(var i = 0; i < items.size(); i ++) {
-			
-			var item = items.get(i);
+		for(var item : shoppingCart.getItems()) {
 			var product = safeCall(productRepo.findById(item.getId()), "Product", "id", item.getId());
 			
-			var pk = new ProductStockHistoryPk();
-			pk.setAction(Action.Sell);
-			pk.setIssueAt(LocalDate.now());
-			pk.setProductId(item.getId());
-			pk.setSeqNumber(i + 1);
-			
 			var saleProduct = new SaleProduct();
-			saleProduct.setId(pk);
+			saleProduct.getId().setStockAction(sale.getId());
+			saleProduct.setProduct(product);
+			
 			saleProduct.setSale(sale);
 			saleProduct.setProduct(product);
 			saleProduct.setSalePrice(product.getSalePrice());
@@ -95,7 +78,9 @@ public class CheckOutService {
 			saleProductRepo.save(saleProduct);
 		}
 		
+		return sale.getId();
 	}
+
 
 	private Sale saveSale(Customer customer, Address address) {
 		

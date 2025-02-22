@@ -2,6 +2,7 @@ package com.jdc.shop.controller.output;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import com.jdc.shop.model.transaction.entity.Sale;
@@ -15,7 +16,17 @@ public record SaleDetails(SalePk id,
 		String customerEmail,
 		LocalDateTime saleAt, 
 		Status status, 
+		String shippingName,
+		String shippingAddress,
 		List<SaleProductInfo> items) {
+	
+	public boolean getCanUpdate() {
+		return status == Status.Invoiced;
+	}
+	
+	public int getTotal() {
+		return items.stream().mapToInt(a -> a.getAmount()).sum();
+	}
 	
 	public static SaleDetails from(Sale entity) {
 		return new Builder()
@@ -26,6 +37,8 @@ public record SaleDetails(SalePk id,
 				.customerEmail(entity.getCustomer().getAccount().getEmail())
 				.saleAt(entity.getSaleAt())
 				.status(entity.getStatus())
+				.shippingName(Optional.ofNullable(entity.getAddress().getName()).orElse(entity.getCustomer().getName()))
+				.shippingAddress(entity.getAddress().getShippingAddress())
 				.items(entity.getProducts().stream().map(SaleProductInfo::from).toList())
 				.build();
 	}
@@ -38,6 +51,8 @@ public record SaleDetails(SalePk id,
 		private String customerEmail;
 		private LocalDateTime saleAt;
 		private Status status;
+		private String shippingName;
+		private String shippingAddress;
 		private List<SaleProductInfo> items;
 
 		public Builder id(SalePk id) {
@@ -75,13 +90,23 @@ public record SaleDetails(SalePk id,
 			return this;
 		}
 
+		public Builder shippingName(String shippingName) {
+			this.shippingName = shippingName;
+			return this;
+		}
+
+		public Builder shippingAddress(String shippingAddress) {
+			this.shippingAddress = shippingAddress;
+			return this;
+		}
+
 		public Builder items(List<SaleProductInfo> items) {
 			this.items = items;
 			return this;
 		}
 
 		public SaleDetails build() {
-			return new SaleDetails(id, customerId, customerName, customerPhone, customerEmail, saleAt, status, items);
+			return new SaleDetails(id, customerId, customerName, customerPhone, customerEmail, saleAt, status, shippingName, shippingAddress, items);
 		}
 	}
 }

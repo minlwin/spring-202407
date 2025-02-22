@@ -7,6 +7,9 @@ import com.jdc.shop.model.master.entity.ProductStockHistory.Action;
 import com.jdc.shop.model.master.entity.ProductStockHistoryPk;
 import com.jdc.shop.model.master.entity.ProductStockHistoryPk_;
 import com.jdc.shop.model.master.entity.ProductStockHistory_;
+import com.jdc.shop.model.transaction.entity.CancelProduct;
+import com.jdc.shop.model.transaction.entity.CancelProduct_;
+import com.jdc.shop.model.transaction.entity.Cancel_;
 import com.jdc.shop.model.transaction.entity.PurchaseProduct;
 import com.jdc.shop.model.transaction.entity.PurchaseProduct_;
 import com.jdc.shop.model.transaction.entity.Purchase_;
@@ -27,7 +30,11 @@ public record StockChangeInfo(
 		String target) {
 	
 	public int getStock() {
-		return id.getAction() == Action.Buy ? beforeStock + quantity : beforeStock - quantity;
+		return switch (id.getAction()) {
+		case Buy -> beforeStock + quantity;
+		case Cancel -> beforeStock + quantity;
+		case Sell -> beforeStock - quantity;
+		};
 	}
 
 	public static void select(
@@ -43,6 +50,9 @@ public record StockChangeInfo(
 		var sale = saleProduct.join(SaleProduct_.sale, JoinType.LEFT);
 		var customer = sale.join(Sale_.customer, JoinType.LEFT);
 		
+		var cancelProduct = cb.treat(root, CancelProduct.class);
+		var cancel = cancelProduct.join(CancelProduct_.cancel, JoinType.LEFT);
+		
 		cq.multiselect(
 			root.get(ProductStockHistory_.id),
 			root.get(ProductStockHistory_.beforeStock),
@@ -55,6 +65,9 @@ public record StockChangeInfo(
 				.when(
 					cb.equal(root.get(ProductStockHistory_.id).get(ProductStockHistoryPk_.action), Action.Sell), 
 					customer.get(Customer_.name))
+				.when(
+					cb.equal(root.get(ProductStockHistory_.id).get(ProductStockHistoryPk_.action), Action.Cancel), 
+					cancel.get(Cancel_.canceldBy))
 			
 		);
 	}

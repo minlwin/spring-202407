@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,6 +35,13 @@ public class InvoiceController {
 	@GetMapping("{id}")
 	public String findDetails(@PathVariable String id, ModelMap model) {
 		model.put("details", service.findById(id));
+		model.put("cancelUrl", "/admin/invoice/%s/cancel".formatted(id));
 		return "invoice/details";
 	}
+	
+	@PostMapping("{id}/cancel")
+	String cancel(@PathVariable String id, @RequestParam String reason) {
+		service.cancel(id, reason);
+		return "redirect:/admin/invoice/%s".formatted(id);
+	}	
 }

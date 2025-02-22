@@ -1,5 +1,7 @@
 package com.jdc.shop.controller.output;
 
+import java.util.Optional;
+
 import com.jdc.shop.model.transaction.entity.SaleProduct;
 
 public record SaleProductInfo(
@@ -9,6 +11,19 @@ public record SaleProductInfo(
 		String productImage,
 		int sellPrice, 
 		int quantity) {
+	
+	public int getAmount() {
+		return sellPrice * quantity;
+	}
+	
+	public String getCoverPhoto() {
+		return Optional.ofNullable(productImage)
+				.map(a -> a.split(","))
+				.filter(a -> a.length > 0)
+				.map(a -> a[0])
+				.map(a -> "images/%s".formatted(a))
+				.orElse("photo/default.jpg");
+	}
 
 	public static SaleProductInfo from(SaleProduct entity) {
 		return new Builder()

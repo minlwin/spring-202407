@@ -33,4 +33,8 @@ public class Address {
 	private String township;
 	@Column(nullable = false)
 	private String region;
+	
+	public String getShippingAddress() {
+		return "%s, %s, %s, %s, %s".formatted(building, street, quarter, township, region);
+	}
 }
