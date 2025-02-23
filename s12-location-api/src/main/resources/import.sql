@@ -1,0 +1,15 @@
+INSERT INTO region (id, name, burmese_name, capital) VALUES (1, 'Ayeyarwady Region', 'ဧရာဝတီတိုင်းဒေသကြီး', 'Pathein');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (2, 'Bago Region', 'ပဲခူးတိုင်းဒေသကြီး', 'Bago');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (3, 'Magway Region', 'မကွေးတိုင်းဒေသကြီး', 'Magway');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (4, 'Mandalay Region', 'မန္တလေးတိုင်းဒေသကြီး', 'Mandalay');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (5, 'Sagaing Region', 'စစ်ကိုင်းတိုင်းဒေသကြီး', 'Monywa');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (6, 'Tanintharyi Region', 'တနင်္သာရီတိုင်းဒေသကြီး', 'Dawei');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (7, 'Yangon Region', 'ရန်ကုန်တိုင်းဒေသကြီး', 'Yangon');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (8, 'Kachin State', 'ကချင်ပြည်နယ်', 'Myitkyina');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (9, 'Kayah State', 'ကယားပြည်နယ်', 'Loikaw');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (10, 'Kayin State', 'ကရင်ပြည်နယ်', 'Hpa-An');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (11, 'Chin State', 'ချင်းပြည်နယ်', 'Hakha');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (12, 'Mon State', 'မွန်ပြည်နယ်', 'Mawlamyine');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (13, 'Rakhine State', 'ရခိုင်ပြည်နယ်', 'Sittwe');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (14, 'Shan State', 'ရှမ်းပြည်နယ်', 'Taunggyi');
+INSERT INTO region (id, name, burmese_name, capital) VALUES (15, 'Naypyidaw Union Territory', 'နေပြည်တော် ပြည်ထောင်စုနယ်မြေ', 'Naypyidaw');
