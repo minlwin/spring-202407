@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { UsersProvider } from "@/providers/users-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,11 +40,16 @@ export default function RootLayout({
             <li className="px-2">
               <Link href={'/input'}>Simple Input</Link>
             </li>
+            <li className="px-2">
+              <Link href={'/users'}>User List</Link>
+            </li>
           </ul>
         </nav>
 
         <main className="px-8 py-4">
-          {children}
+          <UsersProvider>
+            {children}
+          </UsersProvider>
         </main>
       </body>
     </html>
