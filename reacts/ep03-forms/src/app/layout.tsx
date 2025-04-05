@@ -1,12 +1,13 @@
 'use client'
 
-import { Menu } from "@mui/icons-material";
+import { ArrowRight, Menu } from "@mui/icons-material";
 import "./globals.css";
 import { Drawer, Typography } from "@mui/joy";
 import React from "react";
 import ApplicationProvider from "@/lib/state/application-provider";
 import { useSideBarState, useSideBarStateSetter } from "@/lib/state/sidebar-state";
 import SideBar from "@/lib/ui/navs/sidebar";
+import { useSelectedMenu } from "@/lib/state/selected-menu-provider";
 
 export default function RootLayout({
   children,
@@ -27,6 +28,7 @@ export default function RootLayout({
 function MainLayout({children} : {children:React.ReactNode}) {
   const drawerState = useSideBarState()  
   const setDrawerState = useSideBarStateSetter()
+  const selectedMenu = useSelectedMenu()
 
   return (
     <body>
@@ -35,6 +37,8 @@ function MainLayout({children} : {children:React.ReactNode}) {
           <Menu/>
         </span>
         <Typography level="h4">JDC PORTAL</Typography>
+        <ArrowRight />
+        <Typography level="h4">{selectedMenu.title.toUpperCase()}</Typography>
       </section>
       <Drawer size="sm" open={drawerState} onClose={() => setDrawerState(false)}>
         <SideBar></SideBar>
