@@ -43,7 +43,9 @@ function MainLayout({children} : {children:React.ReactNode}) {
       <Drawer size="sm" open={drawerState} onClose={() => setDrawerState(false)}>
         <SideBar></SideBar>
       </Drawer>
-      {children}
+      <main className="px-8 py-2">
+        {children}
+      </main>
     </body>
   )
 }
