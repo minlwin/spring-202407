@@ -5,6 +5,7 @@ import { useState } from "react";
 import CourseEdit from "./course-edit";
 import CourseSearch from "./course-search";
 import CourseList from "./course-list";
+import CourseSearchComponent from "./course-search";
 
 export default function CoursesManagement() {
 
@@ -22,7 +23,7 @@ export default function CoursesManagement() {
             </Drawer>
 
             <Drawer anchor="right" open={openFilter} onClose={() => setOpenFilter(false)}>
-                <CourseSearch />
+                <CourseSearchComponent />
             </Drawer>
 
             <CourseList />
