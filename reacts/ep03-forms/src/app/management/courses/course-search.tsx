@@ -1,15 +1,23 @@
-'use client'
 import { CourseSearch, LEVELS } from "@/lib/model/course-model";
 import { FilterAltOutlined, Search } from "@mui/icons-material";
-import { Box, Button, FormControl, FormLabel, Input, Option, Select } from "@mui/joy";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { Box, Button, FormControl, formControlClasses, FormLabel, Input, Option, Select } from "@mui/joy";
+import { Controller, SubmitHandler, useForm, Validate } from "react-hook-form";
 
 export default function CourseSearchComponent() {
 
-    const {control, register, handleSubmit} = useForm<CourseSearch>()
+    const {control, register, handleSubmit, formState: {errors}} = useForm<CourseSearch>()
     
     const onSubmit:SubmitHandler<CourseSearch> = (form) => {
         console.log(form)
+    }
+
+    const fromAndToValidation:Validate<number | undefined, CourseSearch> = (_, formValue) => {
+        if(formValue.hoursFrom && formValue.hoursTo) {
+            if(Number.parseInt(formValue.hoursFrom.toString()) > Number.parseInt(formValue.hoursTo.toString())) {
+                return "Hour from must be less than hour to."
+            } 
+        }
+        return undefined
     }
 
     return (
@@ -47,9 +55,12 @@ export default function CourseSearchComponent() {
                         display: 'flex',
                         gap: 2
                     }}>
-                        <Input {...register('hoursFrom')} type="number" placeholder="From" sx={{flex: 1}} />
-                        <Input {...register('hoursTo')} type="number" placeholder="To" sx={{flex: 1}} />
+                        <Input {...register('hoursFrom', {validate: fromAndToValidation})} type="number" placeholder="From" sx={{flex: 1}} />
+                        <Input {...register('hoursTo', {validate: fromAndToValidation})} type="number" placeholder="To" sx={{flex: 1}} />
                     </Box>
+                    {(errors.hoursFrom || errors.hoursTo) &&
+                        <span>{errors.hoursFrom?.message ?? errors.hoursTo?.message}</span>
+                    }
                 </Box>
 
                 <FormControl sx={{marginBottom : 3}}>

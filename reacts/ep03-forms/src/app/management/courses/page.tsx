@@ -3,7 +3,6 @@ import SearchControl from "@/lib/ui/components/search-control";
 import { Drawer } from "@mui/joy";
 import { useState } from "react";
 import CourseEdit from "./course-edit";
-import CourseSearch from "./course-search";
 import CourseList from "./course-list";
 import CourseSearchComponent from "./course-search";
 
