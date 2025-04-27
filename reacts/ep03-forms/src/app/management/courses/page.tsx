@@ -18,7 +18,7 @@ export default function CoursesManagement() {
             </nav>
 
             <Drawer anchor="right" open={openEdit} onClose={() => setOpenEdit(false)}>
-                <CourseEdit />
+                <CourseEdit setCloseForm={() => setOpenEdit(false)} />
             </Drawer>
 
             <Drawer anchor="right" open={openFilter} onClose={() => setOpenFilter(false)}>
