@@ -1,14 +1,17 @@
 import { CourseSearch, LEVELS } from "@/lib/model/course-model";
 import { FilterAltOutlined, Search } from "@mui/icons-material";
-import { Box, Button, FormControl, formControlClasses, FormLabel, Input, Option, Select } from "@mui/joy";
+import { Box, Button, FormControl, FormLabel, Input, Option, Select } from "@mui/joy";
 import { Controller, SubmitHandler, useForm, Validate } from "react-hook-form";
+import { useLocalCourseSearchSetter } from "./state/course-search-local-state";
 
-export default function CourseSearchComponent() {
+export default function CourseSearchComponent({setCloseSearch} : {setCloseSearch : VoidFunction}) {
 
     const {control, register, handleSubmit, formState: {errors}} = useForm<CourseSearch>()
-    
+    const courseSearchSetter = useLocalCourseSearchSetter()
+
     const onSubmit:SubmitHandler<CourseSearch> = (form) => {
-        console.log(form)
+        courseSearchSetter(form)
+        setCloseSearch()
     }
 
     const fromAndToValidation:Validate<number | undefined, CourseSearch> = (_, formValue) => {

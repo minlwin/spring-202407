@@ -5,16 +5,23 @@ import { useState } from "react";
 import CourseEdit from "./course-edit";
 import CourseList from "./course-list";
 import CourseSearchComponent from "./course-search";
+import { useSelectedCourseSetter } from "./state/selected-course-local-state";
 
 export default function CoursesManagement() {
 
     const [openEdit, setOpenEdit] = useState(false)
     const [openFilter, setOpenFilter] = useState(false)
+    const setSelectedCourse = useSelectedCourseSetter()
+
+    const addNewAction = () => {
+        setSelectedCourse()
+        setOpenEdit(true)
+    }
 
     return (
         <>
             <nav className="mb-4">
-                <SearchControl onAdd={() => setOpenEdit(true)} onFilter={() => setOpenFilter(true)} />
+                <SearchControl onAdd={addNewAction} onFilter={() => setOpenFilter(true)} />
             </nav>
 
             <Drawer anchor="right" open={openEdit} onClose={() => setOpenEdit(false)}>
@@ -22,10 +29,10 @@ export default function CoursesManagement() {
             </Drawer>
 
             <Drawer anchor="right" open={openFilter} onClose={() => setOpenFilter(false)}>
-                <CourseSearchComponent />
+                <CourseSearchComponent setCloseSearch={() => setOpenFilter(false)} />
             </Drawer>
 
-            <CourseList />
+            <CourseList showEdit={() => setOpenEdit(true)} />
         </>
     )
 }

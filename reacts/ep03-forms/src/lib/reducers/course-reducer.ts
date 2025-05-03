@@ -2,10 +2,11 @@
 import { Course, CourseForm, CourseSearch } from "../model/course-model"
 
 export type CourseAction = {
-    type: 'Create' | 'Update' | 'Delete'
+    type: 'Create' | 'Update' | 'Delete' | 'SetAll'
     id?: number
     form? : CourseForm
     search? : CourseSearch
+    list? : Course[]
 }
 
 const ID_KEY = 'com.jdc.demo.course.id'
@@ -33,6 +34,7 @@ export function courseReducer(state:Course[], action:CourseAction) {
             updatedAt: new Date
         }]
         localStorage.setItem(ID_KEY, nextId.toString())
+        console.log('Create Course')
         break;
     case 'Update':
         newState = update(action.id!, action.form!, state)
@@ -40,7 +42,14 @@ export function courseReducer(state:Course[], action:CourseAction) {
     case 'Delete':
         newState = [...state.filter(a => a.id != action.id)]
         break;
+    case 'SetAll':
+        newState = [...action.list!]
+        break;
     }
+    // Save State
+    try {
+        localStorage.setItem('app.state.courses', JSON.stringify(newState))
+    } catch(e) {}
     return newState;
 }
 
@@ -49,7 +58,7 @@ function update(id:number, form:CourseForm, state:Course[]): Course[]{
     let index = -1;
     for(let i = 0; i < state.length; i++) {
         if(id === state[i].id) {
-            index = -1;
+            index = i;
         }
     }
 

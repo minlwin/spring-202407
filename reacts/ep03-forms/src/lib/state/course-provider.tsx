@@ -10,8 +10,20 @@ type CourseContextType = {
 
 const CourseContext = createContext<CourseContextType | undefined>(undefined)
 
+function loadCourse() {
+
+    try {
+        const str = localStorage.getItem('app.state.courses')
+        if(str) {
+            return JSON.parse(str)
+        }
+    } catch(e) {}
+
+    return []
+}
+
 function CourseContextProvider({children} : {children: React.ReactNode}) {
-    const [state, dispatch] = useReducer(courseReducer, [])
+    const [state, dispatch] = useReducer(courseReducer, loadCourse())
 
     return (
         <CourseContext.Provider value={{courses: state, dispatch: dispatch}}>

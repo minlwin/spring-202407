@@ -4,6 +4,8 @@ import { useCourseDispatch } from "@/lib/state/course-provider";
 import { Edit, Save } from "@mui/icons-material";
 import { Button, Checkbox, FormControl, FormLabel, Input, Option, Select, Textarea } from "@mui/joy";
 import { Controller, useForm } from "react-hook-form";
+import { useSelectedCourse } from "./state/selected-course-local-state";
+import { useEffect } from "react";
 
 export default function CourseEdit({setCloseForm} : {setCloseForm : VoidFunction}) {
 
@@ -20,11 +22,24 @@ export default function CourseEdit({setCloseForm} : {setCloseForm : VoidFunction
     })
 
     const courseDispatch = useCourseDispatch()
+    const selectedCourse = useSelectedCourse()
+
+    useEffect(() => {
+        console.log(`Set Edit Form`)
+        reset({
+            name: selectedCourse?.name ?? '',
+            level: selectedCourse?.level ?? 'Basic',
+            hours: selectedCourse?.hours ?? 0,
+            deleted: selectedCourse?.deleted ?? false,
+            description: selectedCourse?.description ?? ''
+        })
+    }, [selectedCourse])
 
     const onSubmit = (form:CourseForm) => {
         // Create Course
         courseDispatch({
-            type : 'Create',
+            type : selectedCourse ? 'Update' : 'Create',
+            id : selectedCourse?.id,
             form : form
         })
 
@@ -43,7 +58,10 @@ export default function CourseEdit({setCloseForm} : {setCloseForm : VoidFunction
     return (
         <section className="p-8">
             <h3 className="mb-4 flex items-center">
-                <Edit /> Create Course
+                <Edit />
+                <span className="ms-2">
+                    {selectedCourse ? 'Edit Course' : 'Add New Course'}
+                </span>
             </h3>
 
             <form onSubmit={handleSubmit(onSubmit)}>
