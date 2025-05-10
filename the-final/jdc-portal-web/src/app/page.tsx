@@ -1,4 +1,5 @@
 import HomeAbout from "@/lib/home/home-about";
+import HomeContact from "@/lib/home/home-contact";
 import OurCourses from "@/lib/home/home-courses";
 import HomeCover from "@/lib/home/home-cover";
 
@@ -15,6 +16,7 @@ export default function Home() {
       <OurCourses />
 
       {/* Contacts */}
+      <HomeContact />
     </>
   )
 }

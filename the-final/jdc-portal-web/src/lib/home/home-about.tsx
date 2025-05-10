@@ -1,11 +1,14 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Cloud, Presentation, Tag, Wrench } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 export default function HomeAbout() {
     return (
         <section className="text-white h-screen flex flex-col justify-center px-28 bg-indigo-700">
-            <h1 className="text-3xl">About Us</h1>
+            <h1 className="text-3xl">
+                <Link href={'/anonymous'}>About Us</Link>
+            </h1>
 
             <div className="my-6 text-xl text-secondary">
                 {/* Description */}
