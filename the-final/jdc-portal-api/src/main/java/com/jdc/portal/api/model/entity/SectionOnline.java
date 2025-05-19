@@ -17,4 +17,8 @@ public class SectionOnline extends Section {
 	public enum Teaching {
 		Zoom, Video
 	}
+	
+	public SectionOnline() {
+		setType(Type.Online);
+	}
 }

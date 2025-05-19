@@ -1,8 +1,10 @@
 package com.jdc.portal.api.model.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public record SectionSchedule(
+		LocalDate startDate,
 		List<SectionScheduleItem> schedules) {
 
 	public String getType() {

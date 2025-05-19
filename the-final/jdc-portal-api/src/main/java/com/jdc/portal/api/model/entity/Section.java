@@ -1,10 +1,11 @@
 package com.jdc.portal.api.model.entity;
 
-import java.time.LocalDate;
-
 import com.jdc.portal.api.model.AbstractEntity;
+import com.jdc.portal.api.model.dto.CourseFees;
+import com.jdc.portal.api.model.entity.converter.SectionFeesConverter;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,8 +29,12 @@ public abstract class Section extends AbstractEntity {
 	private Course course;
 	@Column(nullable = false)
 	private Type type;
-	@Column(nullable = false)
-	private LocalDate startDate;
+	
+	@Column(columnDefinition = "TEXT")
+	@Convert(converter = SectionFeesConverter.class)
+	private CourseFees fees;
+	
+	private boolean acceptClose;
 	
 	public enum Type {
 		Campus, Online
