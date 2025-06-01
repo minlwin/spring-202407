@@ -43,7 +43,9 @@ public class AppUserDetailsService implements UserDetailsService{
 	}
 
 	private String[] getRoles(Account a) {
-		// TODO Auto-generated method stub
-		return null;
+		return switch(a.getRole()) {
+		case Employee -> new String[] {"ROLE_%s".formatted(a.getEmployee().getType().name().toUpperCase())};
+		default -> new String[] {"ROLE_%s".formatted(a.getRole().name().toUpperCase())};
+		};
 	}
 }
