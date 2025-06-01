@@ -23,9 +23,9 @@ public class AdminUserInitializer implements ApplicationRunner {
 	private final AccountRepo accountRepo;
 	private final PasswordEncoder passwordEncoder;
 	
-	@Value("app.admin.username")
+	@Value("${app.admin.username}")
 	private String username;
-	@Value("app.admin.password")
+	@Value("${app.admin.password}")
 	private String password;
 	
 	@Override
@@ -41,7 +41,7 @@ public class AdminUserInitializer implements ApplicationRunner {
 			admin.setActivatedAt(LocalDateTime.now());
 			admin.setActivated(true);
 			
-			accountRepo.save(admin);
+			accountRepo.persist(admin);
 		}
 	}
 

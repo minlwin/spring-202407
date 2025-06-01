@@ -25,4 +25,6 @@ public interface BaseRepository<T, ID> extends JpaRepository<T, ID> {
 
 	<R> Optional<R> findOne(
 			Function<CriteriaBuilder, CriteriaQuery<R>> queryFunc);
+	
+	T persist(T entity);
 }

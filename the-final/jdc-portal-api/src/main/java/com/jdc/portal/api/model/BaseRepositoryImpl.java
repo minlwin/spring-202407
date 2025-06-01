@@ -6,6 +6,7 @@ import java.util.function.Function;
 
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jdc.portal.api.model.dto.PageResult;
 
@@ -48,5 +49,12 @@ public class BaseRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implem
 	@Override
 	public <R> Optional<R> findOne(Function<CriteriaBuilder, CriteriaQuery<R>> queryFunc) {
 		return Optional.ofNullable(em.createQuery(queryFunc.apply(em.getCriteriaBuilder())).getSingleResult());
+	}
+
+	@Override
+	@Transactional
+	public T persist(T entity) {
+		em.persist(entity);
+		return entity;
 	}
 }

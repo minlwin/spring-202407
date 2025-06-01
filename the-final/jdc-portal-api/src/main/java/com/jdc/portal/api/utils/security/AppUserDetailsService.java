@@ -44,8 +44,8 @@ public class AppUserDetailsService implements UserDetailsService{
 
 	private String[] getRoles(Account a) {
 		return switch(a.getRole()) {
-		case Employee -> new String[] {"ROLE_%s".formatted(a.getEmployee().getType().name().toUpperCase())};
-		default -> new String[] {"ROLE_%s".formatted(a.getRole().name().toUpperCase())};
+		case Employee -> new String[] {a.getEmployee().getType().name().toUpperCase()};
+		default -> new String[] {a.getRole().name().toUpperCase()};
 		};
 	}
 }

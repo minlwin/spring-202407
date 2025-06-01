@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import lombok.Data;
@@ -25,10 +26,10 @@ public class Account {
 	private LocalDateTime registeredAt;
 	private LocalDateTime activatedAt;
 	
-	@OneToOne(mappedBy = "account")
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
 	private Employee employee;
 	
-	@OneToOne(mappedBy = "account")
+	@OneToOne(mappedBy = "account", fetch = FetchType.LAZY)
 	private Student student;
 	
 	public enum Role {
