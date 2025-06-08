@@ -2,6 +2,8 @@ package com.jdc.portal.api.controller;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,13 +26,13 @@ public class AccessTokenApi {
 	private final AccountRepo accountRepo;
 
 	@PostMapping("generate")
-	AccessTokenResponse generate(@RequestBody AccessTokenRequest req) {
+	public AccessTokenResponse generate(@Validated @RequestBody AccessTokenRequest req, BindingResult bindingResult) {
 		var authentication = authenticationManager.authenticate(req.getAuthentication());
 		return createResponse(req.username(), authentication);
 	}
 	
 	@PostMapping("refresh")
-	AccessTokenResponse refresh(@RequestBody AccessTokenRequest req) {
+	public AccessTokenResponse refresh(@Validated @RequestBody AccessTokenRequest req, BindingResult bindingResult) {
 		var authentication = appTokenProvider.parseRefreshToken(req.password());
 		return createResponse(req.username(), authentication);
 	}

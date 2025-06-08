@@ -2,6 +2,7 @@ package com.jdc.portal.api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
@@ -14,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import com.jdc.portal.api.utils.exceptions.SecurityExceptionHandler;
 import com.jdc.portal.api.utils.security.AppTokenFilter;
@@ -21,6 +23,7 @@ import com.jdc.portal.api.utils.security.AppTokenProvider;
 
 @Configuration
 @EnableJpaAuditing
+@EnableAspectJAutoProxy
 @PropertySource("classpath:/token.properties")
 public class JdcPortalApiSecurityConfig {
 	
@@ -42,8 +45,9 @@ public class JdcPortalApiSecurityConfig {
 		
 		http.addFilterAfter(appTokenFilter(), ExceptionTranslationFilter.class);
 		
-		http.exceptionHandling(excption -> {
-			excption.accessDeniedHandler(securityExceptionHandler);
+		http.exceptionHandling(exception -> {
+			exception.accessDeniedHandler(securityExceptionHandler);
+			exception.authenticationEntryPoint(securityExceptionHandler);
 		});
 		
 		return http.build();
@@ -80,7 +84,7 @@ public class JdcPortalApiSecurityConfig {
 	}
 	
 	@Bean
-	SecurityExceptionHandler securityExceptionHandler() {
-		return new SecurityExceptionHandler();
+	SecurityExceptionHandler securityExceptionHandler(HandlerExceptionResolver handlerExceptionResolver) {
+		return new SecurityExceptionHandler(handlerExceptionResolver);
 	}
 }

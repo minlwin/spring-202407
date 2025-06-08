@@ -13,6 +13,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
+import com.jdc.portal.api.utils.exceptions.AppTokenInvalidException;
+
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 
 @Service
@@ -51,21 +54,25 @@ public class AppTokenProvider {
 
 	private Authentication parse(Type type, String token) {
 		
-		var jwt = Jwts.parser()
-				.requireIssuer(getIssuer(type))
-				.verifyWith(secretKey)
-				.build()
-				.parseSignedClaims(token);
-		
-		var username = jwt.getPayload().getSubject();
-		var roleValue = jwt.getPayload().get(roleKey).toString();
-		
-		return UsernamePasswordAuthenticationToken.authenticated(
-				username, 
-				null, 
-				Arrays.stream(roleValue.split(","))
-					.map(a -> new SimpleGrantedAuthority(a))
-					.toList());
+		try {
+			var jwt = Jwts.parser()
+					.requireIssuer(getIssuer(type))
+					.verifyWith(secretKey)
+					.build()
+					.parseSignedClaims(token);
+			
+			var username = jwt.getPayload().getSubject();
+			var roleValue = jwt.getPayload().get(roleKey).toString();
+			
+			return UsernamePasswordAuthenticationToken.authenticated(
+					username, 
+					null, 
+					Arrays.stream(roleValue.split(","))
+						.map(a -> new SimpleGrantedAuthority(a))
+						.toList());
+		} catch (JwtException e) {
+			throw new AppTokenInvalidException(token, e, type);
+		}
 	}
 
 	private String generate(Type type, Authentication authentication) {

@@ -30,6 +30,7 @@ public class RequiredConstraint implements ConstraintValidator<Required, String>
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(getMessage())
 				.addConstraintViolation();
+			return false;
 		}
 		
 		return true;

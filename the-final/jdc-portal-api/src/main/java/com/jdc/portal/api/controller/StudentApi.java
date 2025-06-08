@@ -1,5 +1,7 @@
 package com.jdc.portal.api.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentApi {
 
 	@GetMapping
-	String demo() {
-		return "This is student api";
+	List<String> demo() {
+		return List.of("This is student api");
 	}
 }
