@@ -14,6 +14,7 @@ public class AppTokenInvalidException extends AuthenticationException {
 
 	public AppTokenInvalidException(String msg, JwtException cause, Type tokenType) {
 		super(msg, cause);
+		this.type = tokenType;
 	}
 
 	public Type getType() {

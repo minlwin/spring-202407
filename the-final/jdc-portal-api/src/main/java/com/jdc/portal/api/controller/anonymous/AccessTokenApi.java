@@ -1,4 +1,4 @@
-package com.jdc.portal.api.controller;
+package com.jdc.portal.api.controller.anonymous;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.portal.api.controller.input.AccessTokenRequest;
-import com.jdc.portal.api.controller.output.AccessTokenResponse;
+import com.jdc.portal.api.controller.anonymous.input.AccessTokenRequest;
+import com.jdc.portal.api.controller.anonymous.output.AccessTokenResponse;
 import com.jdc.portal.api.model.repo.AccountRepo;
 import com.jdc.portal.api.utils.security.AppTokenProvider;
 

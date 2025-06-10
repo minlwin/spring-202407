@@ -11,7 +11,11 @@ import jakarta.validation.Payload;
 
 @Target(FIELD)
 @Retention(RUNTIME)
-@Constraint(validatedBy = RequiredConstraint.class)
+@Constraint(validatedBy = {
+	RequiredStringConstraint.class,
+	RequiredEnumConstraint.class,
+	RequiredTemporalConstraint.class
+})
 public @interface Required {
 
 	String message() default "{app.validation.required}";

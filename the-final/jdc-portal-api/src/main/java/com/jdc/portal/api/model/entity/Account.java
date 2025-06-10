@@ -23,6 +23,9 @@ public class Account {
 	private boolean activated;
 	private LocalDate expiredAt;
 	
+	private boolean changedPass;
+	private LocalDateTime changePassAt;
+	
 	private LocalDateTime registeredAt;
 	private LocalDateTime activatedAt;
 	

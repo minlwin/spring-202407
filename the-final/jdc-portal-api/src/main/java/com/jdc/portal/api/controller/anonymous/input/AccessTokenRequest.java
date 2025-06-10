@@ -1,4 +1,4 @@
-package com.jdc.portal.api.controller.input;
+package com.jdc.portal.api.controller.anonymous.input;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

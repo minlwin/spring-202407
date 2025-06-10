@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +25,7 @@ import com.jdc.portal.api.utils.security.AppTokenProvider;
 @Configuration
 @EnableJpaAuditing
 @EnableAspectJAutoProxy
+@EnableScheduling
 @PropertySource("classpath:/token.properties")
 public class JdcPortalApiSecurityConfig {
 	

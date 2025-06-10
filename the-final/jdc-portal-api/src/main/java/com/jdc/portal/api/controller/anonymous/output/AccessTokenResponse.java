@@ -1,4 +1,4 @@
-package com.jdc.portal.api.controller.output;
+package com.jdc.portal.api.controller.anonymous.output;
 
 public record AccessTokenResponse(
 		String name,

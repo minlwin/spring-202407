@@ -26,9 +26,12 @@ public class ApplicationExceptionHandler {
 
  	private final MessageSource messageSource;
   
-	@ExceptionHandler
+	@ExceptionHandler({
+		ApiBusinessException.class,
+		ApiValidationException.class
+	})
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-	List<String> handle(ApiValidationException e) {
+	List<String> handle(ApiBusinessException e) {
 		return e.getMessages();
 	}
 	
