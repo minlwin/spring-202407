@@ -40,7 +40,7 @@ public class JdcPortalApiSecurityConfig {
 			req.requestMatchers("/student/**").hasRole("STUDENT");
 			req.requestMatchers("/office/**").hasRole("OFFICE");
 			req.requestMatchers("/teacher/**").hasRole("TEACHER");
-			req.anyRequest().denyAll();
+			req.anyRequest().authenticated();
 		});
 		
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

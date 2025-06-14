@@ -18,7 +18,7 @@ public record EmployeeForm(
 		String username,
 		@Required(name = "employee type")
 		Type type,
-		@Required(name = "password")
+		@Required(name = "employee name")
 		String name,
 		LocalDate dob,
 		@Required(name = "assign date")
@@ -42,6 +42,8 @@ public record EmployeeForm(
 		account.setPassword(encoder.encode(PasswordGenerator.generate(name)));
 		account.setRole(Role.Employee);
 		account.setRegisteredAt(LocalDateTime.now());
+		account.setActivated(true);
+		account.setActivatedAt(LocalDateTime.now());
 		entity.setAccount(account);
 		
 		var contact = new Contact();

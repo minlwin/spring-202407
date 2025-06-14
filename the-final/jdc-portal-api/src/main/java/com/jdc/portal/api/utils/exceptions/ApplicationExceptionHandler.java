@@ -47,6 +47,12 @@ public class ApplicationExceptionHandler {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(List.of("Invalid %s token.".formatted(e.getType())));
 	}
 	
+	@ExceptionHandler
+	@ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE)
+	List<String> handle(ApiEmploeeNotChangePasswordException e) {
+		return List.of(messageSource.getMessage(e.getMessage(), new Object[] {}, null));
+	}
+	
 	
 	@ExceptionHandler
 	@ResponseStatus(code = HttpStatus.UNAUTHORIZED)

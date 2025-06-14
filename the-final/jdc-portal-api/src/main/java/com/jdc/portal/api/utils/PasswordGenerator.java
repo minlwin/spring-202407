@@ -13,6 +13,11 @@ public class PasswordGenerator {
 		sb.append(temp);
 		sb.reverse();
 		var now = LocalDate.now().format(DTF);
-		return "%s#$s".formatted(sb.toString(), now);
+		return "%s#%s".formatted(sb.toString(), now);
+	}
+	
+	public static void main(String[] args) {
+		var password = generate("Zaw Min Lwin");
+		System.out.println(password);
 	}
 }

@@ -6,6 +6,7 @@ import com.jdc.portal.api.model.AbstractEntity;
 import com.jdc.portal.api.model.dto.Contact;
 
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -33,7 +34,7 @@ public class Employee extends AbstractEntity{
 
 	private LocalDate dob;
 	
-	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Account account;
 	
 	@Embedded

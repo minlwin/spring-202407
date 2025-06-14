@@ -17,6 +17,7 @@ import com.jdc.portal.api.controller.office.input.EmployeeSearch;
 import com.jdc.portal.api.controller.office.output.EmployeeDetails;
 import com.jdc.portal.api.controller.office.output.EmployeeDto;
 import com.jdc.portal.api.service.EmployeeService;
+import com.jdc.portal.api.utils.exceptions.EmployeeInitializationRequired;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,6 +29,7 @@ public class EmployeeManageentApi {
 	private final EmployeeService service;
 	
 	@GetMapping
+	@EmployeeInitializationRequired(false)
 	List<EmployeeDto> search(EmployeeSearch search) {
 		return service.search(search);
 	}
