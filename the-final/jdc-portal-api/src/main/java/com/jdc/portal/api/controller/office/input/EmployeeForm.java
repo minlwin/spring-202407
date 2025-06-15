@@ -42,8 +42,12 @@ public record EmployeeForm(
 		account.setPassword(encoder.encode(PasswordGenerator.generate(name)));
 		account.setRole(Role.Employee);
 		account.setRegisteredAt(LocalDateTime.now());
-		account.setActivated(true);
-		account.setActivatedAt(LocalDateTime.now());
+		
+		if(LocalDate.now().equals(assignAt)) {
+			account.setActivated(true);
+			account.setActivatedAt(LocalDateTime.now());
+		}
+
 		entity.setAccount(account);
 		
 		var contact = new Contact();
@@ -67,6 +71,11 @@ public record EmployeeForm(
 		account.setEmail(username);
 		account.setRole(Role.Employee);
 		account.setRegisteredAt(LocalDateTime.now());
+
+		if(LocalDate.now().equals(assignAt)) {
+			account.setActivated(true);
+			account.setActivatedAt(LocalDateTime.now());
+		}
 
 		var contact = entity.getContact();
 		contact.setPhone(phone);

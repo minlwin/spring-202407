@@ -10,6 +10,7 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.jdc.portal.api.model.entity.Account.Role;
 import com.jdc.portal.api.model.repo.AccountRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -45,7 +46,7 @@ public class EmployeeInitializationRequiredAspect {
 		
 		var account = accountRepo.findById(username).get();
 		
-		if(!account.isChangedPass()) {
+		if(account.getRole() == Role.Employee && !account.isChangedPass()) {
 			throw new ApiEmploeeNotChangePasswordException();
 		}
 	}

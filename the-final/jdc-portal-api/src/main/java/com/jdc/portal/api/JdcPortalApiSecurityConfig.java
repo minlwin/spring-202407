@@ -27,6 +27,7 @@ import com.jdc.portal.api.utils.security.AppTokenProvider;
 @EnableAspectJAutoProxy
 @EnableScheduling
 @PropertySource("classpath:/token.properties")
+@PropertySource("classpath:/keys.properties")
 public class JdcPortalApiSecurityConfig {
 	
 	@Bean

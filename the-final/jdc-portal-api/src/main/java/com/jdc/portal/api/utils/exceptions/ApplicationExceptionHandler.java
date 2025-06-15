@@ -50,7 +50,7 @@ public class ApplicationExceptionHandler {
 	@ExceptionHandler
 	@ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE)
 	List<String> handle(ApiEmploeeNotChangePasswordException e) {
-		return List.of(messageSource.getMessage(e.getMessage(), new Object[] {}, null));
+		return e.getMessages().stream().map(a -> messageSource.getMessage(a, new Object[] {}, null)).toList();
 	}
 	
 	
